@@ -1,25 +1,37 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const database = require('./db.json');
 
 const app = express();
+
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-app.get('/destination', (req, res) => {
-    res.json(database.destination);
+app.get('/api/destinations', (req, res) => {
+    const destinations = database.destination.map(city => ({
+        value: city.value,
+        label: city.label,
+    }));
+    res.json(destinations);
 });
 
-app.get('/hotels', (req, res) => {
-    res.json(database.hotels);  
+app.get('/api/hotels/search', (req, res) => {
+    const {city} = req.query;
+    if (!city) {
+        return res.json([]);
+    }
+    const hotelsResponded = database.hotels.filter(
+        hotel => hotel.city === city
+    );
+    res.json(hotelsResponded);
 });
 
-app.post('/hotels', (req, res) => {
-    const {city} = req.body;
-    const hotels = database.hotels.filter(hotel => hotel.city === city);
-    res.json(hotels);
-});
+// app.post('/api/hotels', (req, res) => {
+//     const {city} = req.body;
+//     const hotels = database.hotels.filter(hotel => hotel.city === city);
+//     res.json(hotels);
+// });
 
 const PORT = 3001;
 app.listen(PORT, () => {
