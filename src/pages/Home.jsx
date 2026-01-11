@@ -1,13 +1,15 @@
-import { useEffect } from "react";
+import { use, useEffect } from "react";
 import { getDestinations } from "../services/hotelsService";
+
 
 export default function Home() {
   // console.log(import.meta.env.VITE_API_URL);
-  useEffect(() => {
-    getDestinations().then((res) => {
-      console.log(res.data);
-    });
-  }, []);
+
+  // useEffect(() => {
+  //   getDestinations().then((res) => {
+  //     console.log(res.data);
+  //   });
+  // }, []);
 
   return (
     <section className="home">
