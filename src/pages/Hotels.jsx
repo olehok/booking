@@ -32,6 +32,20 @@ export default function Hotels() {
   //   return <p>Error: {error}</p>;
   // }
 
+  const { hotels, loading, error } = useSelector((state) => state.hotels);
+
+  if (loading) {
+    return <p>Loading hotels...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  if (!hotels.length) {
+    return <p>No hotels found</p>;
+  }
+
   return (
     <section className="hotels">
       <div className="container">
@@ -41,14 +55,25 @@ export default function Hotels() {
           Whether you're looking for luxury, budget-friendly, or boutique
           accommodations, we have options to suit every traveler's needs.
         </p>
-        {/* <div>
+        <div className="hotels-list">
+          {hotels.map((hotel) => (
+            <div key={hotel.id} className="hotel-card">
+              <h3>{hotel.name}</h3>
+              <p>City: {hotel.city}</p>
+              <p>Address: {hotel.address}</p>
+              <p>Rating: {hotel.hotel_rating}</p>
+              <p>Phone number: {hotel.phone_number}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* <div>
           <h2>Destinations</h2>
           <pre>{JSON.stringify(destinations, null, 2)}</pre>
 
           <h2>Hotels</h2>
           <pre>{JSON.stringify(hotels, null, 2)}</pre>
         </div> */}
-      </div>
     </section>
   );
 }

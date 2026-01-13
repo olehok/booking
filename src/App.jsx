@@ -4,6 +4,7 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Hotels from "./pages/Hotels";
+import { hotelsLoader } from "./loaders/loaders";
 
 const router = createBrowserRouter(
   [
@@ -14,7 +15,7 @@ const router = createBrowserRouter(
       children: [
         { index: true, element: <Home /> },
         { path: "about", element: <About /> },
-        { path: "hotels", element: <Hotels /> },
+        { path: "hotels", element: <Hotels />, loader: hotelsLoader },
         { path: "*", element: <h2>Not Found</h2> },
       ],
     },
@@ -23,9 +24,5 @@ const router = createBrowserRouter(
 );
 
 export default function App() {
-  return (
-    
-      <RouterProvider router={router} />
-    
-  );
+  return <RouterProvider router={router} />;
 }
