@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.get('/api/destinations', (req, res) => {
     const destinations = database.destination.map(city => ({
-        value: city.value,
+        id: city.id,
         label: city.label,
     }));
     res.json(destinations);
