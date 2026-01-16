@@ -17,7 +17,6 @@ const SearchForm = () => {
     dispatch(fetchDestinations());
   }, [dispatch]);
 
-  // Якщо destinations ще немає, чекаємо
   if (loading || !destinations.length) return <div>Loading cities...</div>;
 
   return (
