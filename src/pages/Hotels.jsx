@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 import { Row, Col, Spin, Empty } from "antd";
 import HotelCard from "../components/HotelCard";
-
+import Container from "../components/Container";
 
 export default function Hotels() {
   const { hotels, loading, error } = useSelector((state) => state.hotels);
 
   if (loading) {
-    return <Spin size="large" />;;
+    return <Spin size="large" />;
   }
 
   if (error) {
@@ -42,13 +42,15 @@ export default function Hotels() {
     // </section>
 
     <section>
-      <Row gutter={[24, 24]}>
+      {/* <Container> */}
+      <Row gutter={[24, 24]} style={{ margin: 0 }} className="container">
         {hotels.map((hotel) => (
           <Col key={hotel.id} xs={24} sm={12} md={8} lg={6}>
             <HotelCard {...hotel} />
           </Col>
         ))}
       </Row>
+      {/* </Container> */}
     </section>
   );
 }

@@ -21,6 +21,7 @@ const HotelCard = ({
   return (
     <Card
       hoverable
+      style={{ overflow: "hidden" }}
       cover={
         <Image
           src={image_url}
