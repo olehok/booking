@@ -24,6 +24,7 @@ const SearchForm = () => {
       enableReinitialize={true}
       initialValues={{
         city: null,
+        // city: undefined,
         dates: [],
         adults: 1,
         children: 0,
@@ -39,7 +40,7 @@ const SearchForm = () => {
       }}
       onSubmit={(values) => {
         const selectedCity = destinations.find(
-          (city) => city.id === values.city
+          (city) => city.id === values.city,
         );
         const params = new URLSearchParams({
           city: selectedCity.label,

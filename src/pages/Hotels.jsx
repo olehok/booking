@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchDestinations, searchHotels } from "../store/thunks/hotelsThunks";
+import { useSelector } from "react-redux";
+
 
 export default function Hotels() {
   const { hotels, loading, error } = useSelector((state) => state.hotels);
