@@ -19,33 +19,18 @@ export default function Hotels() {
   }
 
   return (
-    // <section className="hotels">
-    //   <div className="container">
-    //     <h2>Our Hotels</h2>
-    //     <p>
-    //       Discover a wide range of hotels available for booking worldwide.
-    //       Whether you're looking for luxury, budget-friendly, or boutique
-    //       accommodations, we have options to suit every traveler's needs.
-    //     </p>
-    //     <div className="hotels-list">
-    //       {hotels.map((hotel) => (
-    //         <div key={hotel.id} className="hotel-card">
-    //           <h3>{hotel.name}</h3>
-    //           <p>City: {hotel.city}</p>
-    //           <p>Address: {hotel.address}</p>
-    //           <p>Rating: {hotel.hotel_rating}</p>
-    //           <p>Phone number: {hotel.phone_number}</p>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </div>
-    // </section>
-
     <section>
       {/* <Container> */}
-      <Row gutter={[24, 24]} style={{ margin: 0 }} className="container">
+      <Row
+        gutter={[24, 36]}
+        style={{
+          maxWidth: 1000,
+          margin: "0 auto",
+          padding: "0 30px",
+        }}
+      >
         {hotels.map((hotel) => (
-          <Col key={hotel.id} xs={24} sm={12} md={8} lg={6}>
+          <Col key={hotel.id} xs={24} sm={12} >
             <HotelCard {...hotel} />
           </Col>
         ))}

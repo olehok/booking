@@ -5,7 +5,7 @@ import { HeartOutlined } from "@ant-design/icons";
 const { Title, Text, Link } = Typography;
 
 const IMAGE_WIDTH = "100%";
-const IMAGE_HEIGHT = 180;
+const IMAGE_HEIGHT = 300;
 
 const HotelCard = ({
   image_url,
@@ -47,8 +47,8 @@ const HotelCard = ({
         </Text>
 
         <Space align="center">
+          <Text type="secondary">Rating: {hotel_rating}</Text>
           <Rate disabled value={hotel_rating} />
-          <Text type="secondary">{hotel_rating}/5</Text>
         </Space>
 
         {phone_number && <Text>{phone_number}</Text>}
