@@ -51,7 +51,7 @@ const HotelCard = ({
           <Rate disabled value={hotel_rating} />
         </Space>
 
-        {phone_number && <Text>{phone_number}</Text>}
+        {phone_number && <Text type="secondary">Tel: {phone_number}</Text>}
 
         {website && (
           <Link href={website} target="_blank">
