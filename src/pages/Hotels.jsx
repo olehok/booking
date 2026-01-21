@@ -1,9 +1,12 @@
 import { useSelector } from "react-redux";
-import { Row, Col, Spin, Empty } from "antd";
+import { useSearchParams } from "react-router-dom";
+import { Row, Col, Spin, Typography, Space } from "antd";
 import HotelCard from "../components/HotelCard";
-import Container from "../components/Container";
+// import Container from "../components/Container";
 
 export default function Hotels() {
+  const [searchParams] = useSearchParams();
+  const city = searchParams.get("city");
   const { hotels, loading, error } = useSelector((state) => state.hotels);
 
   if (loading) {
@@ -15,12 +18,15 @@ export default function Hotels() {
   }
 
   if (!hotels.length) {
-    return <Empty description="No hotels found" />;
+    return (
+      <Space direction="vertical" size="large">
+        <Typography.Text type="primary">No hotels found in {city}</Typography.Text>
+      </Space>
+    );
   }
 
   return (
     <section>
-      {/* <Container> */}
       <Row
         gutter={[24, 36]}
         style={{
@@ -30,12 +36,11 @@ export default function Hotels() {
         }}
       >
         {hotels.map((hotel) => (
-          <Col key={hotel.id} xs={24} sm={12} >
+          <Col key={hotel.id} xs={24} sm={12}>
             <HotelCard {...hotel} />
           </Col>
         ))}
       </Row>
-      {/* </Container> */}
     </section>
   );
 }

@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import { Select, InputNumber, DatePicker, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import dayjs from "dayjs";
 import { fetchDestinations } from "../store/thunks/hotelsThunks";
 
 const { RangePicker } = DatePicker;
@@ -23,8 +23,7 @@ const SearchForm = () => {
     <Formik
       enableReinitialize={true}
       initialValues={{
-        city: null,
-        // city: undefined,
+        city: undefined,
         dates: [],
         adults: 1,
         children: 0,
@@ -36,6 +35,15 @@ const SearchForm = () => {
           errors.dates = "Check-in and check-out are required";
         if (values.adults < 1 || values.adults > 5)
           errors.adults = "Adults must be between 1 and 5";
+        if (!values.dates || values.dates.length !== 2) 
+          errors.dates = "Check-in and check-out are required";
+         else {
+          const [start, end] = values.dates;
+
+          if (end.diff(start, "day") > 30) {
+            errors.dates = "Stay duration cannot exceed 30 days";
+          }
+        }
         return errors;
       }}
       onSubmit={(values) => {
@@ -73,6 +81,24 @@ const SearchForm = () => {
               value={values.dates}
               onChange={(dates) => setFieldValue("dates", dates)}
               style={{ width: 250 }}
+              disabledDate={(current) => {
+                return current && current < dayjs().startOf("day");
+              }}
+              onCalendarChange={(dates) => {
+                if (dates && dates.length === 2) {
+                  const [start, end] = dates;
+
+                  if (end.diff(start, "day") > 30) {
+                    setFieldError(
+                      "dates",
+                      "Stay duration cannot exceed 30 days",
+                    );
+                  } else {
+                    setFieldError("dates", undefined);
+                  }
+                }
+                // setFieldValue("dates", dates);
+              }}
             />
             {errors.dates && <div style={{ color: "red" }}>{errors.dates}</div>}
           </div>
@@ -100,7 +126,12 @@ const SearchForm = () => {
             />
           </div>
 
-          <Button type="primary" htmlType="submit" style={{ marginTop: 10 }}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            disabled={!!errors.dates}
+            style={{ marginTop: 10 }}
+          >
             Search
           </Button>
         </form>
