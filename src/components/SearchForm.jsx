@@ -31,19 +31,18 @@ const SearchForm = () => {
       validate={(values) => {
         const errors = {};
         if (!values.city) errors.city = "City is required";
-        if (!values.dates || values.dates.length !== 2)
+        if (!values.dates || values.dates.length !== 2) {
           errors.dates = "Check-in and check-out are required";
-        if (values.adults < 1 || values.adults > 5)
-          errors.adults = "Adults must be between 1 and 5";
-        if (!values.dates || values.dates.length !== 2) 
-          errors.dates = "Check-in and check-out are required";
-         else {
+        } else {
           const [start, end] = values.dates;
 
           if (end.diff(start, "day") > 30) {
             errors.dates = "Stay duration cannot exceed 30 days";
           }
         }
+        if (values.adults < 1 || values.adults > 6)
+          errors.adults = "Adults must be between 1 and 6";
+
         return errors;
       }}
       onSubmit={(values) => {
@@ -80,25 +79,10 @@ const SearchForm = () => {
             <RangePicker
               value={values.dates}
               onChange={(dates) => setFieldValue("dates", dates)}
-              style={{ width: 250 }}
               disabledDate={(current) => {
                 return current && current < dayjs().startOf("day");
               }}
-              onCalendarChange={(dates) => {
-                if (dates && dates.length === 2) {
-                  const [start, end] = dates;
-
-                  if (end.diff(start, "day") > 30) {
-                    setFieldError(
-                      "dates",
-                      "Stay duration cannot exceed 30 days",
-                    );
-                  } else {
-                    setFieldError("dates", undefined);
-                  }
-                }
-                // setFieldValue("dates", dates);
-              }}
+              style={{ width: 250 }}
             />
             {errors.dates && <div style={{ color: "red" }}>{errors.dates}</div>}
           </div>
@@ -107,7 +91,7 @@ const SearchForm = () => {
             <label>Adults</label>
             <InputNumber
               min={1}
-              max={5}
+              max={6}
               value={values.adults}
               onChange={(value) => setFieldValue("adults", value)}
             />
