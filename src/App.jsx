@@ -12,15 +12,20 @@ const router = createBrowserRouter(
       path: "/",
       element: <Layout />,
       errorElement: <h2>error</h2>,
+      HydrateFallback: () => <div>Loading hotels...</div>,
       children: [
         { index: true, element: <Home /> },
         { path: "about", element: <About /> },
-        { path: "hotels", element: <Hotels />, loader: hotelsLoader },
+        {
+          path: "hotels",
+          element: <Hotels />,
+          loader: hotelsLoader,
+        },
         { path: "*", element: <h2>Not Found</h2> },
       ],
     },
   ],
-  { basename: "/booking/" }
+  { basename: "/booking/" },
 );
 
 export default function App() {

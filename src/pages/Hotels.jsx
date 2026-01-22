@@ -1,13 +1,12 @@
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { Row, Col, Spin, Typography, Space } from "antd";
+import { Pagination, Row, Col, Spin, Typography, Space } from "antd";
 import HotelCard from "../components/HotelCard";
-// import Container from "../components/Container";
 
 export default function Hotels() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const city = searchParams.get("city");
-  const { hotels, loading, error } = useSelector((state) => state.hotels);
+  const { hotels, loading, error, total, page } = useSelector((state) => state.hotels);
 
   if (loading) {
     return <Spin size="large" />;
@@ -19,11 +18,21 @@ export default function Hotels() {
 
   if (!hotels.length) {
     return (
-      <Space direction="vertical" size="large">
+      <Space orientation="vertical" size="large">
         <Typography.Text type="primary">No hotels found in {city}</Typography.Text>
       </Space>
     );
   }
+
+  const handlePageChange = (newPage) => {
+    const params = Object.fromEntries(searchParams.entries());
+
+    setSearchParams({
+      ...params,
+      page: newPage,
+    });
+  };
+
 
   return (
     <section>
@@ -41,6 +50,14 @@ export default function Hotels() {
           </Col>
         ))}
       </Row>
+
+      <Pagination
+        style={{ marginTop: 20, textAlign: "center" }}
+        current={Number(searchParams.get("page")) || 1}
+        total={total}
+        pageSize={10}
+        onChange={handlePageChange}
+      />
     </section>
   );
 }

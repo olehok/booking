@@ -38,7 +38,7 @@ const HotelCard = ({
       }
       actions={[<HeartOutlined key="fav" />]}
     >
-      <Space direction="vertical" size="small" style={{ width: "100%" }}>
+      <Space orientation="vertical" size="small" style={{ width: "100%" }}>
         <Title level={4}>{name}</Title>
 
         <Text type="secondary">

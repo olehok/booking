@@ -17,14 +17,28 @@ app.get('/api/destinations', (req, res) => {
 });
 
 app.get('/api/hotels/search', (req, res) => {
-    const {city} = req.query;
+    const {
+        city,
+        page = 1,
+        limit = 10
+    } = req.query;
+
+    let hotels = database.hotels;
+
     if (!city) {
         return res.json([]);
     }
-    const hotelsResponded = database.hotels.filter(
+    hotels = hotels.filter(
         hotel => hotel.city === city
     );
-    res.json(hotelsResponded);
+
+    const total = hotels.length;
+
+    const start = (page - 1) * limit;
+    const end = start + Number(limit);
+
+    const paginatedHotels = hotels.slice(start, end);
+    res.json({ data: paginatedHotels, total });
 });
 
 // app.post('/api/hotels', (req, res) => {
@@ -35,5 +49,5 @@ app.get('/api/hotels/search', (req, res) => {
 
 const PORT = 3001;
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -2,8 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { fetchDestinations, searchHotels } from '../thunks/hotelsThunks';
 
 const initialState = {
-    destinations: [],   
-    hotels: [],         
+    destinations: [],
+    hotels: [],
+    total: 0,
+    page: 1,
+    limit: 10,
     loading: false,
     error: null
 };
@@ -14,7 +17,6 @@ const hotelsSlice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
-            // --- DESTINATIONS ---
             .addCase(fetchDestinations.pending, state => {
                 state.loading = true;
                 state.error = null;
@@ -28,14 +30,14 @@ const hotelsSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            // --- HOTELS SEARCH ---
             .addCase(searchHotels.pending, state => {
                 state.loading = true;
                 state.error = null;
             })
             .addCase(searchHotels.fulfilled, (state, action) => {
                 state.loading = false;
-                state.hotels = action.payload;
+                state.hotels = action.payload.data;
+                state.total = action.payload.total;
             })
             .addCase(searchHotels.rejected, (state, action) => {
                 state.loading = false;
