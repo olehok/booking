@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Hotels from "./pages/Hotels";
 import { hotelsLoader } from "./loaders/loaders";
+import { Spin } from "antd";
 
 const router = createBrowserRouter(
   [
@@ -12,7 +13,7 @@ const router = createBrowserRouter(
       path: "/",
       element: <Layout />,
       errorElement: <h2>error</h2>,
-      HydrateFallback: () => <div>Loading hotels...</div>,
+      HydrateFallback: () => <Spin fullscreen size="large" />,
       children: [
         { index: true, element: <Home /> },
         { path: "about", element: <About /> },

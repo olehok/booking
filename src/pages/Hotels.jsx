@@ -52,7 +52,7 @@ export default function Hotels() {
       </Row>
 
       <Pagination
-        style={{ marginTop: 20, textAlign: "center" }}
+        // style={{ marginTop: 20, textAlign: "center" }}
         current={Number(searchParams.get("page")) || 1}
         total={total}
         pageSize={10}
