@@ -6,7 +6,9 @@ import HotelCard from "../components/HotelCard";
 export default function Hotels() {
   const [searchParams, setSearchParams] = useSearchParams();
   const city = searchParams.get("city");
-  const { hotels, loading, error, total, page } = useSelector((state) => state.hotels);
+  const { hotels, loading, error, total, page } = useSelector(
+    (state) => state.hotels,
+  );
 
   if (loading) {
     return <Spin size="large" />;
@@ -19,7 +21,9 @@ export default function Hotels() {
   if (!hotels.length) {
     return (
       <Space orientation="vertical" size="large">
-        <Typography.Text type="primary">No hotels found in {city}</Typography.Text>
+        <Typography.Text type="primary">
+          No hotels found in {city}
+        </Typography.Text>
       </Space>
     );
   }
@@ -33,18 +37,9 @@ export default function Hotels() {
     });
   };
 
-
   return (
-    <section>
-      <Row
-        gutter={[24, 36]}
-        // justify={"center"}
-        style={{
-          maxWidth: 1000,
-          margin: "0 auto",
-          padding: "0 30px",
-        }}
-      >
+    <section className="container">
+      <Row gutter={[24, 36]}>
         {hotels.map((hotel) => (
           <Col key={hotel.id} xs={24} sm={12}>
             <HotelCard {...hotel} />
@@ -53,7 +48,6 @@ export default function Hotels() {
       </Row>
 
       <Pagination
-        style={{ marginTop: 30 }}
         align="center"
         current={Number(searchParams.get("page")) || 1}
         total={total}

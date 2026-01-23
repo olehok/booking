@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 export default function Header() {
   return (
     <header className="header">
-      <div className="container">
+      <div className="container large">
         <h1>
           <NavLink to="/">Booking</NavLink>
         </h1>
