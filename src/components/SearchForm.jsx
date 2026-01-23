@@ -59,65 +59,69 @@ const SearchForm = () => {
     >
       {({ handleSubmit, setFieldValue, errors, values }) => (
         <form onSubmit={handleSubmit}>
-          <div>
-            <label>City</label>
-            <Select
-              placeholder="Select city"
-              value={values.city}
-              options={destinations.map((city) => ({
-                value: city.id,
-                label: city.label,
-              }))}
-              onChange={(value) => setFieldValue("city", value)}
-              style={{ width: 200 }}
-            />
-            {errors.city && <div style={{ color: "red" }}>{errors.city}</div>}
-          </div>
+          <div className="search-form">
+            <div>
+              <label>City</label>
+              <Select
+                placeholder="Select city"
+                value={values.city}
+                options={destinations.map((city) => ({
+                  value: city.id,
+                  label: city.label,
+                }))}
+                onChange={(value) => setFieldValue("city", value)}
+                style={{ width: 200 }}
+              />
+              {errors.city && <div style={{ color: "red" }}>{errors.city}</div>}
+            </div>
 
-          <div>
-            <label>Dates</label>
-            <RangePicker
-              value={values.dates}
-              onChange={(dates) => setFieldValue("dates", dates)}
-              disabledDate={(current) => {
-                return current && current < dayjs().startOf("day");
-              }}
-              style={{ width: 250 }}
-            />
-            {errors.dates && <div style={{ color: "red" }}>{errors.dates}</div>}
-          </div>
+            <div>
+              <label>Dates</label>
+              <RangePicker
+                value={values.dates}
+                onChange={(dates) => setFieldValue("dates", dates)}
+                disabledDate={(current) => {
+                  return current && current < dayjs().startOf("day");
+                }}
+                style={{ width: 250 }}
+              />
+              {errors.dates && (
+                <div style={{ color: "red" }}>{errors.dates}</div>
+              )}
+            </div>
 
-          <div>
-            <label>Adults</label>
-            <InputNumber
-              min={1}
-              max={6}
-              value={values.adults}
-              onChange={(value) => setFieldValue("adults", value)}
-            />
-            {errors.adults && (
-              <div style={{ color: "red" }}>{errors.adults}</div>
-            )}
-          </div>
+            <div>
+              <label>Adults</label>
+              <InputNumber
+                min={1}
+                max={6}
+                value={values.adults}
+                onChange={(value) => setFieldValue("adults", value)}
+              />
+              {errors.adults && (
+                <div style={{ color: "red" }}>{errors.adults}</div>
+              )}
+            </div>
 
-          <div>
-            <label>Children</label>
-            <InputNumber
-              min={0}
-              max={5}
-              value={values.children}
-              onChange={(value) => setFieldValue("children", value)}
-            />
-          </div>
+            <div>
+              <label>Children</label>
+              <InputNumber
+                min={0}
+                max={5}
+                value={values.children}
+                onChange={(value) => setFieldValue("children", value)}
+              />
+            </div>
 
-          <Button
-            type="primary"
-            htmlType="submit"
-            disabled={!!errors.dates}
-            style={{ marginTop: 10 }}
-          >
-            Search
-          </Button>
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={!!errors.dates}
+              style={{ marginTop: 10 }}
+            >
+              Search
+            </Button>
+          </div>
         </form>
       )}
     </Formik>

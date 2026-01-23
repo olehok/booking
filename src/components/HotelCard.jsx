@@ -22,6 +22,7 @@ const HotelCard = ({
     <Card
       hoverable
       style={{ overflow: "hidden" }}
+      
       cover={
         <Image
           src={image_url}
@@ -46,9 +47,9 @@ const HotelCard = ({
           {state && `, ${state}`} ({country_code})
         </Text>
 
-        <Space align="center">
+        <Space align="baseline">
           <Text type="secondary">Rating: {hotel_rating}</Text>
-          <Rate disabled value={hotel_rating} />
+          <Rate disabled size="small" value={hotel_rating} />
         </Space>
 
         {phone_number && <Text type="secondary">Tel: {phone_number}</Text>}

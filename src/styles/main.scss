@@ -1,11 +1,24 @@
 @import "antd/dist/reset.css";
 
+* {
+  font-family: 'Inter', sans-serif;
+}
+
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding-left: 18px;
-  padding-right: 18px;
-  & large {
-    max-width: 1200px;
-  }
+  padding: 0 18px 32px 18px;
+}
+
+.large {
+  max-width: 1000px;
+}
+
+.search-form {
+  display: flex;
+  gap: 18px;
+  align-items: baseline;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 24px;
 }
