@@ -38,6 +38,7 @@ export default function Hotels() {
     <section>
       <Row
         gutter={[24, 36]}
+        // justify={"center"}
         style={{
           maxWidth: 1000,
           margin: "0 auto",
@@ -52,7 +53,8 @@ export default function Hotels() {
       </Row>
 
       <Pagination
-        // style={{ marginTop: 20, textAlign: "center" }}
+        style={{ marginTop: 30 }}
+        align="center"
         current={Number(searchParams.get("page")) || 1}
         total={total}
         pageSize={10}
