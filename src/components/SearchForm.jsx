@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Formik } from "formik";
-import { Select, InputNumber, DatePicker, Button, Form } from "antd";
+import { Select, InputNumber, DatePicker, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
@@ -57,14 +57,10 @@ const SearchForm = () => {
         navigate(`/hotels?${params.toString()}`);
       }}
     >
+      {/* Form */}
       {({ handleSubmit, setFieldValue, errors, values }) => (
-        <Form onSubmit={handleSubmit}
-          layout="inline"
-          className="search-form"
-        >
-          {/* <div className="search-form"> */}
-          <Form.Item>
-            {/* <label>City</label> */}
+        <form onSubmit={handleSubmit} layout="inline" className="search-form">
+          <div>
             <Select
               placeholder="Select city"
               value={values.city}
@@ -76,10 +72,9 @@ const SearchForm = () => {
               style={{ width: 200 }}
             />
             {errors.city && <div style={{ color: "red" }}>{errors.city}</div>}
-          </Form.Item>
+          </div>
 
-          <Form.Item>
-            {/* <label>Dates</label> */}
+          <div>
             <RangePicker
               value={values.dates}
               onChange={(dates) => setFieldValue("dates", dates)}
@@ -90,10 +85,9 @@ const SearchForm = () => {
               placeholder={["Check-in", "Check-out"]}
             />
             {errors.dates && <div style={{ color: "red" }}>{errors.dates}</div>}
-          </Form.Item>
+          </div>
 
-          <Form.Item>
-            {/* <label>Adults</label> */}
+          <div>
             <InputNumber
               min={1}
               max={6}
@@ -104,10 +98,9 @@ const SearchForm = () => {
             {errors.adults && (
               <div style={{ color: "red" }}>{errors.adults}</div>
             )}
-          </Form.Item>
+          </div>
 
-          <Form.Item>
-            {/* <label>Children</label> */}
+          <div>
             <InputNumber
               min={0}
               max={5}
@@ -115,7 +108,7 @@ const SearchForm = () => {
               onChange={(value) => setFieldValue("children", value)}
               placeholder={"Children"}
             />
-          </Form.Item>
+          </div>
 
           <Button
             type="primary"
@@ -125,8 +118,7 @@ const SearchForm = () => {
           >
             Search
           </Button>
-          {/* </div> */}
-        </Form>
+        </form>
       )}
     </Formik>
   );

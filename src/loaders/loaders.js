@@ -2,6 +2,8 @@ import { store } from '../store/store';
 import { searchHotels } from '../store/thunks/hotelsThunks';
 
 export const hotelsLoader = async ({ request }) => {
+
+
     const url = new URL(request.url);
 
     const city = url.searchParams.get('city');
@@ -22,6 +24,8 @@ export const hotelsLoader = async ({ request }) => {
             limit: 10,
         })
     );
+
+
 
     return null;
 };

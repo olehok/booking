@@ -15,14 +15,26 @@ const router = createBrowserRouter(
       errorElement: <h2>error</h2>,
       HydrateFallback: () => <Spin fullscreen size="large" />,
       children: [
-        { index: true, element: <Home /> },
-        { path: "about", element: <About /> },
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "about",
+          element: <About />,
+        },
         {
           path: "hotels",
           element: <Hotels />,
           loader: hotelsLoader,
+          shouldRevalidate: ({ currentUrl, nextUrl }) => {
+            return currentUrl.search !== nextUrl.search;
+          },
         },
-        { path: "*", element: <h2>Not Found</h2> },
+        {
+          path: "*",
+          element: <h2>Not Found</h2>,
+        },
       ],
     },
   ],

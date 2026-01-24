@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="footer">
-      <div className="container large">
+    <footer>
+      <div>
         <h3>Contacts</h3>
         <p>© 2025 Oleh Kovalenko</p>
       </div>
