@@ -38,7 +38,7 @@ export default function Hotels() {
   };
 
   return (
-    <section className="container">
+    <section className="hotel-list">
       <Row gutter={[24, 36]}>
         {hotels.map((hotel) => (
           <Col key={hotel.id} xs={24} sm={12}>
@@ -49,6 +49,7 @@ export default function Hotels() {
 
       <Pagination
         align="center"
+        style={{ marginTop: 18 }}
         current={Number(searchParams.get("page")) || 1}
         total={total}
         pageSize={10}

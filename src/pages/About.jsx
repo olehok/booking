@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <section>
+    <section style={{flex: 1}}>
       <div>
         <h2>About the Booking App</h2>
         <p>

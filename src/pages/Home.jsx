@@ -1,12 +1,10 @@
-import { use, useEffect } from "react";
-import { getDestinations } from "../services/hotelsService";
 import SearchForm from "../components/SearchForm";
 
 export default function Home() {
   return (
     <section className="home">
       <div >
-        <h2>Booking Home</h2>
+        <h2>Travel with Booking</h2>
         <p>
           Explore and book the best hotels around the world with ease and
           confidence.

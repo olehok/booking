@@ -4,6 +4,8 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Hotels from "./pages/Hotels";
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
 import { hotelsLoader } from "./loaders/loaders";
 import { Spin } from "antd";
 
@@ -20,6 +22,10 @@ const router = createBrowserRouter(
           element: <Home />,
         },
         {
+          path: "search",
+          element: <Home />,
+        },
+        {
           path: "about",
           element: <About />,
         },
@@ -30,6 +36,14 @@ const router = createBrowserRouter(
           shouldRevalidate: ({ currentUrl, nextUrl }) => {
             return currentUrl.search !== nextUrl.search;
           },
+        },
+        {
+          path: "profile",
+          element: <Profile />,
+        },
+        {
+          path: "login",
+          element: <Login />,
         },
         {
           path: "*",

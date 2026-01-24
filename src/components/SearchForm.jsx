@@ -59,6 +59,7 @@ const SearchForm = () => {
     >
       {/* Form */}
       {({ handleSubmit, setFieldValue, errors, values }) => (
+        
         <form onSubmit={handleSubmit} layout="inline" className="search-form">
           <div>
             <Select
