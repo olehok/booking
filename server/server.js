@@ -24,12 +24,14 @@ app.get('/api/hotels/search', (req, res) => {
 
     let hotels = database.hotels;
 
-    if (!city) {
-        return res.json([]);
+    // if (!city) {
+    //     return res.json([]);
+    // }
+    if (city !== 'all') {
+        hotels = hotels.filter(
+            hotel => hotel.city === city
+        );
     }
-    hotels = hotels.filter(
-        hotel => hotel.city === city
-    );
 
     const total = hotels.length;
 
@@ -39,12 +41,6 @@ app.get('/api/hotels/search', (req, res) => {
     const paginatedHotels = hotels.slice(start, end);
     res.json({ data: paginatedHotels, total });
 });
-
-// app.post('/api/hotels', (req, res) => {
-//     const {city} = req.body;
-//     const hotels = database.hotels.filter(hotel => hotel.city === city);
-//     res.json(hotels);
-// });
 
 const PORT = 3001;
 app.listen(PORT, () => {

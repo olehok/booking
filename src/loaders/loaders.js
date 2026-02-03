@@ -2,10 +2,7 @@ import { store } from '../store/store';
 import { searchHotels } from '../store/thunks/hotelsThunks';
 
 export const hotelsLoader = async ({ request }) => {
-
-
     const url = new URL(request.url);
-
     const city = url.searchParams.get('city');
     const adults = Number(url.searchParams.get('adults')) || 1;
     const children = Number(url.searchParams.get('children')) || 0;
@@ -17,7 +14,7 @@ export const hotelsLoader = async ({ request }) => {
 
     await store.dispatch(
         searchHotels({
-            city,
+            city: city === "all" ? undefined : city,
             adults,
             children,
             page,
@@ -25,5 +22,7 @@ export const hotelsLoader = async ({ request }) => {
         })
     );
 
-    return null;
+
+
+    return { city, page };
 };

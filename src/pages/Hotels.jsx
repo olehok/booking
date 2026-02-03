@@ -1,10 +1,13 @@
 import { useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
-import { Pagination, Row, Col, Spin, Typography, Space } from "antd";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { Pagination, Row, Col, Spin, Typography, Space, Button } from "antd";
 import HotelCard from "../components/HotelCard";
+
+const { Text } = Typography;
 
 export default function Hotels() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const city = searchParams.get("city");
   const { hotels, loading, error, total, page } = useSelector(
     (state) => state.hotels,
@@ -20,10 +23,23 @@ export default function Hotels() {
 
   if (!hotels.length) {
     return (
-      <Space orientation="vertical" size="large">
-        <Typography.Text type="primary">
-          No hotels found in {city}
-        </Typography.Text>
+      <Space
+        orientation="vertical"
+        size="large"
+        style={{ width: "100%" }}
+        align="center"
+      >
+        <Text>
+          {city ? `No hotels found in ${city}.` : "Please select a city."}
+        </Text>
+        <Button
+          type="primary"
+          onClick={() => {
+            navigate("/hotels?city=all&page=1");
+          }}
+        >
+          Show all hotels
+        </Button>
       </Space>
     );
   }

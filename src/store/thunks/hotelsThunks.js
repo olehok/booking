@@ -19,6 +19,6 @@ export const searchHotels = createAsyncThunk(
             page,
             limit
         });
-        return response.data;
+        return { ...response.data, page };
     }
 );

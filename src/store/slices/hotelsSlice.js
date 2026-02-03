@@ -38,6 +38,7 @@ const hotelsSlice = createSlice({
                 state.loading = false;
                 state.hotels = action.payload.data;
                 state.total = action.payload.total;
+                state.page = action.payload.page || 1;
             })
             .addCase(searchHotels.rejected, (state, action) => {
                 state.loading = false;

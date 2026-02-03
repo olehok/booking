@@ -53,6 +53,7 @@ const SearchForm = () => {
           city: selectedCity.label,
           adults: values.adults,
           children: values.children,
+          page: 1,
         });
         navigate(`/hotels?${params.toString()}`);
       }}
