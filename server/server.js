@@ -24,14 +24,17 @@ app.get('/api/hotels/search', (req, res) => {
 
     let hotels = database.hotels;
 
-    // if (!city) {
-    //     return res.json([]);
-    // }
+    if (!city) {
+        return res.json({ data: [], total: 0 });
+    }
     if (city !== 'all') {
         hotels = hotels.filter(
             hotel => hotel.city === city
         );
     }
+    // if (city === 'all') {
+    //     return res.json(hotels);
+    // }
 
     const total = hotels.length;
 

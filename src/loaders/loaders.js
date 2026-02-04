@@ -14,7 +14,7 @@ export const hotelsLoader = async ({ request }) => {
 
     await store.dispatch(
         searchHotels({
-            city: city === "all" ? undefined : city,
+            city,
             adults,
             children,
             page,
@@ -24,5 +24,5 @@ export const hotelsLoader = async ({ request }) => {
 
 
 
-    return { city, page };
+    return null;
 };

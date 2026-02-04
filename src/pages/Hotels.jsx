@@ -3,7 +3,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { Pagination, Row, Col, Spin, Typography, Space, Button } from "antd";
 import HotelCard from "../components/HotelCard";
 
-const { Text } = Typography;
+const { Text, Link } = Typography;
 
 export default function Hotels() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,14 +14,16 @@ export default function Hotels() {
   );
 
   if (loading) {
-    return <Spin size="large" />;
+    return <Spin fullscreen size="large" />;
   }
 
   if (error) {
     return <p>Error: {error}</p>;
   }
 
-  if (!hotels.length) {
+  const hotelsSafe = Array.isArray(hotels) ? hotels : [];
+
+  if (!hotelsSafe.length) {
     return (
       <Space
         orientation="vertical"
@@ -30,16 +32,16 @@ export default function Hotels() {
         align="center"
       >
         <Text>
-          {city ? `No hotels found in ${city}.` : "Please select a city."}
+          {city ? `No hotels found in ${city}.` : <>Please select a <Link onClick={() => navigate("/search")}>city.</Link></>}
         </Text>
-        <Button
+        {city !== "all" && <Button
           type="primary"
           onClick={() => {
             navigate("/hotels?city=all&page=1");
           }}
         >
           Show all hotels
-        </Button>
+        </Button>}
       </Space>
     );
   }
@@ -56,7 +58,7 @@ export default function Hotels() {
   return (
     <section className="hotel-list">
       <Row gutter={[24, 36]}>
-        {hotels.map((hotel) => (
+        {hotelsSafe.map((hotel) => (
           <Col key={hotel.id} xs={24} sm={12}>
             <HotelCard {...hotel} />
           </Col>
