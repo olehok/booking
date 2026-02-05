@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Formik } from "formik";
-import { Select, InputNumber, DatePicker, Button } from "antd";
+import { Select, InputNumber, DatePicker, Button, Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
@@ -17,7 +17,7 @@ const SearchForm = () => {
     dispatch(fetchDestinations());
   }, [dispatch]);
 
-  if (loading || !destinations.length) return <div>Loading cities...</div>;
+  if (loading || !destinations.length) return <Spin fullscreen size="large" />;
 
   return (
     <Formik
@@ -60,57 +60,56 @@ const SearchForm = () => {
     >
       {/* Form */}
       {({ handleSubmit, setFieldValue, errors, values }) => (
-        
         <form onSubmit={handleSubmit} layout="inline" className="search-form">
-          <div>
-            <Select
-              placeholder="Select city"
-              value={values.city}
-              options={destinations.map((city) => ({
-                value: city.id,
-                label: city.label,
-              }))}
-              onChange={(value) => setFieldValue("city", value)}
-              style={{ width: 200 }}
-            />
-            {errors.city && <div style={{ color: "red" }}>{errors.city}</div>}
-          </div>
+          {/* <div> */}
+          <Select
+            placeholder="Select city"
+            value={values.city}
+            options={destinations.map((city) => ({
+              value: city.id,
+              label: city.label,
+            }))}
+            onChange={(value) => setFieldValue("city", value)}
+            style={{ width: 200 }}
+          />
+          {errors.city && <div style={{ color: "red" }}>{errors.city}</div>}
+          {/* </div> */}
 
-          <div>
-            <RangePicker
-              value={values.dates}
-              onChange={(dates) => setFieldValue("dates", dates)}
-              disabledDate={(current) => {
-                return current && current < dayjs().startOf("day");
-              }}
-              style={{ width: 250 }}
-              placeholder={["Check-in", "Check-out"]}
-            />
-            {errors.dates && <div style={{ color: "red" }}>{errors.dates}</div>}
-          </div>
+          {/* <div> */}
+          <RangePicker
+            value={values.dates}
+            onChange={(dates) => setFieldValue("dates", dates)}
+            disabledDate={(current) => {
+              return current && current < dayjs().startOf("day");
+            }}
+            style={{ flexGrow: 1 }}
+            placeholder={["Check-in", "Check-out"]}
+          />
+          {errors.dates && <div style={{ color: "red" }}>{errors.dates}</div>}
+          {/* </div> */}
 
-          <div>
-            <InputNumber
-              min={1}
-              max={6}
-              value={values.adults}
-              onChange={(value) => setFieldValue("adults", value)}
-              placeholder={"Adults: 1"}
-            />
-            {errors.adults && (
-              <div style={{ color: "red" }}>{errors.adults}</div>
-            )}
-          </div>
+          {/* <div> */}
+          <InputNumber
+            min={1}
+            max={6}
+            value={values.adults}
+            onChange={(value) => setFieldValue("adults", value)}
+            style={{ width: 100 }}
+            placeholder={"Adults: 1"}
+          />
+          {errors.adults && <div style={{ color: "red" }}>{errors.adults}</div>}
+          {/* </div> */}
 
-          <div>
-            <InputNumber
-              min={0}
-              max={5}
-              value={values.children}
-              onChange={(value) => setFieldValue("children", value)}
-              placeholder={"Children"}
-            />
-          </div>
+          {/* <div> */}
+          <InputNumber
+            min={0}
+            max={5}
+            value={values.children}
+            onChange={(value) => setFieldValue("children", value)}
+            style={{ width: 100 }}
+            placeholder={"Children: 0"}
+          />
+          {/* </div> */}
 
           <Button
             type="primary"
@@ -119,6 +118,14 @@ const SearchForm = () => {
             style={{ marginTop: 10 }}
           >
             Search
+          </Button>
+          <Button
+            type="primary"
+            onClick={() => {
+              navigate("/hotels?city=all&page=1");
+            }}
+          >
+            Show all hotels
           </Button>
         </form>
       )}

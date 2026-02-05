@@ -1,9 +1,11 @@
+import {useState, useMemo} from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { Pagination, Row, Col, Spin, Typography, Space, Button } from "antd";
 import HotelCard from "../components/HotelCard";
 
 const { Text, Link } = Typography;
+// const [sortOrder, setSortOrder] = useState(null);
 
 export default function Hotels() {
   const [searchParams, setSearchParams] = useSearchParams();
