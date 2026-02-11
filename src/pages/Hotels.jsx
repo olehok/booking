@@ -91,7 +91,7 @@ export default function Hotels() {
       <Select
         allowClear
         placeholder="Sort by rating"
-        style={{ width: 220, marginBottom: 16 }}
+        style={{ width: 150, marginBottom: 18 }}
         value={sortOrder}
         onChange={setSortOrder}
         options={[
