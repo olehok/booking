@@ -58,10 +58,8 @@ const SearchForm = () => {
         navigate(`/hotels?${params.toString()}`);
       }}
     >
-      {/* Form */}
       {({ handleSubmit, setFieldValue, errors, values }) => (
         <form onSubmit={handleSubmit} layout="inline" className="search-form">
-          {/* <div> */}
           <Select
             placeholder="Select city"
             value={values.city}
@@ -72,10 +70,8 @@ const SearchForm = () => {
             onChange={(value) => setFieldValue("city", value)}
             style={{ width: 200 }}
           />
-          {errors.city && <div style={{ color: "red" }}>{errors.city}</div>}
-          {/* </div> */}
+          {errors.city && <div className="error-search-form">{errors.city}</div>}
 
-          {/* <div> */}
           <RangePicker
             value={values.dates}
             onChange={(dates) => setFieldValue("dates", dates)}
@@ -85,10 +81,8 @@ const SearchForm = () => {
             style={{ flexGrow: 1 }}
             placeholder={["Check-in", "Check-out"]}
           />
-          {errors.dates && <div style={{ color: "red" }}>{errors.dates}</div>}
-          {/* </div> */}
+          {errors.dates && <div className="error-search-form">{errors.dates}</div>}
 
-          {/* <div> */}
           <InputNumber
             min={1}
             max={6}
@@ -97,10 +91,8 @@ const SearchForm = () => {
             style={{ width: 100 }}
             placeholder={"Adults: 1"}
           />
-          {errors.adults && <div style={{ color: "red" }}>{errors.adults}</div>}
-          {/* </div> */}
+          {errors.adults && <div className="error-search-form">{errors.adults}</div>}
 
-          {/* <div> */}
           <InputNumber
             min={0}
             max={5}
@@ -109,7 +101,6 @@ const SearchForm = () => {
             style={{ width: 100 }}
             placeholder={"Children: 0"}
           />
-          {/* </div> */}
 
           <Button
             type="primary"

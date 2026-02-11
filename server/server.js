@@ -32,9 +32,6 @@ app.get('/api/hotels/search', (req, res) => {
             hotel => hotel.city === city
         );
     }
-    // if (city === 'all') {
-    //     return res.json(hotels);
-    // }
 
     const total = hotels.length;
 

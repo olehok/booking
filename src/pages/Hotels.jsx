@@ -95,8 +95,8 @@ export default function Hotels() {
         value={sortOrder}
         onChange={setSortOrder}
         options={[
-          { value: "desc", label: "Rating: from high to low" },
-          { value: "asc", label: "Rating: from low to high" },
+          { value: "desc", label: "From high to low" },
+          { value: "asc", label: "From low to high" },
         ]}
       />
 
