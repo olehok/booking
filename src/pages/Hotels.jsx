@@ -1,11 +1,19 @@
-import {useState, useMemo} from "react";
+import { useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { Pagination, Row, Col, Spin, Typography, Space, Button } from "antd";
+import {
+  Pagination,
+  Row,
+  Col,
+  Spin,
+  Typography,
+  Space,
+  Select,
+  Button,
+} from "antd";
 import HotelCard from "../components/HotelCard";
 
 const { Text, Link } = Typography;
-// const [sortOrder, setSortOrder] = useState(null);
 
 export default function Hotels() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,7 +31,19 @@ export default function Hotels() {
     return <p>Error: {error}</p>;
   }
 
+  const [sortOrder, setSortOrder] = useState(null);
+
   const hotelsSafe = Array.isArray(hotels) ? hotels : [];
+
+  const sortedHotels = useMemo(() => {
+    if (!sortOrder) return hotelsSafe;
+
+    return [...hotelsSafe].sort((a, b) => {
+      return sortOrder === "desc"
+        ? b.hotel_rating - a.hotel_rating
+        : a.hotel_rating - b.hotel_rating;
+    });
+  }, [hotelsSafe, sortOrder]);
 
   if (!hotelsSafe.length) {
     return (
@@ -34,16 +54,25 @@ export default function Hotels() {
         align="center"
       >
         <Text>
-          {city ? `No hotels found in ${city}.` : <>Please select a <Link onClick={() => navigate("/search")}>city.</Link></>}
+          {city ? (
+            `No hotels found in ${city}.`
+          ) : (
+            <>
+              Please select a{" "}
+              <Link onClick={() => navigate("/search")}>city.</Link>
+            </>
+          )}
         </Text>
-        {city !== "all" && <Button
-          type="primary"
-          onClick={() => {
-            navigate("/hotels?city=all&page=1");
-          }}
-        >
-          Show all hotels
-        </Button>}
+        {city !== "all" && (
+          <Button
+            type="primary"
+            onClick={() => {
+              navigate("/hotels?city=all&page=1");
+            }}
+          >
+            Show all hotels
+          </Button>
+        )}
       </Space>
     );
   }
@@ -59,8 +88,20 @@ export default function Hotels() {
 
   return (
     <section className="hotel-list">
+      <Select
+        allowClear
+        placeholder="Sort by rating"
+        style={{ width: 220, marginBottom: 16 }}
+        value={sortOrder}
+        onChange={setSortOrder}
+        options={[
+          { value: "desc", label: "Rating: from high to low" },
+          { value: "asc", label: "Rating: from low to high" },
+        ]}
+      />
+
       <Row gutter={[24, 36]}>
-        {hotelsSafe.map((hotel) => (
+        {sortedHotels.map((hotel) => (
           <Col key={hotel.id} xs={24} sm={12}>
             <HotelCard {...hotel} />
           </Col>
