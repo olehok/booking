@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import {
@@ -85,6 +85,21 @@ export default function Hotels() {
       page: newPage,
     });
   };
+
+  const scrollPosition = useRef(0);
+  useEffect(() => {
+    const savedPosition = localStorage.getItem("hotelsScroll");
+
+    if (savedPosition) {
+      window.scrollTo(0, Number(savedPosition));
+    }
+  }, []);
+  useEffect(() => {
+    return () => {
+      scrollPosition.current = window.scrollY;
+      localStorage.setItem("hotelsScroll", scrollPosition.current);
+    };
+  }, []);
 
   return (
     <section className="hotel-list">
