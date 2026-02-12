@@ -19,6 +19,7 @@ export default function Hotels() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const city = searchParams.get("city");
+  const scrollKey = `hotelsScroll-${city}`;
   const { hotels, loading, error, total, page } = useSelector(
     (state) => state.hotels,
   );
@@ -30,6 +31,25 @@ export default function Hotels() {
   if (error) {
     return <p>Error: {error}</p>;
   }
+
+  useEffect(() => {
+    const savedPosition = localStorage.getItem(scrollKey);
+
+    if (savedPosition) {
+      window.scrollTo(0, Number(savedPosition));
+    }
+  }, [scrollKey]);
+  useEffect(() => {
+    const handleScroll = () => {
+      localStorage.setItem(scrollKey, window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrollKey]);
 
   const [sortOrder, setSortOrder] = useState(null);
 
@@ -86,20 +106,20 @@ export default function Hotels() {
     });
   };
 
-  const scrollPosition = useRef(0);
-  useEffect(() => {
-    const savedPosition = localStorage.getItem("hotelsScroll");
+  // const scrollPosition = useRef(0);
+  // useEffect(() => {
+  //   const savedPosition = localStorage.getItem("hotelsScroll");
 
-    if (savedPosition) {
-      window.scrollTo(0, Number(savedPosition));
-    }
-  }, []);
-  useEffect(() => {
-    return () => {
-      scrollPosition.current = window.scrollY;
-      localStorage.setItem("hotelsScroll", scrollPosition.current);
-    };
-  }, []);
+  //   if (savedPosition) {
+  //     window.scrollTo(0, Number(savedPosition));
+  //   }
+  // }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     scrollPosition.current = window.scrollY;
+  //     localStorage.setItem("hotelsScroll", scrollPosition.current);
+  //   };
+  // }, []);
 
   return (
     <section className="hotel-list">
