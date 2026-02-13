@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import {
@@ -11,6 +11,7 @@ import {
   Select,
   Button,
 } from "antd";
+import useDebounce from "../hooks/useDebounce";
 import HotelCard from "../components/HotelCard";
 
 const { Text, Link } = Typography;
