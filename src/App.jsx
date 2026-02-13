@@ -33,9 +33,6 @@ const router = createBrowserRouter(
           path: "hotels",
           element: <Hotels />,
           loader: hotelsLoader,
-          // shouldRevalidate: ({ currentUrl, nextUrl }) => {
-          //   return currentUrl.search !== nextUrl.search;
-          // },
         },
         {
           path: "profile",

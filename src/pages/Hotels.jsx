@@ -106,21 +106,6 @@ export default function Hotels() {
     });
   };
 
-  // const scrollPosition = useRef(0);
-  // useEffect(() => {
-  //   const savedPosition = localStorage.getItem("hotelsScroll");
-
-  //   if (savedPosition) {
-  //     window.scrollTo(0, Number(savedPosition));
-  //   }
-  // }, []);
-  // useEffect(() => {
-  //   return () => {
-  //     scrollPosition.current = window.scrollY;
-  //     localStorage.setItem("hotelsScroll", scrollPosition.current);
-  //   };
-  // }, []);
-
   return (
     <section className="hotel-list">
       <Select

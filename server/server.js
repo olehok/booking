@@ -34,10 +34,8 @@ app.get('/api/hotels/search', (req, res) => {
     }
 
     const total = hotels.length;
-
     const start = (page - 1) * limit;
     const end = start + Number(limit);
-
     const paginatedHotels = hotels.slice(start, end);
     res.json({ data: paginatedHotels, total });
 });

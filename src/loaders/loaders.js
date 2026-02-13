@@ -22,7 +22,5 @@ export const hotelsLoader = async ({ request }) => {
         })
     );
 
-
-
     return null;
 };

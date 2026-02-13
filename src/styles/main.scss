@@ -20,17 +20,22 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
-  transition: transform 0.5s ease;
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.3s ease;
   background: #ffffff;
+  margin-bottom: 1rem;
   &--hidden {
     transform: translateY(-100%);
+  }
+  &:not(.header--hidden) {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   &-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 1rem;
   }
   &-nav {
     display: flex;
