@@ -3,7 +3,7 @@ const { Text } = Typography;
 
 export default function About() {
   return (
-    <section style={{flex: 1}}>
+    <section>
       <div>
         <h2>About the Booking App</h2>
         <Text>

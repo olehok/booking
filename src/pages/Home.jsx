@@ -2,7 +2,7 @@ import SearchForm from "../components/SearchForm";
 
 export default function Home() {
   return (
-    <section className="home">
+    <section>
       <div >
         <h2>Travel with Booking</h2>
         <p>

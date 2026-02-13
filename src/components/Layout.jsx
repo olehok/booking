@@ -41,16 +41,14 @@ export default function Layout() {
   }, [hidden]);
 
   return (
-    <>
+    <div className="layout container">
       <div className={`header ${hidden ? "header--hidden" : ""}`}>
         <Header />
       </div>
-      <div className="container">
-        <main>
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
-    </>
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
   );
 }
