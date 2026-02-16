@@ -7,10 +7,9 @@ export const hotelsLoader = async ({ request }) => {
     const adults = Number(url.searchParams.get('adults')) || 1;
     const children = Number(url.searchParams.get('children')) || 0;
     const page = Number(url.searchParams.get('page')) || 1;
+    const sort = url.searchParams.get("sort") || "";
 
-    if (!city) {
-        return null;
-    }
+    if (!city) return null;
 
     await store.dispatch(
         searchHotels({
@@ -19,6 +18,7 @@ export const hotelsLoader = async ({ request }) => {
             children,
             page,
             limit: 10,
+            sort,
         })
     );
 

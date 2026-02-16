@@ -21,17 +21,9 @@ export default function Hotels() {
   const navigate = useNavigate();
   const city = searchParams.get("city");
   const scrollKey = `hotelsScroll-${city}`;
-  const { hotels, loading, error, total, page } = useSelector(
+  const { hotels, loading, error, total } = useSelector(
     (state) => state.hotels,
   );
-
-  if (loading) {
-    return <Spin fullscreen size="large" />;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
 
   useEffect(() => {
     const savedPosition = localStorage.getItem(scrollKey);
@@ -40,6 +32,7 @@ export default function Hotels() {
       window.scrollTo(0, Number(savedPosition));
     }
   }, [scrollKey]);
+
   useEffect(() => {
     const handleScroll = () => {
       localStorage.setItem(scrollKey, window.scrollY);
@@ -52,19 +45,36 @@ export default function Hotels() {
     };
   }, [scrollKey]);
 
-  const [sortOrder, setSortOrder] = useState(null);
-
   const hotelsSafe = Array.isArray(hotels) ? hotels : [];
 
-  const sortedHotels = useMemo(() => {
-    if (!sortOrder) return hotelsSafe;
+  const handlePageChange = (newPage) => {
+    const params = Object.fromEntries(searchParams.entries());
 
-    return [...hotelsSafe].sort((a, b) => {
-      return sortOrder === "desc"
-        ? b.hotel_rating - a.hotel_rating
-        : a.hotel_rating - b.hotel_rating;
+    setSearchParams({
+      ...params,
+      page: newPage,
     });
-  }, [hotelsSafe, sortOrder]);
+  };
+
+  const sort = searchParams.get("sort") || null;
+
+  const handleSortChange = (value) => {
+    const params = Object.fromEntries(searchParams.entries());
+
+    setSearchParams({
+      ...params,
+      sort: value || "",
+      page: 1,
+    });
+  };
+
+  if (loading) {
+    return <Spin fullscreen size="large" />;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   if (!hotelsSafe.length) {
     return (
@@ -98,23 +108,14 @@ export default function Hotels() {
     );
   }
 
-  const handlePageChange = (newPage) => {
-    const params = Object.fromEntries(searchParams.entries());
-
-    setSearchParams({
-      ...params,
-      page: newPage,
-    });
-  };
-
   return (
     <section className="hotel-list">
       <Select
         allowClear
         placeholder="Sort by rating"
         style={{ width: 150, marginBottom: 18 }}
-        value={sortOrder}
-        onChange={setSortOrder}
+        value={sort}
+        onChange={handleSortChange}
         options={[
           { value: "desc", label: "From high to low" },
           { value: "asc", label: "From low to high" },
@@ -122,7 +123,7 @@ export default function Hotels() {
       />
 
       <Row gutter={[24, 36]}>
-        {sortedHotels.map((hotel) => (
+        {hotelsSafe.map((hotel) => (
           <Col key={hotel.id} xs={24} sm={12}>
             <HotelCard {...hotel} />
           </Col>

@@ -19,7 +19,8 @@ app.get('/api/hotels/search', (req, res) => {
     const {
         city,
         page = 1,
-        limit = 10
+        limit = 10,
+        sort = "",
     } = req.query;
 
     let hotels = database.hotels;
@@ -33,10 +34,19 @@ app.get('/api/hotels/search', (req, res) => {
         );
     }
 
+    if (sort === "desc") {
+        hotels = hotels.sort((a, b) => b.hotel_rating - a.hotel_rating);
+    }
+
+    if (sort === "asc") {
+        hotels = hotels.sort((a, b) => a.hotel_rating - b.hotel_rating);
+    }
+
     const total = hotels.length;
     const start = (page - 1) * limit;
     const end = start + Number(limit);
     const paginatedHotels = hotels.slice(start, end);
+
     res.json({ data: paginatedHotels, total });
 });
 

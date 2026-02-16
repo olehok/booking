@@ -11,13 +11,14 @@ export const fetchDestinations = createAsyncThunk(
 
 export const searchHotels = createAsyncThunk(
     'hotels/searchHotels',
-    async ({ city, adults, children, page = 1, limit = 10 }) => {
+    async ({ city, adults, children, page = 1, limit = 10, sort = "" }) => {
         const response = await searchHotelsApi({
             city,
             adults,
             children,
             page,
-            limit
+            limit,
+            sort,
         });
         return { ...response.data, page };
     }
