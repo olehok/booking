@@ -4,7 +4,7 @@ export const getDestinations = () => {
     return api.get('/api/destinations');
 };
 
-export const searchHotels = ({ city, adults, children, page, limit, sort }) => {
+export const searchHotels = ({ city, adults, children, page, limit, sort, search }) => {
     return api.get('/api/hotels/search', {
         params: {
             city,
@@ -13,6 +13,7 @@ export const searchHotels = ({ city, adults, children, page, limit, sort }) => {
             page,
             limit,
             sort,
+            search,
         }
     });
 };

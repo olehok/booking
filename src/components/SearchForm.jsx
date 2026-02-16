@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { Formik } from "formik";
-import { Select, InputNumber, DatePicker, Button, Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import { Select, InputNumber, DatePicker, Button, Spin } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import { fetchDestinations } from "../store/thunks/hotelsThunks";
 
 const { RangePicker } = DatePicker;
@@ -70,7 +71,9 @@ const SearchForm = () => {
             onChange={(value) => setFieldValue("city", value)}
             style={{ width: 200 }}
           />
-          {errors.city && <div className="error-search-form">{errors.city}</div>}
+          {errors.city && (
+            <div className="error-search-form">{errors.city}</div>
+          )}
 
           <RangePicker
             value={values.dates}
@@ -81,7 +84,9 @@ const SearchForm = () => {
             style={{ flexGrow: 1 }}
             placeholder={["Check-in", "Check-out"]}
           />
-          {errors.dates && <div className="error-search-form">{errors.dates}</div>}
+          {errors.dates && (
+            <div className="error-search-form">{errors.dates}</div>
+          )}
 
           <InputNumber
             min={1}
@@ -91,7 +96,9 @@ const SearchForm = () => {
             style={{ width: 100 }}
             placeholder={"Adults: 1"}
           />
-          {errors.adults && <div className="error-search-form">{errors.adults}</div>}
+          {errors.adults && (
+            <div className="error-search-form">{errors.adults}</div>
+          )}
 
           <InputNumber
             min={0}
@@ -103,15 +110,17 @@ const SearchForm = () => {
           />
 
           <Button
-            type="primary"
+            shape="circle"
+            color="primary"
             htmlType="submit"
             disabled={!!errors.dates}
             style={{ marginTop: 10 }}
-          >
-            Search
-          </Button>
+            icon={<SearchOutlined />}
+          />
+
           <Button
-            type="primary"
+            color="primary"
+            variant="outlined"
             onClick={() => {
               navigate("/hotels?city=all&page=1");
             }}

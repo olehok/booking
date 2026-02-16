@@ -8,6 +8,7 @@ export const hotelsLoader = async ({ request }) => {
     const children = Number(url.searchParams.get('children')) || 0;
     const page = Number(url.searchParams.get('page')) || 1;
     const sort = url.searchParams.get("sort") || "";
+    const search = url.searchParams.get("search") || "";
 
     if (!city) return null;
 
@@ -19,6 +20,7 @@ export const hotelsLoader = async ({ request }) => {
             page,
             limit: 10,
             sort,
+            search,
         })
     );
 

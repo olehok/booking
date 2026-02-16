@@ -21,6 +21,7 @@ app.get('/api/hotels/search', (req, res) => {
         page = 1,
         limit = 10,
         sort = "",
+        search = "",
     } = req.query;
 
     let hotels = database.hotels;
@@ -31,6 +32,12 @@ app.get('/api/hotels/search', (req, res) => {
     if (city !== 'all') {
         hotels = hotels.filter(
             hotel => hotel.city === city
+        );
+    }
+
+    if (search) {
+        hotels = hotels.filter(hotel =>
+            hotel.name.toLowerCase().includes(search.toLowerCase())
         );
     }
 

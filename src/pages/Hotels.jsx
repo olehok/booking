@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import {
@@ -10,7 +10,9 @@ import {
   Space,
   Select,
   Button,
+  Input,
 } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import useDebounce from "../hooks/useDebounce";
 import HotelCard from "../components/HotelCard";
 
@@ -21,17 +23,37 @@ export default function Hotels() {
   const navigate = useNavigate();
   const city = searchParams.get("city");
   const scrollKey = `hotelsScroll-${city}`;
+  const isNewSearch = useRef(false);
+
+  const [searchValue, setSearchValue] = useState(
+    searchParams.get("search") || "",
+  );
+
+  const debouncedSearch = useDebounce(searchValue, 700);
+
   const { hotels, loading, error, total } = useSelector(
     (state) => state.hotels,
   );
 
-  useEffect(() => {
-    const savedPosition = localStorage.getItem(scrollKey);
+  const hotelsSafe = Array.isArray(hotels) ? hotels : [];
+  const urlSearch = searchParams.get("search") || "";
 
-    if (savedPosition) {
-      window.scrollTo(0, Number(savedPosition));
+  useEffect(() => {
+    setSearchValue(urlSearch);
+  }, [urlSearch]);
+
+  useEffect(() => {
+    if (debouncedSearch !== urlSearch) {
+      const params = Object.fromEntries(searchParams.entries());
+
+      setSearchParams({
+        ...params,
+        search: debouncedSearch || "",
+        page: 1,
+      });
+      isNewSearch.current = true;
     }
-  }, [scrollKey]);
+  }, [debouncedSearch, urlSearch, searchParams, setSearchParams]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,7 +67,20 @@ export default function Hotels() {
     };
   }, [scrollKey]);
 
-  const hotelsSafe = Array.isArray(hotels) ? hotels : [];
+  useEffect(() => {
+    if (hotelsSafe.length > 0) {
+      const savedPosition = localStorage.getItem(scrollKey);
+
+      if (isNewSearch.current) {
+        window.scrollTo(0, 0);
+        isNewSearch.current = false;
+      } else if (savedPosition) {
+        requestAnimationFrame(() => {
+          window.scrollTo(0, Number(savedPosition));
+        });
+      }
+    }
+  }, [hotelsSafe.length, scrollKey]);
 
   const handlePageChange = (newPage) => {
     const params = Object.fromEntries(searchParams.entries());
@@ -68,76 +103,87 @@ export default function Hotels() {
     });
   };
 
-  if (loading) {
-    return <Spin fullscreen size="large" />;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
-
-  if (!hotelsSafe.length) {
-    return (
-      <Space
-        orientation="vertical"
-        size="large"
-        style={{ width: "100%" }}
-        align="center"
-      >
-        <Text>
-          {city ? (
-            `No hotels found in ${city}.`
-          ) : (
-            <>
-              Please select a{" "}
-              <Link onClick={() => navigate("/search")}>city.</Link>
-            </>
-          )}
-        </Text>
-        {city !== "all" && (
-          <Button
-            type="primary"
-            onClick={() => {
-              navigate("/hotels?city=all&page=1");
-            }}
-          >
-            Show all hotels
-          </Button>
-        )}
-      </Space>
-    );
-  }
-
   return (
     <section className="hotel-list">
-      <Select
-        allowClear
-        placeholder="Sort by rating"
-        style={{ width: 150, marginBottom: 18 }}
-        value={sort}
-        onChange={handleSortChange}
-        options={[
-          { value: "desc", label: "From high to low" },
-          { value: "asc", label: "From low to high" },
-        ]}
-      />
+      <Space style={{ margin: "0 8px 18px" }}>
+        <Input
+          placeholder="Search hotel..."
+          style={{ width: 250 }}
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+        <Button shape="circle" icon={<SearchOutlined />} />
+      </Space>
 
-      <Row gutter={[24, 36]}>
-        {hotelsSafe.map((hotel) => (
-          <Col key={hotel.id} xs={24} sm={12}>
-            <HotelCard {...hotel} />
-          </Col>
-        ))}
-      </Row>
+      {loading && (
+        <Spin size="large" style={{ display: "block", margin: "50px auto" }} />
+      )}
 
-      <Pagination
-        align="center"
-        style={{ marginTop: 18 }}
-        current={Number(searchParams.get("page")) || 1}
-        total={total}
-        pageSize={10}
-        onChange={handlePageChange}
-      />
+      {error && <p>Error: {error}</p>}
+
+      {!loading && !error && !hotelsSafe.length && (
+        <Space
+          orientation="vertical"
+          size="large"
+          style={{ width: "100%", marginTop: 40 }}
+          align="center"
+        >
+          <Text>
+            {city ? (
+              `No hotels found${city !== "all" ? ` in ${city}` : ""}.`
+            ) : (
+              <>
+                Please select a{" "}
+                <Link onClick={() => navigate("/search")}>city.</Link>
+              </>
+            )}
+          </Text>
+          {city !== "all" && (
+            <Button
+              color="primary"
+              variant="outlined"
+              onClick={() => {
+                navigate("/hotels?city=all&page=1");
+              }}
+            >
+              Show all hotels
+            </Button>
+          )}
+        </Space>
+      )}
+
+      {!loading && !error && hotelsSafe.length > 0 && (
+        <>
+          <Select
+            allowClear
+            placeholder="Sort by rating"
+            style={{ width: 150 }}
+            value={sort}
+            onChange={handleSortChange}
+            options={[
+              { value: "desc", label: "From high to low" },
+              { value: "asc", label: "From low to high" },
+            ]}
+          />
+
+          <Row gutter={[24, 36]}>
+            {hotelsSafe.map((hotel) => (
+              <Col key={hotel.id} xs={24} sm={12}>
+                <HotelCard {...hotel} />
+              </Col>
+            ))}
+          </Row>
+
+          <Pagination
+            align="center"
+            style={{ marginTop: 18 }}
+            current={Number(searchParams.get("page")) || 1}
+            total={total}
+            pageSize={10}
+            onChange={handlePageChange}
+          />
+        </>
+      )}
     </section>
   );
 }

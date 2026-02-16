@@ -33,7 +33,10 @@ const router = createBrowserRouter(
           path: "hotels",
           element: <Hotels />,
           loader: hotelsLoader,
-          shouldRevalidate: ({ currentUrl, nextUrl }) => {
+          shouldRevalidate: ({ currentUrl, nextUrl, actionType }) => {
+            if (actionType === "POP") {
+              return false;
+            }
             return currentUrl.search !== nextUrl.search;
           },
         },
