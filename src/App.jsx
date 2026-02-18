@@ -1,4 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useEffect } from "react"; 
+import { useDispatch } from "react-redux";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
@@ -7,6 +9,7 @@ import Hotels from "./pages/Hotels";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import { hotelsLoader } from "./loaders/loaders";
+import { hydrateFavorites } from "./store/slices/favoritesSlice";
 import { Spin } from "antd";
 
 const router = createBrowserRouter(
@@ -59,5 +62,14 @@ const router = createBrowserRouter(
 );
 
 export default function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const storedFavorites = localStorage.getItem("favorites");
+    if (storedFavorites) {
+      dispatch(hydrateFavorites(JSON.parse(storedFavorites)));
+    }
+  }, [dispatch]);
+
   return <RouterProvider router={router} />;
 }

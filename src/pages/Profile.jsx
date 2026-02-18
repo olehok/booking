@@ -6,7 +6,6 @@ export default function Profile() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        // Fetch user profile data
         const fetchProfile = async () => {
             try {
                 const response = await fetch('/api/profile');

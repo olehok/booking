@@ -1,6 +1,8 @@
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import { toggleFavorite } from "../store/slices/favoritesSlice";
 import { Card, Rate, Typography, Space, Button, Image } from "antd";
-import { HeartOutlined } from "@ant-design/icons";
+import { HeartOutlined, HeartFilled } from "@ant-design/icons";
 
 const { Title, Text, Link } = Typography;
 
@@ -17,12 +19,15 @@ const HotelCard = ({
   phone_number,
   website,
   hotel_rating,
+  id,
 }) => {
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.favorites.favorites);
+  const isFavorite = favorites.includes(id);
   return (
     <Card
       hoverable
       style={{ overflow: "hidden" }}
-      
       cover={
         <Image
           src={image_url}
@@ -37,7 +42,20 @@ const HotelCard = ({
           preview={false}
         />
       }
-      actions={[<HeartOutlined key="fav" />]}
+      actions={[
+        isFavorite ? (
+          <HeartFilled
+            key="fav"
+            style={{ color: "red" }}
+            onClick={() => dispatch(toggleFavorite(id))}
+          />
+        ) : (
+          <HeartOutlined
+            key="fav"
+            onClick={() => dispatch(toggleFavorite(id))}
+          />
+        ),
+      ]}
     >
       <Space orientation="vertical" size="small" style={{ width: "100%" }}>
         <Title level={4}>{name}</Title>
@@ -74,6 +92,7 @@ HotelCard.propTypes = {
   phone_number: PropTypes.string,
   website: PropTypes.string,
   hotel_rating: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default HotelCard;
