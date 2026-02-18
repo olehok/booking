@@ -14,7 +14,7 @@ import {
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import useDebounce from "../hooks/useDebounce";
-import HotelCard from "../components/HotelCard";
+import HotelsGrid from "../components/HotelsGrid";
 
 const { Text, Link } = Typography;
 
@@ -166,13 +166,7 @@ export default function Hotels() {
             ]}
           />
 
-          <Row gutter={[24, 36]}>
-            {hotelsSafe.map((hotel) => (
-              <Col key={hotel.id} xs={24} sm={12}>
-                <HotelCard {...hotel} />
-              </Col>
-            ))}
-          </Row>
+          <HotelsGrid hotels={hotelsSafe} />
 
           <Pagination
             align="center"

@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Row, Col, Typography, Button, Space } from "antd";
 import HotelCard from "../components/HotelCard";
+import HotelsGrid from "../components/HotelsGrid";
 import { resetFavorites } from "../store/slices/favoritesSlice";
 
 const { Title, Text } = Typography;
@@ -27,7 +28,7 @@ export default function Profile() {
         </Space>
       );
     }
-    
+
   return (
     <section>
       <h2>Profile</h2>
@@ -45,13 +46,7 @@ export default function Profile() {
         </Button>
       </Space>
 
-      <Row gutter={[24, 36]}>
-        {favoriteHotels.map((hotel) => (
-          <Col key={hotel.id} xs={24} sm={12}>
-            <HotelCard {...hotel} />
-          </Col>
-        ))}
-      </Row>
+      <HotelsGrid hotels={favoriteHotels} />
     </section>
   );
 }
