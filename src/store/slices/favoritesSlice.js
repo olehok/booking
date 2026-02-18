@@ -23,11 +23,16 @@ const favoritesSlice = createSlice({
             );
         },
 
+        resetFavorites: (state) => {
+            state.favorites = [];
+            localStorage.removeItem("favorites");
+        },
+
         hydrateFavorites: (state, action) => {
             state.favorites = action.payload;
         }
     }
 });
 
-export const { toggleFavorite, hydrateFavorites } = favoritesSlice.actions;
+export const { toggleFavorite, hydrateFavorites, resetFavorites } = favoritesSlice.actions;
 export default favoritesSlice.reducer;

@@ -1,40 +1,57 @@
-import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { Row, Col, Typography, Button, Space } from "antd";
+import HotelCard from "../components/HotelCard";
+import { resetFavorites } from "../store/slices/favoritesSlice";
+
+const { Title, Text } = Typography;
 
 export default function Profile() {
-    const [profile, setProfile] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        const fetchProfile = async () => {
-            try {
-                const response = await fetch('/api/profile');
-                if (!response.ok) throw new Error('Failed to fetch profile');
-                const data = await response.json();
-                setProfile(data);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
+    // отримуємо favorites IDs
+    const favoriteIds = useSelector((state) => state.favorites.favorites);
 
-        fetchProfile();
-    }, []);
+    // отримуємо всі готелі, які вже були завантажені
+    const allHotels = useSelector((state) => state.hotels.hotels);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
-
-    return (
-        <div className="profile-container">
-            <h1>Profile</h1>
-            {profile && (
-                <div className="profile-info">
-                    <p><strong>Name:</strong> {profile.name}</p>
-                    <p><strong>Email:</strong> {profile.email}</p>
-                    <p><strong>Phone:</strong> {profile.phone}</p>
-                </div>
-            )}
-        </div>
+    // фільтруємо тільки улюблені
+    const favoriteHotels = allHotels.filter((hotel) =>
+      favoriteIds.includes(hotel.id),
     );
+
+    if (!favoriteHotels.length) {
+      return (
+        <Space orientation="vertical" align="center" style={{ width: "100%" }}>
+          <Title level={3}>Your Favorites</Title>
+          <Text>No favorite hotels yet.</Text>
+        </Space>
+      );
+    }
+    
+  return (
+    <section>
+      <h2>Profile</h2>
+      <Space
+        style={{
+          width: "100%",
+          justifyContent: "space-between",
+          marginBottom: 24,
+        }}
+      >
+        <Title level={3}>Your Favorites</Title>
+
+        <Button danger onClick={() => dispatch(resetFavorites())}>
+          Reset all
+        </Button>
+      </Space>
+
+      <Row gutter={[24, 36]}>
+        {favoriteHotels.map((hotel) => (
+          <Col key={hotel.id} xs={24} sm={12}>
+            <HotelCard {...hotel} />
+          </Col>
+        ))}
+      </Row>
+    </section>
+  );
 }
