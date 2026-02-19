@@ -1,13 +1,15 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useEffect } from "react"; 
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Hotels from "./pages/Hotels";
+import Favorites from "./pages/Favorites";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
+import PrivateRoute from "./components/PrivateRoute";
 import { hotelsLoader } from "./loaders/loaders";
 import { hydrateFavorites } from "./store/slices/favoritesSlice";
 import { Spin } from "antd";
@@ -44,12 +46,20 @@ const router = createBrowserRouter(
           },
         },
         {
-          path: "profile",
-          element: <Profile />,
+          path: "favorites",
+          element: <Favorites />,
         },
         {
           path: "login",
           element: <Login />,
+        },
+        {
+          path: "profile",
+          element: (
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          ),
         },
         {
           path: "*",

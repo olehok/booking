@@ -3,8 +3,6 @@ import { useSelector } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import {
   Pagination,
-  Row,
-  Col,
   Spin,
   Typography,
   Space,

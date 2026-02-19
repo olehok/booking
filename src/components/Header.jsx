@@ -19,7 +19,7 @@ export default function Header() {
           </h3>
 
           <h3>
-            <NavLink to="/profile">Profile</NavLink>
+            <NavLink to="/favorites">Favorites</NavLink>
           </h3>
           <h3>
             <NavLink to="/login">Login</NavLink>
