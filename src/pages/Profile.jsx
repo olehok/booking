@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Row, Col, Typography, Button, Space } from "antd";
-import HotelCard from "../components/HotelCard";
+import { Typography, Button, Space } from "antd";
 import HotelsGrid from "../components/HotelsGrid";
 import { resetFavorites } from "../store/slices/favoritesSlice";
 
@@ -9,16 +8,15 @@ const { Title, Text } = Typography;
 export default function Profile() {
     const dispatch = useDispatch();
 
-    // отримуємо favorites IDs
-    const favoriteIds = useSelector((state) => state.favorites.favorites);
+    const favoriteHotels = useSelector((state) => state.favorites.favorites);
 
-    // отримуємо всі готелі, які вже були завантажені
-    const allHotels = useSelector((state) => state.hotels.hotels);
+    // // отримуємо всі готелі, які вже були завантажені
+    // const allHotels = useSelector((state) => state.hotels.hotels);
 
-    // фільтруємо тільки улюблені
-    const favoriteHotels = allHotels.filter((hotel) =>
-      favoriteIds.includes(hotel.id),
-    );
+    // // фільтруємо тільки улюблені
+    // const favoriteHotels = allHotels.filter((hotel) =>
+    //   favoriteIds.includes(hotel.id),
+    // );
 
     if (!favoriteHotels.length) {
       return (

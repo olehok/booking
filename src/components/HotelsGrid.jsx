@@ -6,7 +6,7 @@ export default function HotelsGrid({ hotels }) {
     <Row gutter={[24, 36]}>
       {hotels.map((hotel) => (
         <Col key={hotel.id} xs={24} sm={12}>
-          <HotelCard {...hotel} />
+          <HotelCard hotel={hotel} />
         </Col>
       ))}
     </Row>

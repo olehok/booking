@@ -9,12 +9,17 @@ const favoritesSlice = createSlice({
     initialState,
     reducers: {
         toggleFavorite: (state, action) => {
-            const id = action.payload;
+            const hotel = action.payload;
+            const existingFavorite = state.favorites.find(
+                fav => fav.id === hotel.id
+            );
 
-            if (state.favorites.includes(id)) {
-                state.favorites = state.favorites.filter(fav => fav !== id);
+            if (existingFavorite) {
+                state.favorites = state.favorites.filter(
+                    fav => fav.id !== hotel.id
+                );
             } else {
-                state.favorites.push(id);
+                state.favorites.push(hotel);
             }
 
             localStorage.setItem(
@@ -29,7 +34,7 @@ const favoritesSlice = createSlice({
         },
 
         hydrateFavorites: (state, action) => {
-            state.favorites = action.payload;
+            state.favorites = action.payload || [];
         }
     }
 });
