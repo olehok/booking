@@ -1,6 +1,14 @@
 import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../store/slices/authSlice";
+import { Link } from "react-router-dom";
+import { Button } from "antd";
 
 export default function Header() {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  const dispatch = useDispatch();
+
   return (
     <header>
       <div className="header-wrapper">
@@ -17,13 +25,34 @@ export default function Header() {
           <h3>
             <NavLink to="/hotels">Hotels</NavLink>
           </h3>
-
           <h3>
             <NavLink to="/favorites">Favorites</NavLink>
           </h3>
-          <h3>
+          {/* <h3>
+            <NavLink to="/profile">Profile</NavLink>
+          </h3> */}
+          {/* <h3>
             <NavLink to="/login">Login</NavLink>
-          </h3>
+          </h3> */}
+          {isAuthenticated ? (
+            <>
+              <h3>
+                <NavLink to="/profile">Profile</NavLink>
+              </h3>{" "}
+              <Button
+                // type="link"
+                color="primary"
+                variant="outlined"
+                onClick={() => dispatch(logout())}
+              >
+                Logout
+              </Button>
+            </>
+          ) : (
+            <h3>
+              <NavLink to="/login">Login</NavLink>
+            </h3>
+          )}
         </nav>
       </div>
     </header>

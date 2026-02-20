@@ -10,14 +10,6 @@ export default function Favorites() {
 
   const favoriteHotels = useSelector((state) => state.favorites.favorites);
 
-  // // отримуємо всі готелі, які вже були завантажені
-  // const allHotels = useSelector((state) => state.hotels.hotels);
-
-  // // фільтруємо тільки улюблені
-  // const favoriteHotels = allHotels.filter((hotel) =>
-  //   favoriteIds.includes(hotel.id),
-  // );
-
   if (!favoriteHotels.length) {
     return (
       <Space orientation="vertical" align="center" style={{ width: "100%" }}>
