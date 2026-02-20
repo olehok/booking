@@ -1,10 +1,12 @@
 import { store } from "../store/store";
 import { hydrateAuth } from "../store/slices/authSlice";
 import { hydrateFavorites } from "../store/slices/favoritesSlice";
+import { hydrateTheme } from "../store/slices/themeSlice";
 
 export function hydrateState() {
     const savedAuth = localStorage.getItem("auth");
     const savedFavorites = localStorage.getItem("favorites");
+    const savedTheme = localStorage.getItem("theme");
 
     if (savedAuth) {
         store.dispatch(hydrateAuth(JSON.parse(savedAuth)));
@@ -12,6 +14,10 @@ export function hydrateState() {
 
     if (savedFavorites) {
         store.dispatch(hydrateFavorites(JSON.parse(savedFavorites)));
+    }
+
+    if (savedTheme) {
+        store.dispatch(hydrateTheme(savedTheme));
     }
 }
 
@@ -26,5 +32,10 @@ store.subscribe(() => {
     localStorage.setItem(
         "favorites",
         JSON.stringify(state.favorites.favorites)
+    );
+
+    localStorage.setItem(
+        "theme",
+        JSON.stringify(state.theme.mode)
     );
 });

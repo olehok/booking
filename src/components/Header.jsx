@@ -1,13 +1,15 @@
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/slices/authSlice";
-import { Link } from "react-router-dom";
-import { Button } from "antd";
+import { toggleTheme } from "../store/slices/themeSlice";
+import { Button, Switch } from "antd";
 
 export default function Header() {
+  const dispatch = useDispatch();
+
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  const dispatch = useDispatch();
+  const themeMode = useSelector((state) => state.theme.mode);
 
   return (
     <header>
@@ -53,6 +55,10 @@ export default function Header() {
               <NavLink to="/login">Login</NavLink>
             </h3>
           )}
+          <Switch
+            checked={themeMode === "dark"}
+            onChange={() => dispatch(toggleTheme())}
+          />
         </nav>
       </div>
     </header>

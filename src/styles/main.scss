@@ -2,6 +2,17 @@
 
 body {
   font-family: "Arial", sans-serif;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  &.light {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  &.dark {
+    background-color: #141414;
+    color: #ffffff;
+  }
 }
 
 .layout {
@@ -23,7 +34,7 @@ body {
   transition:
     transform 0.5s ease,
     box-shadow 0.3s ease;
-  background: #ffffff;
+  background: inherit;
   padding: 0 1rem;
   margin-bottom: 1rem;
   &--hidden {

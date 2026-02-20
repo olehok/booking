@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
@@ -11,8 +11,7 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import { hotelsLoader } from "./loaders/loaders";
-import { hydrateFavorites } from "./store/slices/favoritesSlice";
-import { Spin } from "antd";
+import { Spin, ConfigProvider, theme as antdTheme } from "antd";
 
 const router = createBrowserRouter(
   [
@@ -72,14 +71,23 @@ const router = createBrowserRouter(
 );
 
 export default function App() {
-  const dispatch = useDispatch();
+  const mode = useSelector((state) => state.theme.mode);
+  const isDarkMode = mode === "dark";
 
   useEffect(() => {
-    const storedFavorites = localStorage.getItem("favorites");
-    if (storedFavorites) {
-      dispatch(hydrateFavorites(JSON.parse(storedFavorites)));
-    }
-  }, [dispatch]);
+    document.body.classList.remove("light", "dark");
+    document.body.classList.add(mode);
+  }, [mode]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <ConfigProvider
+      theme={{
+        algorithm: isDarkMode
+          ? antdTheme.darkAlgorithm
+          : antdTheme.defaultAlgorithm,
+      }}
+    >
+      <RouterProvider router={router} />
+    </ConfigProvider>
+  );
 }
