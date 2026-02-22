@@ -36,6 +36,6 @@ store.subscribe(() => {
 
     localStorage.setItem(
         "theme",
-        JSON.stringify(state.theme.mode)
+        state.theme.mode
     );
 });
