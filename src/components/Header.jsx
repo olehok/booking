@@ -40,15 +40,20 @@ export default function Header() {
             <>
               <h3>
                 <NavLink to="/profile">Profile</NavLink>
-              </h3>{" "}
-              <Button
-                // type="link"
-                color="primary"
-                variant="outlined"
-                onClick={() => dispatch(logout())}
-              >
-                Logout
-              </Button>
+              </h3>
+              <h3>
+                {/* <Button
+                  type="link"
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => dispatch(logout())}
+                >
+                  Logout
+                </Button> */}
+                <NavLink to="/login" onClick={() => dispatch(logout())}>
+                  Logout
+                </NavLink>
+              </h3>
             </>
           ) : (
             <h3>

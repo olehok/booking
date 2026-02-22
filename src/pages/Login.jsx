@@ -31,22 +31,24 @@ export default function Login() {
         }}
       >
         {() => (
-          <Form>
-            <div>
-              <Field name="email" placeholder="Email" />
-              <ErrorMessage name="email" component="div" />
-            </div>
+          <Form className="login-wrapper">
+            <Field className="login-field" name="email" placeholder="Email" />
+            <ErrorMessage name="email" component="div" />
 
-            <div style={{ marginTop: 12 }}>
-              <Field name="password" type="password" placeholder="Password" />
-              <ErrorMessage name="password" component="div" />
-            </div>
+            <Field
+              className="login-field"
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+            <ErrorMessage name="password" component="div" />
 
             <Button
-              type="primary"
+              color="primary"
+              variant="outlined"
               htmlType="submit"
               style={{ marginTop: 16 }}
-              block
+              // block
             >
               Login
             </Button>
