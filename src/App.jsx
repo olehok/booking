@@ -75,9 +75,8 @@ export default function App() {
   const isDarkMode = mode === "dark";
 
   useEffect(() => {
-    document.body.classList.remove("light", "dark");
-    document.body.classList.add(mode);
-  }, [mode]);
+    document.body.classList.toggle("dark", isDarkMode);
+  }, [isDarkMode]);
 
   return (
     <ConfigProvider
