@@ -32,16 +32,28 @@ export default function Login() {
       >
         {() => (
           <Form className="login-wrapper">
-            <Field className="login-field" name="email" placeholder="Email" />
-            <ErrorMessage name="email" component="div" />
+            <div className="login-field-group">
+              <Field className="login-field" name="email" placeholder="Email" />
+              <ErrorMessage
+                name="email"
+                component="span"
+                className="error-message"
+              />
+            </div>
 
-            <Field
-              className="login-field"
-              name="password"
-              type="password"
-              placeholder="Password"
-            />
-            <ErrorMessage name="password" component="div" />
+            <div className="login-field-group">
+              <Field
+                className="login-field"
+                name="password"
+                type="password"
+                placeholder="Password"
+              />
+              <ErrorMessage
+                name="password"
+                component="span"
+                className="error-message"
+              />
+            </div>
 
             <Button
               color="primary"

@@ -1,26 +1,14 @@
+@use "themes";
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "antd/dist/reset.css";
 
-:root {
-  --primary-color: #00284e;
-  --secondary-color: #e0e0e0;
-  --text-color: #1f1f1f;
-  --background-color: #ffffff;
-}
-
 body {
-  font-family: "Arial", sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: 0.3s ease;
-  // &.light {
-  //   background-color: #ffffff;
-  //   color: #000000;
-  // }
-  &.dark {
-    --primary-color: #1e90ff;
-    --background-color: #141414;
-    --text-color: #eeeeee;
-  }
+  font-family: var(--font-main);
+  font-size: 1rem;
+  line-height: 1.5;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
 @keyframes runningLine {
@@ -52,6 +40,10 @@ a {
 
 h1 {
   font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.375rem;
 }
 
 h3 {
@@ -122,7 +114,7 @@ main {
 .error-search-form {
   display: inline-block;
   width: 18rem;
-  color: rgb(255, 69, 69);
+  color: var(--error-color);
   font-size: 0.875rem;
   padding: 0.25rem;
 }
@@ -144,5 +136,16 @@ main {
     border: 1px solid var(--secondary-color);
     border-radius: 0.4rem;
     padding: 0.25rem;
+    &-group {
+      position: relative;
+    }
   }
+}
+
+.error-message {
+  position: absolute;
+  top: 2.2rem;
+  left: 0.25rem;
+  color: var(--error-color);
+  font-size: 0.875rem;
 }

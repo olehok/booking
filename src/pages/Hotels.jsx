@@ -22,7 +22,6 @@ export default function Hotels() {
   const navigate = useNavigate();
   const city = searchParams.get("city");
   const scrollKey = `hotelsScroll-${city}`;
-  // const isNewSearch = useRef(false);
 
   const [searchValue, setSearchValue] = useState(
     searchParams.get("search") || "",
@@ -52,37 +51,9 @@ export default function Hotels() {
         search: debouncedSearch || "",
         page: 1,
       });
-      // isNewSearch.current = true;
       markNewSearch();
     }
   }, [debouncedSearch, urlSearch, searchParams, setSearchParams, markNewSearch]);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     localStorage.setItem(scrollKey, window.scrollY);
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, [scrollKey]);
-
-  // useEffect(() => {
-  //   if (hotelsSafe.length > 0) {
-  //     const savedPosition = localStorage.getItem(scrollKey);
-
-  //     if (isNewSearch.current) {
-  //       window.scrollTo(0, 0);
-  //       isNewSearch.current = false;
-  //     } else if (savedPosition) {
-  //       requestAnimationFrame(() => {
-  //         window.scrollTo(0, Number(savedPosition));
-  //       });
-  //     }
-  //   }
-  // }, [hotelsSafe.length, scrollKey]);
 
   const handlePageChange = (newPage) => {
     const params = Object.fromEntries(searchParams.entries());
@@ -108,7 +79,7 @@ export default function Hotels() {
 
   return (
     <section className="hotel-list">
-      <Space style={{ margin: "0 8px 18px" }}>
+      <Space style={{ margin: "0 0.5rem 1rem" }}>
         <Input
           placeholder="Search hotel..."
           style={{ width: 250 }}

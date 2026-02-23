@@ -84,6 +84,17 @@ export default function App() {
         algorithm: isDarkMode
           ? antdTheme.darkAlgorithm
           : antdTheme.defaultAlgorithm,
+        token: {
+          fontFamily: "var(--font-main)",
+          // fontSize: "1rem",
+          // fontSizeHeading3: "1.25rem",
+          // fontSizeHeading4: "1.15rem",
+          // fontSizeSM: "0.875rem",
+          // lineHeight: "1.3",
+          // colorBgContainer: "var(--background-color)",
+          colorText: "var(--text-color)",
+          // colorPrimary: "var(--primary-color)",
+        },
       }}
     >
       <RouterProvider router={router} />
