@@ -61,20 +61,23 @@ const SearchForm = () => {
     >
       {({ handleSubmit, setFieldValue, errors, values }) => (
         <form onSubmit={handleSubmit} layout="inline" className="search-form">
-          <Select
-            placeholder="Select city"
-            value={values.city}
-            options={destinations.map((city) => ({
-              value: city.id,
-              label: city.label,
-            }))}
-            onChange={(value) => setFieldValue("city", value)}
-            style={{ width: 200 }}
-          />
-          {errors.city && (
-            <div className="error-search-form">{errors.city}</div>
-          )}
+          <div className="search-form-group">
+            <Select
+              placeholder="Select city"
+              value={values.city}
+              options={destinations.map((city) => ({
+                value: city.id,
+                label: city.label,
+              }))}
+              onChange={(value) => setFieldValue("city", value)}
+              style={{ width: 200 }}
+            />
+            {errors.city && (
+              <div className="error-message">{errors.city}</div>
+            )}
+          </div>
 
+          <div className="search-form-group">
           <RangePicker
             value={values.dates}
             onChange={(dates) => setFieldValue("dates", dates)}
@@ -85,9 +88,11 @@ const SearchForm = () => {
             placeholder={["Check-in", "Check-out"]}
           />
           {errors.dates && (
-            <div className="error-search-form">{errors.dates}</div>
+            <div className="error-message">{errors.dates}</div>
           )}
+          </div>
 
+          <div className="search-form-group">
           <InputNumber
             min={1}
             max={6}
@@ -97,8 +102,9 @@ const SearchForm = () => {
             placeholder={"Adults: 1"}
           />
           {errors.adults && (
-            <div className="error-search-form">{errors.adults}</div>
-          )}
+            <div className="error-message">{errors.adults}</div>
+            )}
+          </div>
 
           <InputNumber
             min={0}

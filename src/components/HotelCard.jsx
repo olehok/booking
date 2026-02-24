@@ -27,10 +27,7 @@ const HotelCard = ({ hotel }) => {
           width={IMAGE_WIDTH}
           height={IMAGE_HEIGHT}
           style={{ objectFit: "cover" }}
-          fallback={`data:image/svg+xml;utf8,
-            <svg xmlns='http://www.w3.org/2000/svg' width='400' height='180'>
-              <rect width='100%' height='100%' fill='%23d9d9d9'/>
-            </svg>`}
+          fallback={<div style={{ width: '100%', height: '100%' }} />}
           preview={false}
         />
       }

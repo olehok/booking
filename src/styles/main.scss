@@ -70,8 +70,9 @@ h3 {
     transform 0.5s ease,
     box-shadow 0.3s ease;
   background-color: var(--background-color);
-  padding: 0 1rem;
-  margin: 1rem 0;
+  border-bottom: 1px solid var(--secondary-color);
+  padding: 1rem 0.5rem 0;
+  margin-bottom: 1rem;
   &--hidden {
     transform: translateY(-100%);
   }
@@ -100,6 +101,9 @@ h3 {
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 1rem;
+  &-group {
+      position: relative;
+    }
   // color: var(--text-color);
 }
 
@@ -109,14 +113,6 @@ main {
 
 .hotel-list {
   margin-bottom: 1rem;
-}
-
-.error-search-form {
-  display: inline-block;
-  width: 18rem;
-  color: var(--error-color);
-  font-size: 0.875rem;
-  padding: 0.25rem;
 }
 
 .login {

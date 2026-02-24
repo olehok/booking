@@ -36,7 +36,7 @@ export default function Hotels() {
   const hotelsSafe = Array.isArray(hotels) ? hotels : [];
   const urlSearch = searchParams.get("search") || "";
 
-  const { markNewSearch } = useScrollPersistence(scrollKey, hotelsSafe.length);
+  const markNewSearch = useScrollPersistence(scrollKey, hotelsSafe.length);
 
   useEffect(() => {
     setSearchValue(urlSearch);
