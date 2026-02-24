@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Spin, ConfigProvider, theme as antdTheme } from "antd";
+import { ConfigProvider, theme as antdTheme } from "antd";
 
 export default function ThemeProvider({ children }) {
   const mode = useSelector((state) => state.theme.mode);
