@@ -1,9 +1,13 @@
+import { Typography } from "antd";
+
+const { Text } = Typography;
+
 export default function Footer() {
   return (
     <footer>
-      <div>
+      <div className="footer">
         <h3>Contacts</h3>
-        <p>© 2025 Oleh Kovalenko</p>
+        <Text>© 2025 Oleh Kovalenko</Text>
       </div>
     </footer>
   );

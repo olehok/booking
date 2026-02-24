@@ -2,7 +2,8 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/slices/authSlice";
 import { toggleTheme } from "../store/slices/themeSlice";
-import { Button, Switch } from "antd";
+import { Switch, Badge } from "antd";
+import { HeartOutlined } from "@ant-design/icons";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -10,6 +11,8 @@ export default function Header() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const themeMode = useSelector((state) => state.theme.mode);
+
+  const favoriteCount = useSelector((state) => state.favorites.favorites.length);
 
   return (
     <header>
@@ -28,7 +31,17 @@ export default function Header() {
             <NavLink to="/hotels">Hotels</NavLink>
           </h3>
           <h3>
-            <NavLink to="/favorites">Favorites</NavLink>
+            <NavLink to="/favorites">
+              <Badge count={favoriteCount} color="primary">
+                <HeartOutlined
+                  key="fav"
+                  style={{
+                    fontSize: "1.25rem",
+                    color: "var(--primary-color)",
+                  }}
+                />
+              </Badge>
+            </NavLink>
           </h3>
           {/* <h3>
             <NavLink to="/profile">Profile</NavLink>

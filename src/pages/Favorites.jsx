@@ -3,7 +3,7 @@ import { Typography, Button, Space } from "antd";
 import HotelsGrid from "../components/HotelsGrid";
 import { resetFavorites } from "../store/slices/favoritesSlice";
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 export default function Favorites() {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export default function Favorites() {
   if (!favoriteHotels.length) {
     return (
       <Space orientation="vertical" align="center" style={{ width: "100%" }}>
-        <Title level={3}>Your Favorites</Title>
+        <h2>Your favorites</h2>
         <Text>No favorite hotels yet.</Text>
       </Space>
     );

@@ -76,9 +76,9 @@ h3 {
   &--hidden {
     transform: translateY(-100%);
   }
-  &:not(.header--hidden) {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  // &:not(.header--hidden) {
+  //   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  // }
   &-wrapper {
     display: flex;
     flex-direction: row;
@@ -92,6 +92,12 @@ h3 {
     align-items: baseline;
     gap: 1rem;
   }
+}
+
+.footer {
+  padding: 1rem 0.5rem;
+  // margin-top: 1rem;
+  border-top: 1px solid var(--secondary-color);
 }
 
 .search-form {
