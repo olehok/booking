@@ -1,9 +1,10 @@
 :root {
   --primary-color: #00396e;
-  --secondary-color: #e0e0e0;
+  --secondary-color: #888888;
   --text-color: #1f1f1f;
   --error-color: #ff4545;
   --background-color: #ffffff;
+  --background-component-color: #ffffff;
   --font-main: "Inter", sans-serif;
 }
 
@@ -12,7 +13,9 @@ body {
   color: var(--text-color);
   &.dark {
     --primary-color: #1e90ff;
+    --secondary-color: #777777;
     --background-color: #141414;
+    --background-component-color: #1d1d1d;
     --text-color: #dadada;
   }
 }

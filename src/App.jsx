@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
@@ -9,9 +7,10 @@ import Hotels from "./pages/Hotels";
 import Favorites from "./pages/Favorites";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
+import ThemeProvider from "./app/ThemeProvider";
 import PrivateRoute from "./components/PrivateRoute";
 import { hotelsLoader } from "./loaders/loaders";
-import { Spin, ConfigProvider, theme as antdTheme } from "antd";
+import { Spin } from "antd";
 
 const router = createBrowserRouter(
   [
@@ -71,33 +70,9 @@ const router = createBrowserRouter(
 );
 
 export default function App() {
-  const mode = useSelector((state) => state.theme.mode);
-  const isDarkMode = mode === "dark";
-
-  useEffect(() => {
-    document.body.classList.toggle("dark", isDarkMode);
-  }, [isDarkMode]);
-
   return (
-    <ConfigProvider
-      theme={{
-        algorithm: isDarkMode
-          ? antdTheme.darkAlgorithm
-          : antdTheme.defaultAlgorithm,
-        token: {
-          fontFamily: "var(--font-main)",
-          // fontSize: "1rem",
-          // fontSizeHeading3: "1.25rem",
-          // fontSizeHeading4: "1.15rem",
-          // fontSizeSM: "0.875rem",
-          // lineHeight: "1.3",
-          // colorBgContainer: "var(--background-color)",
-          colorText: "var(--text-color)",
-          // colorPrimary: "var(--primary-color)",
-        },
-      }}
-    >
+    <ThemeProvider>
       <RouterProvider router={router} />
-    </ConfigProvider>
+    </ThemeProvider>
   );
 }
