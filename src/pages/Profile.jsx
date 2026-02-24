@@ -1,26 +1,21 @@
 import { useSelector, useDispatch } from "react-redux";
-// import { resetFavorites } from "../store/slices/favoritesSlice";
-import { Card, Button, Typography } from "antd";
+import { Typography, Card, Space } from "antd";
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 export default function Profile() {
   const user = useSelector((state) => state.auth.user);
-  // const favorites = useSelector((state) => state.favorites.favorites);
-
-  // const dispatch = useDispatch();
 
   return (
     <div style={{ padding: 24 }}>
-      <Title level={3}>Welcome, {user?.email}</Title>
-
-      {/* <Card style={{ marginTop: 24 }}>
-        <p>Favorite hotels: {favorites.length}</p>
-
-        <Button danger onClick={() => dispatch(resetFavorites())}>
-          Reset favorites
-        </Button>
-      </Card> */}
+      <Title level={3}>Welcome, {user?.name}</Title>
+      <Card>
+        <Space orientation="vertical" size="middle">
+          <Title level={4}>Your profile information:</Title>
+          <Text>Username: {user?.name}</Text>
+          <Text>Email: {user?.email}</Text>
+        </Space>
+      </Card>
     </div>
   );
 }

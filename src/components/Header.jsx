@@ -2,13 +2,15 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/slices/authSlice";
 import { toggleTheme } from "../store/slices/themeSlice";
-import { Switch, Badge } from "antd";
+import { Switch, Badge, Typography } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
+
+const { Text, Title } = Typography;
 
 export default function Header() {
   const dispatch = useDispatch();
 
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
 
   const themeMode = useSelector((state) => state.theme.mode);
 
@@ -17,9 +19,21 @@ export default function Header() {
   return (
     <header>
       <div className="header-wrapper">
-        <h1>
-          <NavLink to="/">Booking</NavLink>
-        </h1>
+        <NavLink to="/">
+          <Title 
+            level={1}
+            strong
+            italic
+            style={{ 
+              color: "var(--primary-color)",
+              // color: "transparent",
+              WebkitTextStroke: "1px var(--primary-color)",
+              margin: 0
+            }}
+          >
+            Booking
+          </Title>
+        </NavLink>
         <nav className="header-nav">
           <h3>
             <NavLink to="/search">Stay</NavLink>
@@ -32,10 +46,12 @@ export default function Header() {
           </h3>
           <h3>
             <NavLink to="/favorites">
+              Favorites 
               <Badge count={favoriteCount} color="primary">
                 <HeartOutlined
-                  key="fav"
+                  // key="fav"
                   style={{
+                    marginLeft: 8,
                     fontSize: "1.25rem",
                     color: "var(--primary-color)",
                   }}
@@ -49,7 +65,7 @@ export default function Header() {
           {/* <h3>
             <NavLink to="/login">Login</NavLink>
           </h3> */}
-          {isAuthenticated ? (
+          {user ? (
             <>
               <h3>
                 <NavLink to="/profile">Profile</NavLink>
@@ -63,7 +79,7 @@ export default function Header() {
                 >
                   Logout
                 </Button> */}
-                <NavLink to="/login" onClick={() => dispatch(logout())}>
+                <NavLink to="/" onClick={() => dispatch(logout())}>
                   Logout
                 </NavLink>
               </h3>

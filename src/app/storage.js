@@ -21,21 +21,29 @@ export function hydrateState() {
     }
 }
 
+let currentAuth;
+let currentFavorites;
+let currentTheme;
+
 store.subscribe(() => {
     const state = store.getState();
 
-    localStorage.setItem(
-        "auth",
-        JSON.stringify(state.auth.user)
-    );
+    if (state.auth.user !== currentAuth) {
+        currentAuth = state.auth.user;
+        if (currentAuth) {
+            localStorage.setItem("auth", JSON.stringify(currentAuth));
+        } else {
+            localStorage.removeItem("auth");
+        }
+    }
 
-    localStorage.setItem(
-        "favorites",
-        JSON.stringify(state.favorites.favorites)
-    );
+    if (state.favorites.favorites !== currentFavorites) {
+        currentFavorites = state.favorites.favorites;
+        localStorage.setItem("favorites", JSON.stringify(currentFavorites));
+    }
 
-    localStorage.setItem(
-        "theme",
-        state.theme.mode
-    );
+    if (state.theme.mode !== currentTheme) {
+        currentTheme = state.theme.mode;
+        localStorage.setItem("theme", currentTheme);
+    }
 });
