@@ -6,7 +6,7 @@ const { Text } = Typography;
 export default function Footer() {
   return (
     <footer>
-      <div className="footer">
+      <div className="container">
         <h3>Contacts</h3>
         <Space orientation="horizontal" size="small">
           <Text>© 2026 Oleh Kovalenko</Text>
@@ -14,13 +14,17 @@ export default function Footer() {
             type="text"
             style={{ fontSize: "1.375rem", color: "var(--primary-color)" }}
             icon={<GithubOutlined />}
-            onClick={() => window.open("https://github.com/olehok/booking", "_blank")}
+            onClick={() =>
+              window.open("https://github.com/olehok/booking", "_blank")
+            }
           />
           <Button
             type="text"
             style={{ fontSize: "1.375rem", color: "var(--primary-color)" }}
             icon={<LinkedinOutlined />}
-            onClick={() => window.open("https://www.linkedin.com/in/olehkvln/", "_blank")}
+            onClick={() =>
+              window.open("https://www.linkedin.com/in/olehkvln/", "_blank")
+            }
           />
         </Space>
       </div>

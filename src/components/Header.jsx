@@ -18,17 +18,17 @@ export default function Header() {
 
   return (
     <header>
-      <div className="header-wrapper">
+      <div className="header-wrapper container">
         <NavLink to="/">
-          <Title 
+          <Title
             level={1}
             strong
             italic
-            style={{ 
+            style={{
               color: "var(--primary-color)",
               // color: "transparent",
               WebkitTextStroke: "1px var(--primary-color)",
-              margin: 0
+              margin: 0,
             }}
           >
             Booking
@@ -46,8 +46,11 @@ export default function Header() {
           </h3>
           <h3>
             <NavLink to="/favorites">
-              Favorites 
-              <Badge count={favoriteCount} color="primary">
+              Favorites
+              <Badge
+                count={favoriteCount}
+                style={{ background: "var(--primary-color)" }}
+              >
                 <HeartOutlined
                   // key="fav"
                   style={{
