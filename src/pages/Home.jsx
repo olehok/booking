@@ -6,25 +6,17 @@ const { Title, Text } = Typography;
 export default function Home() {
   return (
     <section>
-      <Space orientation="horizontal" size="middle">
-        <Title level={3}>Travel with </Title>
-        <Title
-          level={3}
-          italic
-          style={{
-            color: "var(--primary-color)",
-            WebkitTextStroke: "1px var(--primary-color)",
-          }}
-        >
-          Booking
-        </Title>
-      </Space>
-      <div>
+      <Space orientation="vertical" size="middle">
+        <Title level={3}>Travel with <span style={{
+          color: 'var(--primary-color)',
+          fontWeight: 'bold',
+          fontStyle: 'italic',
+        }}>Booking</span></Title>
         <Text>
           Explore and book the best hotels around the world with ease and
           confidence.
         </Text>
-      </div>
+      </Space>
       <SearchForm />
     </section>
   );

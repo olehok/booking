@@ -5,16 +5,18 @@ import { toggleTheme } from "../store/slices/themeSlice";
 import { Switch, Badge, Typography } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
 
-const { Text, Title } = Typography;
+const { Title } = Typography;
 
 export default function Header() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.auth.user);
-
   const themeMode = useSelector((state) => state.theme.mode);
+  const favoriteCount = useSelector(
+    (state) => state.favorites.favorites.length,
+  );
 
-  const favoriteCount = useSelector((state) => state.favorites.favorites.length);
+  const isActiveClass = ({ isActive }) => (isActive ? "active" : "");
 
   return (
     <header>
@@ -26,7 +28,6 @@ export default function Header() {
             italic
             style={{
               color: "var(--primary-color)",
-              // color: "transparent",
               WebkitTextStroke: "1px var(--primary-color)",
               margin: 0,
             }}
@@ -36,16 +37,22 @@ export default function Header() {
         </NavLink>
         <nav className="header-nav">
           <h3>
-            <NavLink to="/search">Stay</NavLink>
+            <NavLink className={isActiveClass} to="/search">
+              Stay
+            </NavLink>
           </h3>
           <h3>
-            <NavLink to="/about">About</NavLink>
+            <NavLink className={isActiveClass} to="/about">
+              About
+            </NavLink>
           </h3>
           <h3>
-            <NavLink to="/hotels">Hotels</NavLink>
+            <NavLink className={isActiveClass} to="/hotels">
+              Hotels
+            </NavLink>
           </h3>
           <h3>
-            <NavLink to="/favorites">
+            <NavLink className={isActiveClass} to="/favorites">
               Favorites
               <Badge
                 count={favoriteCount}
@@ -71,7 +78,9 @@ export default function Header() {
           {user ? (
             <>
               <h3>
-                <NavLink to="/profile">Profile</NavLink>
+                <NavLink className={isActiveClass} to="/profile">
+                  Profile
+                </NavLink>
               </h3>
               <h3>
                 {/* <Button
@@ -82,14 +91,20 @@ export default function Header() {
                 >
                   Logout
                 </Button> */}
-                <NavLink to="/" onClick={() => dispatch(logout())}>
+                <NavLink
+                  className={isActiveClass}
+                  to="/"
+                  onClick={() => dispatch(logout())}
+                >
                   Logout
                 </NavLink>
               </h3>
             </>
           ) : (
             <h3>
-              <NavLink to="/login">Login</NavLink>
+              <NavLink className={isActiveClass} to="/login">
+                Login
+              </NavLink>
             </h3>
           )}
           <Switch

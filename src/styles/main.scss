@@ -26,7 +26,8 @@ a {
   color: var(--primary-color);
   text-decoration: none;
   position: relative;
-  &:hover::after {
+  &:hover::after,
+  &.active::after {
     position: absolute;
     content: "";
     display: block;
@@ -34,6 +35,8 @@ a {
     height: 2px;
     background-color: currentColor;
     margin-top: 2px;
+  }
+  &:hover::after {
     animation: runningLine 0.3s ease;
   }
 }
@@ -70,7 +73,7 @@ h3 {
   transition:
     transform 0.5s ease,
     box-shadow 0.3s ease;
-  background-color: var(--background-color);
+  background-color: var(--background-component-color);
   border-bottom: 1px solid var(--secondary-color);
   padding-top: 0.5rem;
   margin-bottom: 1rem;
@@ -97,8 +100,8 @@ h3 {
 
 .footer {
   padding-top: 1rem;
-  // margin-top: 1rem;
   border-top: 1px solid var(--secondary-color);
+  background-color: var(--background-component-color);
 }
 
 .search-form {
@@ -109,9 +112,8 @@ h3 {
   justify-content: space-between;
   margin-bottom: 1rem;
   &-group {
-      position: relative;
-    }
-  // color: var(--text-color);
+    position: relative;
+  }
 }
 
 main {
