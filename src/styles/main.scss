@@ -2,10 +2,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "antd/dist/reset.css";
 
+// html {
+//   height: auto;
+// }
+
 body {
+  // height: auto;
   font-family: var(--font-main);
   font-size: 1rem;
-  line-height: 1.5;
+  // line-height: 1.5;
   transition:
     background 0.3s ease,
     color 0.3s ease;
@@ -99,6 +104,7 @@ h3 {
 }
 
 .footer {
+  // margin-top: auto;
   padding-top: 1rem;
   border-top: 1px solid var(--secondary-color);
   background-color: var(--background-component-color);

@@ -6,8 +6,8 @@ const { Title, Text } = Typography;
 export default function Home() {
   return (
     <section>
-      <Space orientation="vertical" size="middle">
-        <Title level={3}>Travel with <span style={{
+      <Space orientation="vertical" size="middle" style={{marginBottom: "2rem" }}>
+        <Title level={2}>Travel with <span style={{
           color: 'var(--primary-color)',
           fontWeight: 'bold',
           fontStyle: 'italic',

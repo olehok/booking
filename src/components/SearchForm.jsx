@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
-import { Select, InputNumber, DatePicker, Button, Spin } from "antd";
+import { Select, InputNumber, DatePicker, Button, Spin, Card } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { fetchDestinations } from "../store/thunks/hotelsThunks";
 
@@ -21,6 +21,7 @@ const SearchForm = () => {
   if (loading || !destinations.length) return <Spin fullscreen size="large" />;
 
   return (
+    <Card size="small">
     <Formik
       enableReinitialize={true}
       initialValues={{
@@ -135,7 +136,8 @@ const SearchForm = () => {
           </Button>
         </form>
       )}
-    </Formik>
+      </Formik>
+      </Card>
   );
 };
 

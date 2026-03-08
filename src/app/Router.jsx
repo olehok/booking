@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Layout from "../components/Layout";
 import Home from "../pages/Home";
+import Search from "../pages/Search";
 import About from "../pages/About";
 import Hotels from "../pages/Hotels";
 import Favorites from "../pages/Favorites";
@@ -25,7 +26,7 @@ const Router = createBrowserRouter(
         },
         {
           path: "search",
-          element: <Home />,
+          element: <Search />,
         },
         {
           path: "about",

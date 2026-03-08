@@ -48,12 +48,13 @@ export default function Hotels() {
 
       setSearchParams({
         ...params,
+        city: params.city || "all",
         search: debouncedSearch || "",
         page: 1,
       });
       markNewSearch();
     }
-  }, [debouncedSearch, urlSearch, searchParams, setSearchParams, markNewSearch]);
+  }, [debouncedSearch, urlSearch, searchParams, setSearchParams]);
 
   const handlePageChange = (newPage) => {
     const params = Object.fromEntries(searchParams.entries());

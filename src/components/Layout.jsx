@@ -7,7 +7,6 @@ export default function Layout() {
   const hidden = useAutoHideHeader();
 
   return (
-    // <div className="layout container">
     <div className="layout">
       <div className={`header ${hidden ? "header--hidden" : ""}`}>
         <Header />
