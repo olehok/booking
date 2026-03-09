@@ -20,7 +20,7 @@ export default function Header() {
 
   return (
     <header>
-      <div className="header-wrapper container">
+      <div className="header-wrapper">
         <NavLink to="/">
           <Title
             level={1}

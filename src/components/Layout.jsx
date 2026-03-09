@@ -8,13 +8,13 @@ export default function Layout() {
 
   return (
     <div className="layout">
-      <div className={`header ${hidden ? "header--hidden" : ""}`}>
+      <div className={`header ${hidden ? "header--hidden" : ""} container`}>
         <Header />
       </div>
       <main className="container">
         <Outlet />
       </main>
-      <div className="footer">
+      <div className="footer container">
         <Footer />
       </div>
     </div>

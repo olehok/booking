@@ -12,10 +12,12 @@ export default function Favorites() {
 
   if (!favoriteHotels.length) {
     return (
-      <Space orientation="vertical" align="center" style={{ width: "100%" }}>
-        <h2>Your favorites</h2>
-        <Text>No favorite hotels yet.</Text>
-      </Space>
+      <section>
+        <Space orientation="vertical" align="center" style={{ width: "100%" }}>
+          <h2>Your favorites</h2>
+          <Text>No favorite hotels yet.</Text>
+        </Space>
+      </section>
     );
   }
 
