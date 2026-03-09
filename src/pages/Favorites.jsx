@@ -3,7 +3,7 @@ import { Typography, Button, Space } from "antd";
 import HotelsGrid from "../components/HotelsGrid";
 import { resetFavorites } from "../store/slices/favoritesSlice";
 
-const { Text } = Typography;
+const { Text, Title } = Typography;
 
 export default function Favorites() {
   const dispatch = useDispatch();
@@ -14,7 +14,9 @@ export default function Favorites() {
     return (
       <section>
         <Space orientation="vertical" align="center" style={{ width: "100%" }}>
-          <h2>Your favorites</h2>
+          <Title level={2} align="center">
+            Your favorites
+          </Title>
           <Text>No favorite hotels yet.</Text>
         </Space>
       </section>
@@ -23,18 +25,13 @@ export default function Favorites() {
 
   return (
     <section>
-      <Space
-        style={{
-          width: "100%",
-          justifyContent: "space-between",
-          marginBottom: 24,
-        }}
-      >
-        <h2>Your favorites</h2>
-        <Button danger onClick={() => dispatch(resetFavorites())}>
+     
+        <Title level={2} align="center">
+          Your favorites
+        </Title>
+        <Button danger onClick={() => dispatch(resetFavorites())} style={{ marginBottom: "1rem" }}>
           Reset all
         </Button>
-      </Space>
 
       <HotelsGrid hotels={favoriteHotels} />
     </section>

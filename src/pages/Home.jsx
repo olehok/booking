@@ -16,21 +16,13 @@ export default function Home() {
           size="middle"
           style={{ marginBottom: "2rem" }}
         >
-          <Title level={2}>
-            Travel with{" "}
-            <span
-              style={{
-                color: "var(--primary-color)",
-                fontWeight: "bold",
-                fontStyle: "italic",
-              }}
-            >
-              Booking
-            </span>
+          <Title level={2} align="center">
+            Travel with Booking
           </Title>
           <Text>
-            Explore and book the best hotels around the world with ease and
-            confidence.
+            Explore and book the best hotels around the USA with ease and
+            confidence. Find your perfect stay and enjoy unforgettable travel
+            experiences with us!
           </Text>
         </Space>
         <SearchForm />

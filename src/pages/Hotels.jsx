@@ -15,7 +15,7 @@ import useDebounce from "../hooks/useDebounce";
 import HotelsGrid from "../components/HotelsGrid";
 import useScrollPersistence from "../hooks/useScrollPersistence";
 
-const { Text, Link } = Typography;
+const { Text, Link, Title } = Typography;
 
 export default function Hotels() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -81,6 +81,9 @@ export default function Hotels() {
 
   return (
     <section className="hotel-list">
+      <Title level={2} align="center">
+        Available Hotels
+      </Title>
       <Space style={{ margin: "0 0.5rem 1rem" }}>
         <Input
           allowClear

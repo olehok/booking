@@ -8,15 +8,19 @@ export default function Profile() {
   const userName = user?.name || "Special One";
 
   return (
-    <div style={{ padding: 24 }}>
-      <Title level={3}>Welcome, <span style={{color: 'var(--primary-color)'}}>{userName}</span></Title>
+    <section>
+      <Title level={2} align="center">
+        Welcome, <span style={{color: 'var(--primary-color)'}}>{userName}</span>
+      </Title>
       <Card>
         <Space orientation="vertical" size="middle">
-          <Title level={4}>Your profile information:</Title>
+          <Title level={4} align="center">
+            Your profile information:
+          </Title>
           <Text>Username: {userName}</Text>
           <Text>Email: {user?.email}</Text>
         </Space>
       </Card>
-    </div>
+    </section>
   );
 }

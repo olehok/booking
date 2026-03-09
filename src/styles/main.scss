@@ -42,7 +42,7 @@ a {
     margin-top: 2px;
   }
   &:hover::after {
-    animation: runningLine ease;
+    animation: runningLine 0.3s ease forwards;
   }
 }
 
