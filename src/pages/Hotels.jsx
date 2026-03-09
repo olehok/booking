@@ -72,6 +72,7 @@ export default function Hotels() {
 
     setSearchParams({
       ...params,
+      city: params.city || "all",
       sort: value || "",
       page: 1,
     });
@@ -82,6 +83,7 @@ export default function Hotels() {
     <section className="hotel-list">
       <Space style={{ margin: "0 0.5rem 1rem" }}>
         <Input
+          allowClear
           placeholder="Search hotel..."
           style={{ width: 250 }}
           value={searchValue}
@@ -132,7 +134,7 @@ export default function Hotels() {
           <Select
             allowClear
             placeholder="Sort by rating"
-            style={{ width: 150 }}
+            style={{ width: 160 }}
             value={sort}
             onChange={handleSortChange}
             options={[

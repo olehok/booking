@@ -1,5 +1,5 @@
 import { store } from '../store/store';
-import { searchHotels } from '../store/thunks/hotelsThunks';
+import { fetchFeaturedHotels, searchHotels } from '../store/thunks/hotelsThunks';
 
 export const hotelsLoader = async ({ request }) => {
     const url = new URL(request.url);
@@ -24,5 +24,10 @@ export const hotelsLoader = async ({ request }) => {
         })
     );
 
+    return null;
+};
+
+export const featuredHotelsLoader = async () => {
+    await store.dispatch(fetchFeaturedHotels());
     return null;
 };

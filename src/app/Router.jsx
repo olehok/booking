@@ -9,7 +9,7 @@ import Favorites from "../pages/Favorites";
 import Profile from "../pages/Profile";
 import Login from "../pages/Login";
 import PrivateRoute from "../components/PrivateRoute";
-import { hotelsLoader } from "../loaders/loaders";
+import { hotelsLoader, featuredHotelsLoader } from "../loaders/loaders";
 import { Spin } from "antd";
 
 const Router = createBrowserRouter(
@@ -23,6 +23,7 @@ const Router = createBrowserRouter(
         {
           index: true,
           element: <Home />,
+          loader: featuredHotelsLoader,
         },
         {
           path: "search",

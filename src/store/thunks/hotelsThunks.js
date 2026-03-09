@@ -1,5 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getDestinations, searchHotels as searchHotelsApi } from '../../services/hotelsService';
+import {
+    getDestinations,
+    getFeaturedHotels,
+    searchHotels as searchHotelsApi
+} from '../../services/hotelsService';
 
 export const fetchDestinations = createAsyncThunk(
     'hotels/fetchDestinations',
@@ -22,5 +26,17 @@ export const searchHotels = createAsyncThunk(
             search,
         });
         return { ...response.data, page };
+    }
+);
+
+export const fetchFeaturedHotels = createAsyncThunk(
+    'hotels/fetchFeaturedHotels',
+    async () => {
+        const response = await getFeaturedHotels();
+        const hotels = Array.isArray(response.data.hotels) ? response.data.hotels : [];
+
+        return [...hotels]
+            .sort((a, b) => b.hotel_rating - a.hotel_rating)
+            .slice(0, 2);
     }
 );

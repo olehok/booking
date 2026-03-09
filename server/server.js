@@ -15,6 +15,10 @@ app.get('/api/destinations', (req, res) => {
     res.json(destinations);
 });
 
+app.get('/api/home', (req, res) => {
+    res.json({ hotels: database.hotels });
+});
+
 app.get('/api/hotels/search', (req, res) => {
     const {
         city,
