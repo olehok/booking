@@ -28,7 +28,7 @@ export default function Home() {
         <SearchForm />
       </section>
       <section style={{ marginTop: "3rem" }}>
-        <Title level={3} style={{ marginBottom: "1rem" }}>
+        <Title level={3} align="center" style={{ marginBottom: "1rem" }}>
           Featured Hotels
         </Title>
         <HotelsGrid hotels={featuredHotels} />
