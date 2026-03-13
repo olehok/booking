@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function useAutoHideHeader(offset = 40, hoverZone = 40) {
+export default function useAutoHideHeader(offset = 70, hoverZone = 20) {
     const [hidden, setHidden] = useState(false);
     const lastScroll = useRef(0);
 

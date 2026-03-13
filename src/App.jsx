@@ -1,10 +1,10 @@
 import { RouterProvider } from "react-router-dom";
-import { useTransition } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import ThemeProvider from "./app/ThemeProvider";
 import Router from "./app/Router";
 
 export default function App() {
-  const { ready } = useTransition();
+  const { ready } = useTranslation();
   if (!ready) return null;
 
   return (

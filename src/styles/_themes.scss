@@ -1,5 +1,9 @@
 :root {
   --primary-color: #00498d;
+  --primary-color-hover: #005fb3;
+  --primary-color-active: #003b72;
+  --primary-color-border: #00498d;
+  --on-primary-color: #ffffff;
   --secondary-color: #999999;
   --text-color: #1f1f1f;
   --error-color: #ff4545;
@@ -13,6 +17,10 @@ body {
   color: var(--text-color);
   &.dark {
     --primary-color: #1e90ff;
+    --primary-color-hover: #3aa0ff;
+    --primary-color-active: #1a7fe0;
+    --primary-color-border: #1e90ff;
+    --on-primary-color: #dadada;
     --secondary-color: #777777;
     --background-color: #141414;
     --background-component-color: #1d1d1d;

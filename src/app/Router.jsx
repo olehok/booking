@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import Layout from "../components/Layout";
 import Home from "../pages/Home";
@@ -16,6 +16,10 @@ const Router = createBrowserRouter(
   [
     {
       path: "/",
+      element: <Navigate to="/en" replace />,
+    },
+    {
+      path: "/:lng",
       element: <Layout />,
       errorElement: <h2>error</h2>,
       HydrateFallback: () => <Spin fullscreen size="large" />,
