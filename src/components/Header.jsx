@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/slices/authSlice";
 import { toggleTheme } from "../store/slices/themeSlice";
+import LanguageToggle from "./LanguageToggle";
 import { Switch, Badge, Typography } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
 
@@ -107,6 +108,7 @@ export default function Header() {
               </NavLink>
             </h3>
           )}
+          <LanguageToggle />
           <Switch
             checked={themeMode === "dark"}
             onChange={() => dispatch(toggleTheme())}

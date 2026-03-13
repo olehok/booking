@@ -1,0 +1,83 @@
+﻿{
+  "nav": {
+    "home": "Home",
+    "stay": "Stay",
+    "aboutUs": "About",
+    "hotels": "Hotels",
+    "favorites": "Favorites",
+    "profile": "Profile",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "home": {
+    "title": "Travel with Booking",
+    "intro": "Explore and book the best hotels around the USA with ease and confidence. Find your perfect stay and enjoy unforgettable travel experiences with us!",
+    "featuredTitle": "Featured Hotels",
+    "findDestination": "Find your next destination"
+  },
+  "about": {
+    "title": "About the Booking App",
+    "body": "The Booking App is designed to help users find and book hotels worldwide with ease. Our mission is to provide a seamless booking experience, offering a wide range of options to suit every traveler's needs."
+  },
+  "favorites": {
+    "title": "Your favorites",
+    "empty": "No favorite hotels yet.",
+    "resetAll": "Reset all"
+  },
+  "hotels": {
+    "title": "Available Hotels",
+    "searchPlaceholder": "Search hotel...",
+    "noHotelsFound": "No hotels found{{cityPart}}.",
+    "noHotelsFoundIn": " in {{city}}",
+    "pleaseSelectCity": "Please select a",
+    "city": "city",
+    "showAll": "Show all hotels",
+    "sortByRating": "Sort by rating",
+    "sortHighToLow": "From high to low",
+    "sortLowToHigh": "From low to high",
+    "error": "Error"
+  },
+  "search": {
+    "title": "Choose your destination"
+  },
+  "login": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Login",
+    "errors": {
+      "tooShort": "Too short",
+      "tooLong": "Too long",
+      "required": "Required",
+      "invalidEmail": "Invalid email"
+    }
+  },
+  "profile": {
+    "welcome": "Welcome",
+    "defaultName": "Special One",
+    "infoTitle": "Your profile information:",
+    "usernameLabel": "Username:",
+    "emailLabel": "Email:"
+  },
+  "hotelCard": {
+    "rating": "Rating:",
+    "tel": "Tel:",
+    "visitWebsite": "Visit website"
+  },
+  "searchForm": {
+    "selectCity": "Select city",
+    "cityRequired": "City is required",
+    "datesRequired": "Check-in and check-out are required",
+    "stayTooLong": "Stay duration cannot exceed 30 days",
+    "adultsRange": "Adults must be between 1 and 6",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "adultsPlaceholder": "Adults: 1",
+    "childrenPlaceholder": "Children: 0",
+    "showAllHotels": "Show all hotels"
+  },
+  "footer": {
+    "contacts": "Contacts",
+    "copyright": "(c) 2026 Oleh Kovalenko"
+  }
+}

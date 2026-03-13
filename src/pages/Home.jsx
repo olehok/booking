@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import SearchForm from "../components/SearchForm";
 import HotelsGrid from "../components/HotelsGrid";
 import { Space, Typography } from "antd";
@@ -7,6 +8,8 @@ const { Title, Text } = Typography;
 
 export default function Home() {
   const featuredHotels = useSelector((state) => state.hotels.featured);
+
+  const { t } = useTranslation();
 
   return (
     <>
@@ -17,19 +20,17 @@ export default function Home() {
           style={{ marginBottom: "2rem" }}
         >
           <Title level={2} align="center">
-            Travel with Booking
+            {t("home.title")}
           </Title>
           <Text>
-            Explore and book the best hotels around the USA with ease and
-            confidence. Find your perfect stay and enjoy unforgettable travel
-            experiences with us!
+            {t("home.intro")}
           </Text>
         </Space>
         <SearchForm />
       </section>
       <section style={{ marginTop: "3rem" }}>
         <Title level={3} align="center" style={{ marginBottom: "1rem" }}>
-          Featured Hotels
+          {t("home.featuredTitle")}
         </Title>
         <HotelsGrid hotels={featuredHotels} />
       </section>
