@@ -1,14 +1,17 @@
 import { Typography, Space, Button } from "antd";
 import { GithubOutlined, LinkedinOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 const { Text } = Typography;
 
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer>
-      <h3>Contacts</h3>
+      <h3>{t("footer.contacts")}</h3>
       <Space orientation="horizontal" size="small">
-        <Text>© 2026 Oleh Kovalenko</Text>
+        <Text>{t("footer.copyright")}</Text>
         <Button
           type="text"
           style={{ fontSize: "1.375rem", color: "var(--primary-color)" }}

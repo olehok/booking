@@ -1,16 +1,19 @@
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/slices/authSlice";
 import { toggleTheme } from "../store/slices/themeSlice";
 import LanguageToggle from "./LanguageToggle";
 import { Switch, Badge, Typography } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
+import useWithLng from "../hooks/useWithLng";
 
 const { Title } = Typography;
 
 export default function Header() {
   const dispatch = useDispatch();
-  const { lng = "en" } = useParams();
+  const { t } = useTranslation();
+  const { withLng } = useWithLng();
 
   const user = useSelector((state) => state.auth.user);
   const themeMode = useSelector((state) => state.theme.mode);
@@ -19,8 +22,6 @@ export default function Header() {
   );
 
   const isActiveClass = ({ isActive }) => (isActive ? "active" : "");
-  const withLng = (path = "") => `/${lng}${path}`;
-
   return (
     <header>
       <div className="header-wrapper">
@@ -35,28 +36,28 @@ export default function Header() {
               margin: 0,
             }}
           >
-            Booking
+            {t("app.name")}
           </Title>
         </NavLink>
         <nav className="header-nav">
           <h3>
             <NavLink className={isActiveClass} to={withLng("/search")}>
-              Stay
+              {t("nav.stay")}
             </NavLink>
           </h3>
           <h3>
             <NavLink className={isActiveClass} to={withLng("/about")}>
-              About
+              {t("nav.aboutUs")}
             </NavLink>
           </h3>
           <h3>
             <NavLink className={isActiveClass} to={withLng("/hotels")}>
-              Hotels
+              {t("nav.hotels")}
             </NavLink>
           </h3>
           <h3>
             <NavLink className={isActiveClass} to={withLng("/favorites")}>
-              Favorites
+              {t("nav.favorites")}
               <Badge
                 count={favoriteCount}
                 style={{ background: "var(--primary-color)" }}
@@ -82,7 +83,7 @@ export default function Header() {
             <>
               <h3>
                 <NavLink className={isActiveClass} to={withLng("/profile")}>
-                  Profile
+                  {t("nav.profile")}
                 </NavLink>
               </h3>
               <h3>
@@ -99,14 +100,14 @@ export default function Header() {
                   to={withLng("")}
                   onClick={() => dispatch(logout())}
                 >
-                  Logout
+                  {t("nav.logout")}
                 </NavLink>
               </h3>
             </>
           ) : (
             <h3>
               <NavLink className={isActiveClass} to={withLng("/login")}>
-                Login
+                {t("nav.login")}
               </NavLink>
             </h3>
           )}

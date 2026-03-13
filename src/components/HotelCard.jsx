@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { toggleFavorite } from "../store/slices/favoritesSlice";
 import { Card, Rate, Typography, Space, Image } from "antd";
 import { HeartOutlined, HeartFilled } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 const { Title, Text, Link } = Typography;
 
@@ -11,6 +12,7 @@ const IMAGE_HEIGHT = 300;
 
 const HotelCard = ({ hotel }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const favorites = useSelector((state) => state.favorites.favorites);
 
@@ -55,15 +57,21 @@ const HotelCard = ({ hotel }) => {
         </Text>
 
         <Space align="baseline">
-          <Text type="secondary">Rating: {hotel.hotel_rating}</Text>
+          <Text type="secondary">
+            {t("hotelCard.rating")} {hotel.hotel_rating}
+          </Text>
           <Rate disabled size="small" value={hotel.hotel_rating} />
         </Space>
 
-        {hotel.phone_number && <Text type="secondary">Tel: {hotel.phone_number}</Text>}
+        {hotel.phone_number && (
+          <Text type="secondary">
+            {t("hotelCard.tel")} {hotel.phone_number}
+          </Text>
+        )}
 
         {hotel.website && (
           <Link href={hotel.website} target="_blank">
-            Visit website
+            {t("hotelCard.visitWebsite")}
           </Link>
         )}
       </Space>

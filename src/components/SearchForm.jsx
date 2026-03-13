@@ -6,6 +6,8 @@ import dayjs from "dayjs";
 import { Select, InputNumber, DatePicker, Button, Spin, Card } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { fetchDestinations } from "../store/thunks/hotelsThunks";
+import { useTranslation } from "react-i18next";
+import useWithLng from "../hooks/useWithLng";
 
 const { RangePicker } = DatePicker;
 
@@ -13,6 +15,8 @@ const SearchForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { destinations, loading } = useSelector((state) => state.hotels);
+  const { t } = useTranslation();
+  const { withLng } = useWithLng();
 
   useEffect(() => {
     dispatch(fetchDestinations());
@@ -22,122 +26,125 @@ const SearchForm = () => {
 
   return (
     <Card size="small">
-    <Formik
-      enableReinitialize={true}
-      initialValues={{
-        city: undefined,
-        dates: [],
-        adults: null,
-        children: null,
-      }}
-      validate={(values) => {
-        const errors = {};
-        if (!values.city) errors.city = "City is required";
-        if (!values.dates || values.dates.length !== 2) {
-          errors.dates = "Check-in and check-out are required";
-        } else {
-          const [start, end] = values.dates;
+      <Formik
+        enableReinitialize={true}
+        initialValues={{
+          city: undefined,
+          dates: [],
+          adults: null,
+          children: null,
+        }}
+        validate={(values) => {
+          const errors = {};
+          if (!values.city) errors.city = t("searchForm.cityRequired");
+          if (!values.dates || values.dates.length !== 2) {
+            errors.dates = t("searchForm.datesRequired");
+          } else {
+            const [start, end] = values.dates;
 
-          if (end.diff(start, "day") > 30) {
-            errors.dates = "Stay duration cannot exceed 30 days";
+            if (end.diff(start, "day") > 30) {
+              errors.dates = t("searchForm.stayTooLong");
+            }
           }
-        }
-        if (values.adults < 1 || values.adults > 6)
-          errors.adults = "Adults must be between 1 and 6";
+          if (values.adults < 1 || values.adults > 6)
+            errors.adults = t("searchForm.adultsRange");
 
-        return errors;
-      }}
-      onSubmit={(values) => {
-        const selectedCity = destinations.find(
-          (city) => city.id === values.city,
-        );
-        const params = new URLSearchParams({
-          city: selectedCity.label,
-          adults: values.adults,
-          children: values.children,
-          page: 1,
-        });
-        navigate(`/hotels?${params.toString()}`);
-      }}
-    >
-      {({ handleSubmit, setFieldValue, errors, values }) => (
-        <form onSubmit={handleSubmit} layout="inline" className="search-form">
-          <div className="search-form-group">
-            <Select
-              placeholder="Select city"
-              value={values.city}
-              options={destinations.map((city) => ({
-                value: city.id,
-                label: city.label,
-              }))}
-              onChange={(value) => setFieldValue("city", value)}
-              style={{ width: 200 }}
+          return errors;
+        }}
+        onSubmit={(values) => {
+          const selectedCity = destinations.find(
+            (city) => city.id === values.city,
+          );
+          const params = new URLSearchParams({
+            city: selectedCity.label,
+            adults: values.adults,
+            children: values.children,
+            page: 1,
+          });
+          navigate(`${withLng("/hotels")}?${params.toString()}`);
+        }}
+      >
+        {({ handleSubmit, setFieldValue, errors, values }) => (
+          <form onSubmit={handleSubmit} layout="inline" className="search-form">
+            <div className="search-form-group">
+              <Select
+                placeholder={t("searchForm.selectCity")}
+                value={values.city}
+                options={destinations.map((city) => ({
+                  value: city.id,
+                  label: city.label,
+                }))}
+                onChange={(value) => setFieldValue("city", value)}
+                style={{ width: 200 }}
+              />
+              {errors.city && (
+                <div className="error-message">{errors.city}</div>
+              )}
+            </div>
+
+            <div className="search-form-group">
+              <RangePicker
+                value={values.dates}
+                onChange={(dates) => setFieldValue("dates", dates)}
+                disabledDate={(current) => {
+                  return current && current < dayjs().startOf("day");
+                }}
+                style={{ flexGrow: 1 }}
+                placeholder={[
+                  t("searchForm.checkIn"),
+                  t("searchForm.checkOut"),
+                ]}
+              />
+              {errors.dates && (
+                <div className="error-message">{errors.dates}</div>
+              )}
+            </div>
+
+            <div className="search-form-group">
+              <InputNumber
+                min={1}
+                max={6}
+                value={values.adults}
+                onChange={(value) => setFieldValue("adults", value)}
+                style={{ width: 100 }}
+                placeholder={t("searchForm.adultsPlaceholder")}
+              />
+              {errors.adults && (
+                <div className="error-message">{errors.adults}</div>
+              )}
+            </div>
+
+            <InputNumber
+              min={0}
+              max={5}
+              value={values.children}
+              onChange={(value) => setFieldValue("children", value)}
+              style={{ width: 100 }}
+              placeholder={t("searchForm.childrenPlaceholder")}
             />
-            {errors.city && (
-              <div className="error-message">{errors.city}</div>
-            )}
-          </div>
 
-          <div className="search-form-group">
-          <RangePicker
-            value={values.dates}
-            onChange={(dates) => setFieldValue("dates", dates)}
-            disabledDate={(current) => {
-              return current && current < dayjs().startOf("day");
-            }}
-            style={{ flexGrow: 1 }}
-            placeholder={["Check-in", "Check-out"]}
-          />
-          {errors.dates && (
-            <div className="error-message">{errors.dates}</div>
-          )}
-          </div>
+            <Button
+              shape="circle"
+              color="primary"
+              htmlType="submit"
+              disabled={!!errors.dates}
+              style={{ marginTop: 10 }}
+              icon={<SearchOutlined />}
+            />
 
-          <div className="search-form-group">
-          <InputNumber
-            min={1}
-            max={6}
-            value={values.adults}
-            onChange={(value) => setFieldValue("adults", value)}
-            style={{ width: 100 }}
-            placeholder={"Adults: 1"}
-          />
-          {errors.adults && (
-            <div className="error-message">{errors.adults}</div>
-            )}
-          </div>
-
-          <InputNumber
-            min={0}
-            max={5}
-            value={values.children}
-            onChange={(value) => setFieldValue("children", value)}
-            style={{ width: 100 }}
-            placeholder={"Children: 0"}
-          />
-
-          <Button
-            shape="circle"
-            color="primary"
-            htmlType="submit"
-            disabled={!!errors.dates}
-            style={{ marginTop: 10 }}
-            icon={<SearchOutlined />}
-          />
-
-          <Button
-            color="primary"
-            variant="outlined"
-            onClick={() => {
-              navigate("/hotels?city=all&page=1");
-            }}
-          >
-            Show all hotels
-          </Button>
-        </form>
-      )}
+            <Button
+              color="primary"
+              variant="outlined"
+              onClick={() => {
+                navigate(`${withLng("/hotels")}?city=all&page=1`);
+              }}
+            >
+              {t("searchForm.showAllHotels")}
+            </Button>
+          </form>
+        )}
       </Formik>
-      </Card>
+    </Card>
   );
 };
 

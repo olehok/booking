@@ -1,4 +1,11 @@
 ﻿{
+  "app": {
+    "name": "Booking"
+  },
+  "common": {
+    "error": "Error",
+    "notFound": "Not Found"
+  },
   "nav": {
     "home": "Home",
     "stay": "Stay",
@@ -17,7 +24,7 @@
   },
   "about": {
     "title": "About the Booking App",
-    "body": "The Booking App is designed to help users find and book hotels worldwide with ease. Our mission is to provide a seamless booking experience, offering a wide range of options to suit every traveler's needs."
+    "body": "The Booking App is designed to help users find and book hotels around the USA with ease. Our mission is to provide a seamless booking experience, offering a wide range of options to suit every traveler's needs."
   },
   "favorites": {
     "title": "Your favorites",

@@ -11,6 +11,17 @@ import Login from "../pages/Login";
 import PrivateRoute from "../components/PrivateRoute";
 import { hotelsLoader, featuredHotelsLoader } from "../loaders/loaders";
 import { Spin } from "antd";
+import { useTranslation } from "react-i18next";
+
+const ErrorPage = () => {
+  const { t } = useTranslation();
+  return <h2>{t("common.error")}</h2>;
+};
+
+const NotFoundPage = () => {
+  const { t } = useTranslation();
+  return <h2>{t("common.notFound")}</h2>;
+};
 
 const Router = createBrowserRouter(
   [
@@ -21,7 +32,7 @@ const Router = createBrowserRouter(
     {
       path: "/:lng",
       element: <Layout />,
-      errorElement: <h2>error</h2>,
+      errorElement: <ErrorPage />,
       HydrateFallback: () => <Spin fullscreen size="large" />,
       children: [
         {
@@ -66,7 +77,7 @@ const Router = createBrowserRouter(
         },
         {
           path: "*",
-          element: <h2>Not Found</h2>,
+          element: <NotFoundPage />,
         },
       ],
     },

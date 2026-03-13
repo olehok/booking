@@ -1,25 +1,42 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import { Card, Button } from "antd";
-
-const LoginSchema = Yup.object().shape({
-  name: Yup.string().min(2, "Too short").max(50, "Too long").required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string().min(4, "Too short").max(20, "Too long").required("Required"),
-});
+import { useTranslation } from "react-i18next";
+import useWithLng from "../hooks/useWithLng";
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { withLng } = useWithLng();
+
+  const loginSchema = useMemo(
+    () =>
+      Yup.object().shape({
+        name: Yup.string()
+          .min(2, t("login.errors.tooShort"))
+          .max(50, t("login.errors.tooLong"))
+          .required(t("login.errors.required")),
+        email: Yup.string()
+          .email(t("login.errors.invalidEmail"))
+          .required(t("login.errors.required")),
+        password: Yup.string()
+          .min(4, t("login.errors.tooShort"))
+          .max(20, t("login.errors.tooLong"))
+          .required(t("login.errors.required")),
+      }),
+    [t],
+  );
 
   return (
     <Card style={{ maxWidth: 400, margin: "40px auto" }}>
       <Formik
         initialValues={{ name: "", email: "", password: "" }}
-        validationSchema={LoginSchema}
+        validationSchema={loginSchema}
         onSubmit={(values) => {
           dispatch(
             login({
@@ -28,7 +45,7 @@ export default function Login() {
             }),
           );
 
-          navigate("/profile");
+          navigate(withLng("/profile"));
         }}
       >
         {() => (
@@ -38,7 +55,7 @@ export default function Login() {
                 className="login-field"
                 name="name"
                 type="text"
-                placeholder="Name"
+                placeholder={t("login.name")}
               />
               <ErrorMessage
                 name="name"
@@ -52,7 +69,7 @@ export default function Login() {
                 className="login-field"
                 name="email"
                 type="email"
-                placeholder="Email"
+                placeholder={t("login.email")}
               />
               <ErrorMessage
                 name="email"
@@ -66,7 +83,7 @@ export default function Login() {
                 className="login-field"
                 name="password"
                 type="password"
-                placeholder="Password"
+                placeholder={t("login.password")}
               />
               <ErrorMessage
                 name="password"
@@ -82,7 +99,7 @@ export default function Login() {
               style={{ marginTop: 16 }}
               // block
             >
-              Login
+              {t("login.submit")}
             </Button>
           </Form>
         )}

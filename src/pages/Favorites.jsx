@@ -2,11 +2,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Typography, Button, Space } from "antd";
 import HotelsGrid from "../components/HotelsGrid";
 import { resetFavorites } from "../store/slices/favoritesSlice";
+import { useTranslation } from "react-i18next";
 
 const { Text, Title } = Typography;
 
 export default function Favorites() {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const favoriteHotels = useSelector((state) => state.favorites.favorites);
 
@@ -15,9 +17,9 @@ export default function Favorites() {
       <section>
         <Space orientation="vertical" align="center" style={{ width: "100%" }}>
           <Title level={2} align="center">
-            Your favorites
+            {t("favorites.title")}
           </Title>
-          <Text>No favorite hotels yet.</Text>
+          <Text>{t("favorites.empty")}</Text>
         </Space>
       </section>
     );
@@ -25,13 +27,16 @@ export default function Favorites() {
 
   return (
     <section>
-     
-        <Title level={2} align="center">
-          Your favorites
-        </Title>
-        <Button danger onClick={() => dispatch(resetFavorites())} style={{ marginBottom: "1rem" }}>
-          Reset all
-        </Button>
+      <Title level={2} align="center">
+        {t("favorites.title")}
+      </Title>
+      <Button
+        danger
+        onClick={() => dispatch(resetFavorites())}
+        style={{ marginBottom: "1rem" }}
+      >
+        {t("favorites.resetAll")}
+      </Button>
 
       <HotelsGrid hotels={favoriteHotels} />
     </section>

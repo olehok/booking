@@ -14,14 +14,18 @@ import { SearchOutlined } from "@ant-design/icons";
 import useDebounce from "../hooks/useDebounce";
 import HotelsGrid from "../components/HotelsGrid";
 import useScrollPersistence from "../hooks/useScrollPersistence";
+import { useTranslation } from "react-i18next";
+import useWithLng from "../hooks/useWithLng";
 
 const { Text, Link, Title } = Typography;
 
 export default function Hotels() {
+  const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const city = searchParams.get("city");
   const scrollKey = `hotelsScroll-${city}`;
+  const { withLng } = useWithLng();
 
   const [searchValue, setSearchValue] = useState(
     searchParams.get("search") || "",
@@ -82,12 +86,12 @@ export default function Hotels() {
   return (
     <section className="hotel-list">
       <Title level={2} align="center">
-        Available Hotels
+        {t("hotels.title")}
       </Title>
       <Space style={{ margin: "0 0.5rem 1rem" }}>
         <Input
           allowClear
-          placeholder="Search hotel..."
+          placeholder={t("hotels.searchPlaceholder")}
           style={{ width: 250 }}
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
@@ -99,7 +103,11 @@ export default function Hotels() {
         <Spin size="large" style={{ display: "block", margin: "50px auto" }} />
       )}
 
-      {error && <p>Error: {error}</p>}
+      {error && (
+        <p>
+          {t("hotels.error")}: {error}
+        </p>
+      )}
 
       {!loading && !error && !hotelsSafe.length && (
         <Space
@@ -110,11 +118,19 @@ export default function Hotels() {
         >
           <Text>
             {city ? (
-              `No hotels found${city !== "all" ? ` in ${city}` : ""}.`
+              t("hotels.noHotelsFound", {
+                cityPart:
+                  city !== "all"
+                    ? t("hotels.noHotelsFoundIn", { city })
+                    : "",
+              })
             ) : (
               <>
-                Please select a{" "}
-                <Link onClick={() => navigate("/search")}>city.</Link>
+                {t("hotels.pleaseSelectCity")}{" "}
+                <Link onClick={() => navigate(withLng("/search"))}>
+                  {t("hotels.city")}
+                </Link>
+                .
               </>
             )}
           </Text>
@@ -123,10 +139,10 @@ export default function Hotels() {
               color="primary"
               variant="outlined"
               onClick={() => {
-                navigate("/hotels?city=all&page=1");
+                navigate(`${withLng("/hotels")}?city=all&page=1`);
               }}
             >
-              Show all hotels
+              {t("hotels.showAll")}
             </Button>
           )}
         </Space>
@@ -136,13 +152,13 @@ export default function Hotels() {
         <>
           <Select
             allowClear
-            placeholder="Sort by rating"
+            placeholder={t("hotels.sortByRating")}
             style={{ width: 160 }}
             value={sort}
             onChange={handleSortChange}
             options={[
-              { value: "desc", label: "From high to low" },
-              { value: "asc", label: "From low to high" },
+              { value: "desc", label: t("hotels.sortHighToLow") },
+              { value: "asc", label: t("hotels.sortLowToHigh") },
             ]}
           />
 
