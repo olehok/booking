@@ -26,7 +26,7 @@ const SearchForm = () => {
   if (loading || !destinations.length) return <Spin fullscreen size="large" />;
 
   return (
-    <Card size="small">
+    <Card size="small" className={styles.searchFormCard}>
       <Formik
         enableReinitialize={true}
         initialValues={{
@@ -143,6 +143,7 @@ const SearchForm = () => {
               onClick={() => {
                 navigate(`${withLng("/hotels")}?city=all&page=1`);
               }}
+              className={styles.searchFormShowAll}
             >
               {t("searchForm.showAllHotels")}
             </Button>

@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import useWithLng from "../../hooks/useWithLng";
@@ -6,8 +7,8 @@ import useAutoHideHeader from "../../hooks/useAutoHideHeader";
 import { logout } from "../../store/slices/authSlice";
 import { toggleTheme } from "../../store/slices/themeSlice";
 import LanguageToggle from "../LanguageToggle/LanguageToggle";
-import { Switch, Badge } from "antd";
-import { HeartOutlined } from "@ant-design/icons";
+import { Switch, Badge, Button } from "antd";
+import { HeartOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import styles from "./Header.module.scss";
 
 export default function Header() {
@@ -18,11 +19,15 @@ export default function Header() {
 
   const user = useSelector((state) => state.auth.user);
   const themeMode = useSelector((state) => state.theme.mode);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const favoriteCount = useSelector(
     (state) => state.favorites.favorites.length,
   );
 
   const isActiveClass = ({ isActive }) => (isActive ? "active" : "");
+  const noActiveClass = () => "";
+  const toggleMenu = () => setIsMenuOpen((value) => !value);
+  const closeMenu = () => setIsMenuOpen(false);
   return (
     <header
       className={`${styles.header} ${isHidden ? styles.headerHidden : ""}`}
@@ -34,24 +39,53 @@ export default function Header() {
           </NavLink>
         </h1>
 
-        <nav className={styles.headerNav}>
+        <Button
+          type="text"
+          className={styles.headerMenuButton}
+          icon={isMenuOpen ? <CloseOutlined /> : <MenuOutlined />}
+          aria-label="Menu"
+          aria-expanded={isMenuOpen}
+          aria-controls="header-navigation"
+          onClick={toggleMenu}
+        />
+
+        <nav
+          id="header-navigation"
+          className={`${styles.headerNav} ${isMenuOpen ? styles.headerNavOpen : ""}`}
+        >
           <h3>
-            <NavLink className={isActiveClass} to={withLng("/search")}>
+            <NavLink
+              className={isActiveClass}
+              to={withLng("/search")}
+              onClick={closeMenu}
+            >
               {t("nav.stay")}
             </NavLink>
           </h3>
           <h3>
-            <NavLink className={isActiveClass} to={withLng("/about")}>
+            <NavLink
+              className={isActiveClass}
+              to={withLng("/about")}
+              onClick={closeMenu}
+            >
               {t("nav.aboutUs")}
             </NavLink>
           </h3>
           <h3>
-            <NavLink className={isActiveClass} to={withLng("/hotels")}>
+            <NavLink
+              className={isActiveClass}
+              to={withLng("/hotels")}
+              onClick={closeMenu}
+            >
               {t("nav.hotels")}
             </NavLink>
           </h3>
           <h3>
-            <NavLink className={isActiveClass} to={withLng("/favorites")}>
+            <NavLink
+              className={isActiveClass}
+              to={withLng("/favorites")}
+              onClick={closeMenu}
+            >
               {t("nav.favorites")}
               <Badge
                 count={favoriteCount}
@@ -64,15 +98,22 @@ export default function Header() {
           {user ? (
             <>
               <h3>
-                <NavLink className={isActiveClass} to={withLng("/profile")}>
+                <NavLink
+                  className={isActiveClass}
+                  to={withLng("/profile")}
+                  onClick={closeMenu}
+                >
                   {t("nav.profile")}
                 </NavLink>
               </h3>
               <h3>
                 <NavLink
-                  className={isActiveClass}
+                  className={noActiveClass}
                   to={withLng("")}
-                  onClick={() => dispatch(logout())}
+                  onClick={() => {
+                    dispatch(logout());
+                    closeMenu();
+                  }}
                 >
                   {t("nav.logout")}
                 </NavLink>
@@ -80,7 +121,11 @@ export default function Header() {
             </>
           ) : (
             <h3>
-              <NavLink className={isActiveClass} to={withLng("/login")}>
+              <NavLink
+                className={isActiveClass}
+                to={withLng("/login")}
+                onClick={closeMenu}
+              >
                 {t("nav.login")}
               </NavLink>
             </h3>

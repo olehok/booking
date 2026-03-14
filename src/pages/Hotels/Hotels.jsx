@@ -139,6 +139,7 @@ export default function Hotels() {
             <Button
               color="primary"
               variant="outlined"
+              className={styles.showAllButton}
               onClick={() => {
                 navigate(`${withLng("/hotels")}?city=all&page=1`);
               }}
