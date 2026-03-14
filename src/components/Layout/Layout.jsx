@@ -26,9 +26,7 @@ export default function Layout() {
       <main className="container">
         <Outlet />
       </main>
-      <div className="footer container">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }

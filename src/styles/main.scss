@@ -2,15 +2,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "antd/dist/reset.css";
 
-// html {
-//   height: auto;
-// }
-
 body {
-  // height: auto;
   font-family: var(--font-main);
   font-size: 1rem;
-  // line-height: 1.5;
   transition:
     background 0.3s ease,
     color 0.3s ease;
@@ -68,7 +62,7 @@ h3 {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 0 0.5rem;
+  padding: 0.5rem;
   background-color: var(--background-component-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -80,16 +74,10 @@ h3 {
   transition:
     transform 0.5s ease,
     box-shadow 0.3s ease;
-  // background-color: var(--background-component-color);
   border-bottom: 1px solid var(--secondary-color);
-  // padding: 0.5rem 0 1rem;
-  // margin-bottom: 1rem;
   &--hidden {
     transform: translateY(-100%);
   }
-  // &:not(.header--hidden) {
-  //   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  // }
   &-wrapper {
     display: flex;
     flex-direction: row;
@@ -101,16 +89,8 @@ h3 {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    // align-items: normal;
     gap: 1rem;
   }
-}
-
-.footer {
-  // margin-top: auto;
-  padding-top: 1rem;
-  border-top: 1px solid var(--secondary-color);
-  // background-color: var(--background-component-color);
 }
 
 .search-form {
