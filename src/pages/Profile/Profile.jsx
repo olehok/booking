@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
 import { Typography, Card, Space } from "antd";
 import { useTranslation } from "react-i18next";
+import styles from "./Profile.module.scss";
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 export default function Profile() {
   const { t } = useTranslation();
@@ -11,15 +12,15 @@ export default function Profile() {
 
   return (
     <section>
-      <Title level={2} align="center">
+      <h2 className="title">
         {t("profile.welcome")},{" "}
-        <span style={{ color: "var(--primary-color)" }}>{userName}</span>
-      </Title>
+        <span className={styles.userName}>{userName}</span>
+      </h2>
       <Card>
         <Space orientation="vertical" size="middle">
-          <Title level={4} align="center">
+          <h4 className={styles.infoTitle}>
             {t("profile.infoTitle")}
-          </Title>
+          </h4>
           <Text>
             {t("profile.usernameLabel")} {userName}
           </Text>

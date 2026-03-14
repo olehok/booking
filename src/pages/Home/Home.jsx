@@ -3,8 +3,9 @@ import { useTranslation } from "react-i18next";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import HotelsGrid from "../../components/HotelsGrid/HotelsGrid";
 import { Space, Typography } from "antd";
+import styles from "./Home.module.scss";
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 export default function Home() {
   const featuredHotels = useSelector((state) => state.hotels.featured);
@@ -17,21 +18,21 @@ export default function Home() {
         <Space
           orientation="vertical"
           size="middle"
-          style={{ marginBottom: "2rem" }}
+          className={styles.intro}
         >
-          <Title level={2} align="center">
+          <h2 className="title">
             {t("home.title")}
-          </Title>
+          </h2>
           <Text>
             {t("home.intro")}
           </Text>
         </Space>
         <SearchForm />
       </section>
-      <section style={{ marginTop: "3rem" }}>
-        <Title level={3} align="center" style={{ marginBottom: "1rem" }}>
+      <section className={styles.featured}>
+        <h3 className="title">
           {t("home.featuredTitle")}
-        </Title>
+        </h3>
         <HotelsGrid hotels={featuredHotels} />
       </section>
     </>

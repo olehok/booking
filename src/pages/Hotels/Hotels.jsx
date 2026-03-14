@@ -16,8 +16,9 @@ import HotelsGrid from "../../components/HotelsGrid/HotelsGrid";
 import useScrollPersistence from "../../hooks/useScrollPersistence";
 import { useTranslation } from "react-i18next";
 import useWithLng from "../../hooks/useWithLng";
+import styles from "./Hotels.module.scss";
 
-const { Text, Link, Title } = Typography;
+const { Text, Link } = Typography;
 
 export default function Hotels() {
   const { t } = useTranslation();
@@ -84,15 +85,15 @@ export default function Hotels() {
   };
 
   return (
-    <section className="hotel-list">
-      <Title level={2} align="center">
+    <section>
+      <h2 className="title">
         {t("hotels.title")}
-      </Title>
-      <Space style={{ margin: "0 0.5rem 1rem" }}>
+      </h2>
+      <Space className={styles.controls}>
         <Input
           allowClear
           placeholder={t("hotels.searchPlaceholder")}
-          style={{ width: 250 }}
+          className={styles.searchInput}
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
         />
@@ -100,7 +101,7 @@ export default function Hotels() {
       </Space>
 
       {loading && (
-        <Spin size="large" style={{ display: "block", margin: "50px auto" }} />
+        <Spin size="large" className={styles.loading} />
       )}
 
       {error && (
@@ -113,7 +114,7 @@ export default function Hotels() {
         <Space
           orientation="vertical"
           size="large"
-          style={{ width: "100%", marginTop: 40 }}
+          className={styles.emptyState}
           align="center"
         >
           <Text>
@@ -153,7 +154,7 @@ export default function Hotels() {
           <Select
             allowClear
             placeholder={t("hotels.sortByRating")}
-            style={{ width: 160 }}
+            className={styles.sortSelect}
             value={sort}
             onChange={handleSortChange}
             options={[
@@ -166,7 +167,7 @@ export default function Hotels() {
 
           <Pagination
             align="center"
-            style={{ marginTop: 18 }}
+            className={styles.pagination}
             current={Number(searchParams.get("page")) || 1}
             total={total}
             pageSize={10}

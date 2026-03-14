@@ -1,15 +1,16 @@
 import { Typography } from "antd";
 import { useTranslation } from "react-i18next";
-const { Text, Title } = Typography;
+import styles from "./About.module.scss";
+const { Text } = Typography;
 
 export default function About() {
   const { t } = useTranslation();
 
   return (
     <section>
-      <Title level={2} align="center">
+      <h2 className="title">
         {t("about.title")}
-      </Title>
+      </h2>
       <Text>
         {t("about.body")}
       </Text>

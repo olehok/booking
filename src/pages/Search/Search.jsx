@@ -1,17 +1,18 @@
 import SearchForm from "../../components/SearchForm/SearchForm";
-import { Typography } from "antd";
 import { useTranslation } from "react-i18next";
-const { Title } = Typography;
+import styles from "./Search.module.scss";
 
 export default function Search() {
   const { t } = useTranslation();
 
   return (
     <section>
-      <Title level={2} align="center">
+      <h2 className="title">
         {t("search.title")}
-      </Title>
-      <SearchForm style={{ marginTop: "3rem" }} />
+      </h2>
+      <div className={styles.formWrapper}>
+        <SearchForm />
+      </div>
     </section>
   );
 }

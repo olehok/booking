@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, Button } from "antd";
 import { useTranslation } from "react-i18next";
 import useWithLng from "../../hooks/useWithLng";
+import styles from "./Login.module.scss";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ export default function Login() {
   );
 
   return (
-    <Card style={{ maxWidth: 400, margin: "40px auto" }}>
+    <Card className={styles.card}>
       <Formik
         initialValues={{ name: "", email: "", password: "" }}
         validationSchema={loginSchema}
@@ -49,10 +50,10 @@ export default function Login() {
         }}
       >
         {() => (
-          <Form className="login-wrapper">
-            <div className="login-field-group">
+          <Form className={styles.wrapper}>
+            <div className={styles.fieldGroup}>
               <Field
-                className="login-field"
+                className={styles.field}
                 name="name"
                 type="text"
                 placeholder={t("login.name")}
@@ -64,9 +65,9 @@ export default function Login() {
               />
             </div>
 
-            <div className="login-field-group">
+            <div className={styles.fieldGroup}>
               <Field
-                className="login-field"
+                className={styles.field}
                 name="email"
                 type="email"
                 placeholder={t("login.email")}
@@ -78,9 +79,9 @@ export default function Login() {
               />
             </div>
 
-            <div className="login-field-group">
+            <div className={styles.fieldGroup}>
               <Field
-                className="login-field"
+                className={styles.field}
                 name="password"
                 type="password"
                 placeholder={t("login.password")}
@@ -96,7 +97,7 @@ export default function Login() {
               color="primary"
               variant="outlined"
               htmlType="submit"
-              style={{ marginTop: 16 }}
+              className={styles.submit}
               // block
             >
               {t("login.submit")}

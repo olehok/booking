@@ -3,8 +3,9 @@ import { Typography, Button, Space } from "antd";
 import HotelsGrid from "../../components/HotelsGrid/HotelsGrid";
 import { resetFavorites } from "../../store/slices/favoritesSlice";
 import { useTranslation } from "react-i18next";
+import styles from "./Favorites.module.scss";
 
-const { Text, Title } = Typography;
+const { Text } = Typography;
 
 export default function Favorites() {
   const dispatch = useDispatch();
@@ -15,10 +16,10 @@ export default function Favorites() {
   if (!favoriteHotels.length) {
     return (
       <section>
-        <Space orientation="vertical" align="center" style={{ width: "100%" }}>
-          <Title level={2} align="center">
+        <Space orientation="vertical" align="center" className={styles.empty}>
+          <h2 className="title">
             {t("favorites.title")}
-          </Title>
+          </h2>
           <Text>{t("favorites.empty")}</Text>
         </Space>
       </section>
@@ -27,16 +28,21 @@ export default function Favorites() {
 
   return (
     <section>
-      <Title level={2} align="center">
-        {t("favorites.title")}
-      </Title>
-      <Button
-        danger
-        onClick={() => dispatch(resetFavorites())}
-        style={{ marginBottom: "1rem" }}
+      <Space
+        orientation="vertical"
+        align="center"
+        className={styles.header}
       >
-        {t("favorites.resetAll")}
-      </Button>
+        <h2 className="title">
+          {t("favorites.title")}
+        </h2>
+        <Button
+          danger
+          onClick={() => dispatch(resetFavorites())}
+        >
+          {t("favorites.resetAll")}
+        </Button>
+      </Space>
 
       <HotelsGrid hotels={favoriteHotels} />
     </section>
