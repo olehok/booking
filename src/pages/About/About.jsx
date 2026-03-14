@@ -1,6 +1,5 @@
 import { Typography } from "antd";
 import { useTranslation } from "react-i18next";
-import styles from "./About.module.scss";
 const { Text } = Typography;
 
 export default function About() {
