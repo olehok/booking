@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import useAutoHideHeader from "../../hooks/useAutoHideHeader";
 
 export default function Layout() {
   const { lng } = useParams();
@@ -16,13 +15,9 @@ export default function Layout() {
     }
   }, [lng, i18n]);
 
-  const hidden = useAutoHideHeader();
-
   return (
     <div className="layout">
-      <div className={`header ${hidden ? "header--hidden" : ""} container`}>
-        <Header />
-      </div>
+      <Header />
       <main className="container">
         <Outlet />
       </main>

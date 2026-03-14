@@ -1,12 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import useWithLng from "../../hooks/useWithLng";
 import { logout } from "../../store/slices/authSlice";
 import { toggleTheme } from "../../store/slices/themeSlice";
 import LanguageToggle from "../LanguageToggle/LanguageToggle";
 import { Switch, Badge, Typography } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
-import { useTranslation } from "react-i18next";
-import useWithLng from "../../hooks/useWithLng";
+import styles from "./Header.module.scss";
 
 const { Title } = Typography;
 
@@ -24,22 +25,18 @@ export default function Header() {
   const isActiveClass = ({ isActive }) => (isActive ? "active" : "");
   return (
     <header>
-      <div className="header-wrapper">
+      <div className={styles.headerWrapper}>
         <NavLink to={withLng("")}>
           <Title
             level={1}
             strong
             italic
-            style={{
-              color: "var(--primary-color)",
-              WebkitTextStroke: "1px var(--primary-color)",
-              margin: 0,
-            }}
+            className={styles.logo}
           >
             {t("app.name")}
           </Title>
         </NavLink>
-        <nav className="header-nav">
+        <nav className={styles.headerNav}>
           <h3>
             <NavLink className={isActiveClass} to={withLng("/search")}>
               {t("nav.stay")}
@@ -60,15 +57,11 @@ export default function Header() {
               {t("nav.favorites")}
               <Badge
                 count={favoriteCount}
-                style={{ background: "var(--primary-color)" }}
+                className={styles.favoriteBadge}
               >
                 <HeartOutlined
                   // key="fav"
-                  style={{
-                    marginLeft: 8,
-                    fontSize: "1.25rem",
-                    color: "var(--primary-color)",
-                  }}
+                  className={styles.favoriteIcon}
                 />
               </Badge>
             </NavLink>

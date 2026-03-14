@@ -67,32 +67,6 @@ h3 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  transition:
-    transform 0.5s ease,
-    box-shadow 0.3s ease;
-  border-bottom: 1px solid var(--secondary-color);
-  &--hidden {
-    transform: translateY(-100%);
-  }
-  &-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 1rem 0;
-  }
-  &-nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    gap: 1rem;
-  }
-}
-
 .search-form {
   display: flex;
   gap: 0.25rem;
