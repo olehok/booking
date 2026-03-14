@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { toggleFavorite } from "../store/slices/favoritesSlice";
+import { toggleFavorite } from "../../store/slices/favoritesSlice";
 import { Card, Rate, Typography, Space, Image } from "antd";
 import { HeartOutlined, HeartFilled } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";

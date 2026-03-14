@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../store/slices/authSlice";
-import { toggleTheme } from "../store/slices/themeSlice";
-import LanguageToggle from "./LanguageToggle";
+import { logout } from "../../store/slices/authSlice";
+import { toggleTheme } from "../../store/slices/themeSlice";
+import LanguageToggle from "../LanguageToggle/LanguageToggle";
 import { Switch, Badge, Typography } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
-import useWithLng from "../hooks/useWithLng";
+import useWithLng from "../../hooks/useWithLng";
 
 const { Title } = Typography;
 

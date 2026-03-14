@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Typography, Button, Space } from "antd";
-import HotelsGrid from "../components/HotelsGrid";
-import { resetFavorites } from "../store/slices/favoritesSlice";
+import HotelsGrid from "../../components/HotelsGrid/HotelsGrid";
+import { resetFavorites } from "../../store/slices/favoritesSlice";
 import { useTranslation } from "react-i18next";
 
 const { Text, Title } = Typography;

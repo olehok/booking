@@ -2,11 +2,11 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../store/slices/authSlice";
+import { login } from "../../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import { Card, Button } from "antd";
 import { useTranslation } from "react-i18next";
-import useWithLng from "../hooks/useWithLng";
+import useWithLng from "../../hooks/useWithLng";
 
 export default function Login() {
   const dispatch = useDispatch();

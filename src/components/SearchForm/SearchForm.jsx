@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { Select, InputNumber, DatePicker, Button, Spin, Card } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { fetchDestinations } from "../store/thunks/hotelsThunks";
+import { fetchDestinations } from "../../store/thunks/hotelsThunks";
 import { useTranslation } from "react-i18next";
-import useWithLng from "../hooks/useWithLng";
+import useWithLng from "../../hooks/useWithLng";
 
 const { RangePicker } = DatePicker;
 

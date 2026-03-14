@@ -1,14 +1,14 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
-import Layout from "../components/Layout";
-import Home from "../pages/Home";
-import Search from "../pages/Search";
-import About from "../pages/About";
-import Hotels from "../pages/Hotels";
-import Favorites from "../pages/Favorites";
-import Profile from "../pages/Profile";
-import Login from "../pages/Login";
-import PrivateRoute from "../components/PrivateRoute";
+import Layout from "../components/Layout/Layout";
+import Home from "../pages/Home/Home";
+import Search from "../pages/Search/Search";
+import About from "../pages/About/About";
+import Hotels from "../pages/Hotels/Hotels";
+import Favorites from "../pages/Favorites/Favorites";
+import Profile from "../pages/Profile/Profile";
+import Login from "../pages/Login/Login";
+import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import { hotelsLoader, featuredHotelsLoader } from "../loaders/loaders";
 import { Spin } from "antd";
 import { useTranslation } from "react-i18next";

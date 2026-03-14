@@ -1,4 +1,4 @@
-import SearchForm from "../components/SearchForm";
+import SearchForm from "../../components/SearchForm/SearchForm";
 import { Typography } from "antd";
 import { useTranslation } from "react-i18next";
 const { Title } = Typography;

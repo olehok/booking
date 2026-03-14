@@ -1,5 +1,5 @@
 import { Row, Col } from "antd";
-import HotelCard from "./HotelCard";
+import HotelCard from "../HotelCard/HotelCard";
 
 export default function HotelsGrid({ hotels }) {
   const hotelsSafe = Array.isArray(hotels) ? hotels : [];

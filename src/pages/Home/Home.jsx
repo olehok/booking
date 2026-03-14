@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import SearchForm from "../components/SearchForm";
-import HotelsGrid from "../components/HotelsGrid";
+import SearchForm from "../../components/SearchForm/SearchForm";
+import HotelsGrid from "../../components/HotelsGrid/HotelsGrid";
 import { Space, Typography } from "antd";
 
 const { Title, Text } = Typography;

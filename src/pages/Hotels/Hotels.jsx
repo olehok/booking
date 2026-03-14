@@ -11,11 +11,11 @@ import {
   Input,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import useDebounce from "../hooks/useDebounce";
-import HotelsGrid from "../components/HotelsGrid";
-import useScrollPersistence from "../hooks/useScrollPersistence";
+import useDebounce from "../../hooks/useDebounce";
+import HotelsGrid from "../../components/HotelsGrid/HotelsGrid";
+import useScrollPersistence from "../../hooks/useScrollPersistence";
 import { useTranslation } from "react-i18next";
-import useWithLng from "../hooks/useWithLng";
+import useWithLng from "../../hooks/useWithLng";
 
 const { Text, Link, Title } = Typography;
 

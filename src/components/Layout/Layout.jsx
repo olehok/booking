@@ -2,9 +2,9 @@ import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import Header from "./Header";
-import Footer from "./Footer";
-import useAutoHideHeader from "../hooks/useAutoHideHeader";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import useAutoHideHeader from "../../hooks/useAutoHideHeader";
 
 export default function Layout() {
   const { lng } = useParams();
