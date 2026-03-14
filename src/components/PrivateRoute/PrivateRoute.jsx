@@ -4,13 +4,6 @@ import useWithLng from "../../hooks/useWithLng";
 
 export default function PrivateRoute({ children }) {
   const { lng } = useWithLng();
-  // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
-  // if (!isAuthenticated) {
-  //   return <Navigate to="/login" replace />;
-  // }
-
-  // return children;
   const user = useSelector((state) => state.auth.user);
 
   if (!user) {

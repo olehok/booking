@@ -4,8 +4,9 @@ import { toggleFavorite } from "../../store/slices/favoritesSlice";
 import { Card, Rate, Typography, Space, Image } from "antd";
 import { HeartOutlined, HeartFilled } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
+import styles from "./HotelCard.module.scss";
 
-const { Title, Text, Link } = Typography;
+const { Text, Link } = Typography;
 
 const IMAGE_WIDTH = "100%";
 const IMAGE_HEIGHT = 300;
@@ -21,15 +22,15 @@ const HotelCard = ({ hotel }) => {
   return (
     <Card
       hoverable
-      style={{ overflow: "hidden" }}
+      className={styles.hotelCard}
       cover={
         <Image
           src={hotel.image_url}
           alt={hotel.name}
           width={IMAGE_WIDTH}
           height={IMAGE_HEIGHT}
-          style={{ objectFit: "cover" }}
-          fallback={<div style={{ width: '100%', height: '100%' }} />}
+          className={styles.hotelCardImage}
+          fallback={<div className={styles.hotelCardImageFallback} />}
           preview={false}
         />
       }
@@ -37,7 +38,7 @@ const HotelCard = ({ hotel }) => {
         isFavorite ? (
           <HeartFilled
             key="fav"
-            style={{ color: "red" }}
+            className={styles.hotelCardFavoriteActive}
             onClick={() => dispatch(toggleFavorite(hotel))}
           />
         ) : (
@@ -48,8 +49,12 @@ const HotelCard = ({ hotel }) => {
         ),
       ]}
     >
-      <Space orientation="vertical" size="small" style={{ width: "100%" }}>
-        <Title level={4}>{hotel.name}</Title>
+      <Space
+        orientation="vertical"
+        size="small"
+        className={styles.hotelCardContent}
+      >
+        <h3>{hotel.name}</h3>
 
         <Text type="secondary">
           {hotel.address}, {hotel.city}

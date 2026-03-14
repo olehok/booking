@@ -1,0 +1,28 @@
+.searchForm {
+  display: flex;
+  gap: 0.25rem;
+  align-items: baseline;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  &Group {
+    position: relative;
+  }
+
+  &Select {
+    width: 200px;
+  }
+
+  &Range {
+    flex-grow: 1;
+  }
+
+  &Persons {
+    width: 100px;
+  }
+
+  &Submit {
+    margin-top: 10px;
+  }
+}

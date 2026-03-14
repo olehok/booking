@@ -21,7 +21,6 @@ export default function LanguageToggle() {
   return (
     <Segmented
       size="small"
-      
       value={currentLng}
       onChange={changeLanguage}
       options={[

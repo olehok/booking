@@ -1,0 +1,33 @@
+.hotelCard {
+  overflow: hidden;
+
+  &Content {
+    width: 100%;
+  }
+
+  &Image {
+    :global(.ant-image-img) {
+      object-fit: cover;
+    }
+  }
+
+  &ImageFallback {
+    width: 100%;
+    height: 100%;
+  }
+
+  :global(.ant-card-actions) {
+    :global(li > span) {
+      font-size: 1.25rem;
+    }
+
+    :global(.anticon svg) {
+      width: 1.15rem;
+      height: 1.15rem;
+    }
+
+    :global(.anticon).hotelCardFavoriteActive {
+      color: var(--primary-color);
+    }
+  }
+}

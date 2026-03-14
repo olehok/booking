@@ -2,19 +2,19 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import useWithLng from "../../hooks/useWithLng";
+import useAutoHideHeader from "../../hooks/useAutoHideHeader";
 import { logout } from "../../store/slices/authSlice";
 import { toggleTheme } from "../../store/slices/themeSlice";
 import LanguageToggle from "../LanguageToggle/LanguageToggle";
-import { Switch, Badge, Typography } from "antd";
+import { Switch, Badge } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
 import styles from "./Header.module.scss";
-
-const { Title } = Typography;
 
 export default function Header() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { withLng } = useWithLng();
+  const isHidden = useAutoHideHeader();
 
   const user = useSelector((state) => state.auth.user);
   const themeMode = useSelector((state) => state.theme.mode);
@@ -24,18 +24,16 @@ export default function Header() {
 
   const isActiveClass = ({ isActive }) => (isActive ? "active" : "");
   return (
-    <header>
-      <div className={styles.headerWrapper}>
-        <NavLink to={withLng("")}>
-          <Title
-            level={1}
-            strong
-            italic
-            className={styles.logo}
-          >
+    <header
+      className={`${styles.header} ${isHidden ? styles.headerHidden : ""}`}
+    >
+      <div className={`${styles.headerWrapper} container`}>
+        <h1 className={styles.headerLogo}>
+          <NavLink to={withLng("")} end>
             {t("app.name")}
-          </Title>
-        </NavLink>
+          </NavLink>
+        </h1>
+
         <nav className={styles.headerNav}>
           <h3>
             <NavLink className={isActiveClass} to={withLng("/search")}>
@@ -57,21 +55,12 @@ export default function Header() {
               {t("nav.favorites")}
               <Badge
                 count={favoriteCount}
-                className={styles.favoriteBadge}
+                className={styles.headerFavoriteBadge}
               >
-                <HeartOutlined
-                  // key="fav"
-                  className={styles.favoriteIcon}
-                />
+                <HeartOutlined className={styles.headerFavoriteIcon} />
               </Badge>
             </NavLink>
           </h3>
-          {/* <h3>
-            <NavLink to="/profile">Profile</NavLink>
-          </h3> */}
-          {/* <h3>
-            <NavLink to="/login">Login</NavLink>
-          </h3> */}
           {user ? (
             <>
               <h3>
@@ -80,14 +69,6 @@ export default function Header() {
                 </NavLink>
               </h3>
               <h3>
-                {/* <Button
-                  type="link"
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => dispatch(logout())}
-                >
-                  Logout
-                </Button> */}
                 <NavLink
                   className={isActiveClass}
                   to={withLng("")}

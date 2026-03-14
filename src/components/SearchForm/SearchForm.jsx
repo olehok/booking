@@ -8,6 +8,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { fetchDestinations } from "../../store/thunks/hotelsThunks";
 import { useTranslation } from "react-i18next";
 import useWithLng from "../../hooks/useWithLng";
+import styles from "./SearchForm.module.scss";
 
 const { RangePicker } = DatePicker;
 
@@ -65,8 +66,12 @@ const SearchForm = () => {
         }}
       >
         {({ handleSubmit, setFieldValue, errors, values }) => (
-          <form onSubmit={handleSubmit} layout="inline" className="search-form">
-            <div className="search-form-group">
+          <form
+            onSubmit={handleSubmit}
+            layout="inline"
+            className={styles.searchForm}
+          >
+            <div className={styles.searchFormGroup}>
               <Select
                 placeholder={t("searchForm.selectCity")}
                 value={values.city}
@@ -75,21 +80,21 @@ const SearchForm = () => {
                   label: city.label,
                 }))}
                 onChange={(value) => setFieldValue("city", value)}
-                style={{ width: 200 }}
+                className={styles.searchFormSelect}
               />
               {errors.city && (
                 <div className="error-message">{errors.city}</div>
               )}
             </div>
 
-            <div className="search-form-group">
+            <div className={styles.searchFormGroup}>
               <RangePicker
                 value={values.dates}
                 onChange={(dates) => setFieldValue("dates", dates)}
                 disabledDate={(current) => {
                   return current && current < dayjs().startOf("day");
                 }}
-                style={{ flexGrow: 1 }}
+                className={styles.searchFormRange}
                 placeholder={[
                   t("searchForm.checkIn"),
                   t("searchForm.checkOut"),
@@ -100,13 +105,13 @@ const SearchForm = () => {
               )}
             </div>
 
-            <div className="search-form-group">
+            <div className={styles.searchFormGroup}>
               <InputNumber
                 min={1}
                 max={6}
                 value={values.adults}
                 onChange={(value) => setFieldValue("adults", value)}
-                style={{ width: 100 }}
+                className={styles.searchFormPersons}
                 placeholder={t("searchForm.adultsPlaceholder")}
               />
               {errors.adults && (
@@ -119,7 +124,7 @@ const SearchForm = () => {
               max={5}
               value={values.children}
               onChange={(value) => setFieldValue("children", value)}
-              style={{ width: 100 }}
+              className={styles.searchFormPersons}
               placeholder={t("searchForm.childrenPlaceholder")}
             />
 
@@ -128,7 +133,7 @@ const SearchForm = () => {
               color="primary"
               htmlType="submit"
               disabled={!!errors.dates}
-              style={{ marginTop: 10 }}
+              className={styles.searchFormSubmit}
               icon={<SearchOutlined />}
             />
 
