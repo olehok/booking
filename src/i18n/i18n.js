@@ -9,6 +9,7 @@ i18n
     .use(initReactI18next)
     .init({
         fallbackLng: "en",
+        showSupportNotice: false,
 
         backend: {
             loadPath: `${import.meta.env.BASE_URL}locales/{{lng}}/translation.json`,

@@ -7,7 +7,6 @@
   transition:
     transform 0.5s ease,
     box-shadow 0.3s ease;
-  border-bottom: 1px solid var(--secondary-color);
 
   &Hidden {
     transform: translateY(-100%);
@@ -20,6 +19,7 @@
     align-items: baseline;
     padding: 1rem 0;
     position: relative;
+    border-bottom: 1px solid var(--secondary-color);
   }
 
   &Nav {

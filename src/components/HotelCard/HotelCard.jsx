@@ -8,9 +8,6 @@ import styles from "./HotelCard.module.scss";
 
 const { Text, Link } = Typography;
 
-// const IMAGE_WIDTH = "100%";
-// const IMAGE_HEIGHT = "280px";
-
 const HotelCard = ({ hotel }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -27,8 +24,6 @@ const HotelCard = ({ hotel }) => {
         <Image
           src={hotel.image_url}
           alt={hotel.name}
-          // width={IMAGE_WIDTH}
-          // height={IMAGE_HEIGHT}
           className={styles.hotelCardImage}
           fallback={<div className={styles.hotelCardImageFallback} />}
           preview={false}

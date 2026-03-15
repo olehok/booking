@@ -3,7 +3,7 @@ import { GithubOutlined, LinkedinOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import styles from "./Footer.module.scss";
 
-const { Text, Title } = Typography;
+const { Text } = Typography;
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer>
       <section className={`${styles.footer} container`}>
-        <Title level={3}>{t("footer.contacts")}</Title>
+        <h3>{t("footer.contacts")}</h3>
         <Space orientation="horizontal" size="small">
           <Text>{t("footer.copyright")}</Text>
           <Button
