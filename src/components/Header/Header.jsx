@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import useWithLng from "../../hooks/useWithLng";
@@ -20,6 +20,8 @@ export default function Header() {
   const user = useSelector((state) => state.auth.user);
   const themeMode = useSelector((state) => state.theme.mode);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navRef = useRef(null);
+  const menuButtonRef = useRef(null);
   const favoriteCount = useSelector(
     (state) => state.favorites.favorites.length,
   );
@@ -28,6 +30,37 @@ export default function Header() {
   const noActiveClass = () => "";
   const toggleMenu = () => setIsMenuOpen((value) => !value);
   const closeMenu = () => setIsMenuOpen(false);
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return;
+    }
+
+    const handleOutsideClick = (event) => {
+      const target = event.target;
+      const navEl = navRef.current;
+      const buttonEl = menuButtonRef.current;
+
+      if (!navEl || !buttonEl) {
+        return;
+      }
+
+      if (navEl.contains(target) || buttonEl.contains(target)) {
+        return;
+      }
+
+      closeMenu();
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideClick);
+    };
+  }, [isMenuOpen]);
+
   return (
     <header
       className={`${styles.header} ${isHidden ? styles.headerHidden : ""}`}
@@ -47,11 +80,13 @@ export default function Header() {
           aria-expanded={isMenuOpen}
           aria-controls="header-navigation"
           onClick={toggleMenu}
+          ref={menuButtonRef}
         />
 
         <nav
           id="header-navigation"
           className={`${styles.headerNav} ${isMenuOpen ? styles.headerNavOpen : ""}`}
+          ref={navRef}
         >
           <h3>
             <NavLink

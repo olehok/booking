@@ -12,7 +12,7 @@ export default function Footer() {
     <footer>
       <section className={`${styles.footer} container`}>
         <h3>{t("footer.contacts")}</h3>
-        <Space orientation="horizontal" size="small">
+        <Space orientation="horizontal" size="small" wrap="wrap">
           <Text>{t("footer.copyright")}</Text>
           <Button
             type="text"

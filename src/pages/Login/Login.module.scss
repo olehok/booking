@@ -1,3 +1,5 @@
+@use "../../styles/breakpoints" as bp;
+
 .card {
   max-width: 400px;
   margin: 40px auto;
@@ -27,5 +29,11 @@
 
   .submit {
     margin-top: 16px;
+  }
+}
+
+@media (max-width: bp.$bp-sm) {
+  .wrapper {
+    width: 100%;
   }
 }

@@ -1,5 +1,16 @@
+@use "../../styles/breakpoints" as bp;
+
 .controls {
   margin: 0 0.5rem 1rem;
+}
+
+.controlWrapper {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .searchInput {
@@ -25,5 +36,15 @@
 }
 
 .pagination {
-  margin-top: 18px;
+  margin-top: 1rem;
+}
+
+@media (max-width: bp.$bp-sm) {
+  .searchInput {
+    width: 100%;
+  }
+
+  .controlWrapper {
+    justify-content: center;
+  }
 }

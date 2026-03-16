@@ -98,7 +98,6 @@ export default function Login() {
               variant="outlined"
               htmlType="submit"
               className={styles.submit}
-              // block
             >
               {t("login.submit")}
             </Button>

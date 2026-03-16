@@ -48,6 +48,11 @@ export default function ThemeProvider({ children }) {
             colorErrorTextHover: "var(--error-color)",
             colorErrorTextActive: "var(--error-color)",
           },
+          Pagination: {
+            itemActiveBg: "var(--primary-color)",
+            itemActiveColor: "var(--on-primary-color)",
+            itemActiveColorHover: "var(--on-primary-color)",
+          },
           Segmented: {
             trackBg: "var(--background-component-color)",
             itemColor: "var(--text-color)",
