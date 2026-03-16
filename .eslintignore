@@ -1,0 +1,7 @@
+# Build outputs
+dist
+coverage
+.vite
+
+# Dependencies
+node_modules
