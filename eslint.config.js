@@ -30,6 +30,8 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       'no-var': 'error',
       'prefer-const': 'error',
+      'quotes': ['error', 'single', { avoidEscape: true }],
+      'indent': ['error', 2],
     },
   },
   {
