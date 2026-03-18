@@ -4,6 +4,7 @@ import { toggleFavorite } from "../../store/slices/favoritesSlice";
 import { Card, Rate, Typography, Space, Image } from "antd";
 import { HeartOutlined, HeartFilled } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
+import fallBackImg from "../../assets/images/fallBackImg.jpg";
 import styles from "./HotelCard.module.scss";
 
 const { Text, Link } = Typography;
@@ -25,7 +26,7 @@ const HotelCard = ({ hotel }) => {
           src={hotel.image_url}
           alt={hotel.name}
           className={styles.hotelCardImage}
-          fallback={<div className={styles.hotelCardImageFallback} />}
+          fallback={fallBackImg}
           preview={false}
         />
       }
