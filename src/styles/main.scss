@@ -15,17 +15,6 @@ body {
   --ant-typography-title-margin-bottom: 0;
 }
 
-@keyframes runningLine {
-  from {
-    width: 0;
-    left: 0;
-  }
-  to {
-    width: 100%;
-    left: 0;
-  }
-}
-
 a {
   color: var(--primary-color);
   text-decoration: none;
@@ -42,6 +31,17 @@ a {
   }
   &:hover::after {
     animation: runningLine 0.3s ease forwards;
+  }
+}
+
+@keyframes runningLine {
+  from {
+    width: 0;
+    left: 0;
+  }
+  to {
+    width: 100%;
+    left: 0;
   }
 }
 
@@ -66,6 +66,15 @@ h4 {
   margin-bottom: 0.75rem;
 }
 
+main {
+  flex: 1;
+}
+
+section {
+  padding-top: 1rem;
+  margin-bottom: 2rem;
+}
+
 .layout {
   display: flex;
   flex-direction: column;
@@ -81,25 +90,16 @@ h4 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: bp.$bp-md) {
-  .container {
-    padding: 1.5rem;
-  }
-}
-
-main {
-  flex: 1;
-}
-
-section {
-  padding-top: 1rem;
-  margin-bottom: 2rem;
-}
-
 .error-message {
   position: absolute;
   top: 2.2rem;
   left: 0.25rem;
   color: var(--error-color);
   font-size: 0.875rem;
+}
+
+@media (max-width: bp.$bp-md) {
+  .container {
+    padding: 1.5rem;
+  }
 }
