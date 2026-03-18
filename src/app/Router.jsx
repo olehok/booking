@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 import Layout from "../components/Layout/Layout";
 import Home from "../pages/Home/Home";
 import Search from "../pages/Search/Search";
@@ -11,16 +11,15 @@ import Login from "../pages/Login/Login";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import { hotelsLoader, featuredHotelsLoader } from "../loaders/loaders";
 import { Spin } from "antd";
-import { useTranslation } from "react-i18next";
 
 const ErrorPage = () => {
   const { t } = useTranslation();
-  return <h2>{t("common.error")}</h2>;
+  return <h2 className="title">{t("common.error")}</h2>;
 };
 
 const NotFoundPage = () => {
   const { t } = useTranslation();
-  return <h2>{t("common.notFound")}</h2>;
+  return <h2 className="title">{t("common.notFound")}</h2>;
 };
 
 const Router = createBrowserRouter(

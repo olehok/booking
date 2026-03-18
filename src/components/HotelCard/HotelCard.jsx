@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { toggleFavorite } from "../../store/slices/favoritesSlice";
+import fallBackImg from "../../assets/images/fallBackImg.jpg";
 import { Card, Rate, Typography, Space, Image } from "antd";
 import { HeartOutlined, HeartFilled } from "@ant-design/icons";
-import { useTranslation } from "react-i18next";
-import fallBackImg from "../../assets/images/fallBackImg.jpg";
 import styles from "./HotelCard.module.scss";
 
 const { Text, Link } = Typography;

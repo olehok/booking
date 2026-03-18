@@ -8,7 +8,15 @@ export const getFeaturedHotels = () => {
     return api.get('/api/home');
 };
 
-export const searchHotels = ({ city, adults, children, page, limit, sort, search }) => {
+export const searchHotels = ({
+    city,
+    adults,
+    children,
+    page,
+    limit,
+    sort,
+    search
+}) => {
     return api.get('/api/hotels/search', {
         params: {
             city,

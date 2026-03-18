@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import useScrollPersistence from "../../hooks/useScrollPersistence";
+import useWithLng from "../../hooks/useWithLng";
+import useDebounce from "../../hooks/useDebounce";
+import HotelsGrid from "../../components/HotelsGrid/HotelsGrid";
 import {
   Pagination,
   Spin,
@@ -11,11 +16,6 @@ import {
   Input,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import useDebounce from "../../hooks/useDebounce";
-import HotelsGrid from "../../components/HotelsGrid/HotelsGrid";
-import useScrollPersistence from "../../hooks/useScrollPersistence";
-import { useTranslation } from "react-i18next";
-import useWithLng from "../../hooks/useWithLng";
 import styles from "./Hotels.module.scss";
 
 const { Text, Link } = Typography;
@@ -101,16 +101,6 @@ export default function Hotels() {
   return (
     <section>
       <h2 className="title">{t("hotels.title")}</h2>
-      {/* <Space className={styles.controls}>
-        <Input
-          allowClear
-          placeholder={t("hotels.searchPlaceholder")}
-          className={styles.searchInput}
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-        />
-        <Button shape="circle" icon={<SearchOutlined />} />
-      </Space> */}
       <div className={styles.controlWrapper}>
         <Input
           allowClear
@@ -183,18 +173,6 @@ export default function Hotels() {
 
       {!loading && !error && hotelsSafe.length > 0 && (
         <>
-          {/* <Select
-            allowClear
-            placeholder={t("hotels.sortByRating")}
-            className={styles.sortSelect}
-            value={sort}
-            onChange={handleSortChange}
-            options={[
-              { value: "desc", label: t("hotels.sortHighToLow") },
-              { value: "asc", label: t("hotels.sortLowToHigh") },
-            ]}
-          /> */}
-
           <HotelsGrid hotels={hotelsSafe} />
 
           <Pagination

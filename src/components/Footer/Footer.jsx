@@ -1,6 +1,6 @@
+import { useTranslation } from "react-i18next";
 import { Typography, Space, Button } from "antd";
 import { GithubOutlined, LinkedinOutlined } from "@ant-design/icons";
-import { useTranslation } from "react-i18next";
 import styles from "./Footer.module.scss";
 
 const { Text } = Typography;

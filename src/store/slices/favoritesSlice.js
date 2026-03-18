@@ -21,16 +21,10 @@ const favoritesSlice = createSlice({
             } else {
                 state.favorites.push(hotel);
             }
-
-            // localStorage.setItem(
-            //     "favorites",
-            //     JSON.stringify(state.favorites)
-            // );
         },
 
         resetFavorites: (state) => {
             state.favorites = [];
-            // localStorage.removeItem("favorites");
         },
 
         hydrateFavorites: (state, action) => {
