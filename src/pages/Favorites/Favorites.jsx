@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Typography, Button, Space } from "antd";
-import HotelsGrid from "../../components/HotelsGrid/HotelsGrid";
-import { resetFavorites } from "../../store/slices/favoritesSlice";
 import { useTranslation } from "react-i18next";
+import { resetFavorites } from "../../store/slices/favoritesSlice";
+import HotelsGrid from "../../components/HotelsGrid/HotelsGrid";
+import { Typography, Button, Space } from "antd";
 import styles from "./Favorites.module.scss";
 
 const { Text } = Typography;
@@ -17,9 +17,7 @@ export default function Favorites() {
     return (
       <section>
         <Space orientation="vertical" align="center" className={styles.empty}>
-          <h2 className="title">
-            {t("favorites.title")}
-          </h2>
+          <h2 className="title">{t("favorites.title")}</h2>
           <Text>{t("favorites.empty")}</Text>
         </Space>
       </section>
@@ -28,18 +26,9 @@ export default function Favorites() {
 
   return (
     <section>
-      <Space
-        orientation="vertical"
-        align="center"
-        className={styles.header}
-      >
-        <h2 className="title">
-          {t("favorites.title")}
-        </h2>
-        <Button
-          danger
-          onClick={() => dispatch(resetFavorites())}
-        >
+      <Space orientation="vertical" align="center" className={styles.header}>
+        <h2 className="title">{t("favorites.title")}</h2>
+        <Button danger onClick={() => dispatch(resetFavorites())}>
           {t("favorites.resetAll")}
         </Button>
       </Space>

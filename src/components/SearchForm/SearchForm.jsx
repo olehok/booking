@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
+import { fetchDestinations } from "../../store/thunks/hotelsThunks";
+import { Formik } from "formik";
+import useWithLng from "../../hooks/useWithLng";
 import { Select, InputNumber, DatePicker, Button, Spin, Card } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { fetchDestinations } from "../../store/thunks/hotelsThunks";
-import { useTranslation } from "react-i18next";
-import useWithLng from "../../hooks/useWithLng";
 import styles from "./SearchForm.module.scss";
 
 const { RangePicker } = DatePicker;

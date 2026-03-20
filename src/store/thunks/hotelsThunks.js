@@ -15,7 +15,14 @@ export const fetchDestinations = createAsyncThunk(
 
 export const searchHotels = createAsyncThunk(
     'hotels/searchHotels',
-    async ({ city, adults, children, page = 1, limit = 10, sort = "", search = "" }) => {
+    async ({ city,
+        adults,
+        children,
+        page = 1,
+        limit = 10,
+        sort = "",
+        search = ""
+    }) => {
         const response = await searchHotelsApi({
             city,
             adults,
@@ -33,7 +40,9 @@ export const fetchFeaturedHotels = createAsyncThunk(
     'hotels/fetchFeaturedHotels',
     async () => {
         const response = await getFeaturedHotels();
-        const hotels = Array.isArray(response.data.hotels) ? response.data.hotels : [];
+        const hotels = Array.isArray(response.data.hotels)
+            ? response.data.hotels
+            : [];
 
         return [...hotels]
             .sort((a, b) => b.hotel_rating - a.hotel_rating)

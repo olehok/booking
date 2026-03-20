@@ -1,6 +1,6 @@
-import { Segmented } from "antd";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Segmented } from "antd";
 
 export default function LanguageToggle() {
   const { i18n } = useTranslation();

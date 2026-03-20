@@ -1,19 +1,21 @@
 # Booking App
 
-Pet project for CV. Focus: React + Redux Toolkit + Vite + UI library usage (not custom CSS).
+Focus: React + Redux Toolkit + Vite + UI library usage with minimal custom styles.
 
 ## Stack
 - React 19, Vite 7
 - Redux Toolkit, React Redux, Redux Thunk
 - React Router
-- Ant Design + @ant-design/icons
+- Prop-types
+- Ant Design
 - Formik + Yup
-- i18next + react-i18next
+- i18next
 - Axios, Dayjs
 - Sass, ESLint
+- Express
 
 ## Local setup
-1. `npm install`
+1. `npm i`
 2. `npm run dev` (runs client + server)
 
 Create `.env`:
@@ -28,8 +30,5 @@ VITE_API_URL=http://localhost:3001
 - `npm run lint` - lint
 
 ## Deployment
-- Frontend: GitHub Pages (planned)
-- Server: separate hosting service (planned)
-
-## Notes
-- Favicon: Font Awesome Free (earth-americas), via Wikimedia Commons (CC BY 4.0).
+- Frontend: ***
+- Server: ***

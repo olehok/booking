@@ -1,6 +1,6 @@
-import { Row, Col } from "antd";
 import PropTypes from "prop-types";
 import HotelCard from "../HotelCard/HotelCard";
+import { Row, Col } from "antd";
 
 export default function HotelsGrid({ hotels }) {
   const hotelsSafe = Array.isArray(hotels) ? hotels : [];
@@ -29,6 +29,6 @@ HotelsGrid.propTypes = {
       website: PropTypes.string,
       hotel_rating: PropTypes.number.isRequired,
       id: PropTypes.number.isRequired,
-    })
+    }),
   ),
 };

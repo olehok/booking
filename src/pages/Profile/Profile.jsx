@@ -18,7 +18,7 @@ export default function Profile() {
       </h2>
       <Card>
         <Space orientation="vertical" size="middle">
-          <h4 className={styles.infoTitle}>
+          <h4 className='title'>
             {t("profile.infoTitle")}
           </h4>
           <Text>
