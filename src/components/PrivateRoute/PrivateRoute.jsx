@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
-import PropTypes from "prop-types";
-import useWithLng from "../../hooks/useWithLng";
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import useWithLng from '../../hooks/useWithLng';
 
 export default function PrivateRoute({ children }) {
   const { lng } = useWithLng();

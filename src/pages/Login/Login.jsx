@@ -1,13 +1,13 @@
-import { useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { useTranslation } from "react-i18next";
-import { login } from "../../store/slices/authSlice";
-import useWithLng from "../../hooks/useWithLng";
-import { Card, Button } from "antd";
-import styles from "./Login.module.scss";
+import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
+import { login } from '../../store/slices/authSlice';
+import useWithLng from '../../hooks/useWithLng';
+import { Card, Button } from 'antd';
+import styles from './Login.module.scss';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -19,16 +19,16 @@ export default function Login() {
     () =>
       Yup.object().shape({
         name: Yup.string()
-          .min(2, t("login.errors.tooShort"))
-          .max(50, t("login.errors.tooLong"))
-          .required(t("login.errors.required")),
+          .min(2, t('login.errors.tooShort'))
+          .max(50, t('login.errors.tooLong'))
+          .required(t('login.errors.required')),
         email: Yup.string()
-          .email(t("login.errors.invalidEmail"))
-          .required(t("login.errors.required")),
+          .email(t('login.errors.invalidEmail'))
+          .required(t('login.errors.required')),
         password: Yup.string()
-          .min(4, t("login.errors.tooShort"))
-          .max(20, t("login.errors.tooLong"))
-          .required(t("login.errors.required")),
+          .min(4, t('login.errors.tooShort'))
+          .max(20, t('login.errors.tooLong'))
+          .required(t('login.errors.required')),
       }),
     [t],
   );
@@ -36,7 +36,7 @@ export default function Login() {
   return (
     <Card className={styles.card}>
       <Formik
-        initialValues={{ name: "", email: "", password: "" }}
+        initialValues={{ name: '', email: '', password: '' }}
         validationSchema={loginSchema}
         onSubmit={(values) => {
           dispatch(
@@ -46,7 +46,7 @@ export default function Login() {
             }),
           );
 
-          navigate(withLng("/profile"));
+          navigate(withLng('/profile'));
         }}
       >
         {() => (
@@ -56,7 +56,7 @@ export default function Login() {
                 className={styles.field}
                 name="name"
                 type="text"
-                placeholder={t("login.name")}
+                placeholder={t('login.name')}
               />
               <ErrorMessage
                 name="name"
@@ -70,7 +70,7 @@ export default function Login() {
                 className={styles.field}
                 name="email"
                 type="email"
-                placeholder={t("login.email")}
+                placeholder={t('login.email')}
               />
               <ErrorMessage
                 name="email"
@@ -84,7 +84,7 @@ export default function Login() {
                 className={styles.field}
                 name="password"
                 type="password"
-                placeholder={t("login.password")}
+                placeholder={t('login.password')}
               />
               <ErrorMessage
                 name="password"
@@ -99,7 +99,7 @@ export default function Login() {
               htmlType="submit"
               className={styles.submit}
             >
-              {t("login.submit")}
+              {t('login.submit')}
             </Button>
           </Form>
         )}

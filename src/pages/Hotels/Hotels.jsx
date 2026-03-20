@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import useScrollPersistence from "../../hooks/useScrollPersistence";
-import useWithLng from "../../hooks/useWithLng";
-import useDebounce from "../../hooks/useDebounce";
-import HotelsGrid from "../../components/HotelsGrid/HotelsGrid";
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import useScrollPersistence from '../../hooks/useScrollPersistence';
+import useWithLng from '../../hooks/useWithLng';
+import useDebounce from '../../hooks/useDebounce';
+import HotelsGrid from '../../components/HotelsGrid/HotelsGrid';
 import {
   Pagination,
   Spin,
@@ -14,9 +14,9 @@ import {
   Select,
   Button,
   Input,
-} from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import styles from "./Hotels.module.scss";
+} from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import styles from './Hotels.module.scss';
 
 const { Text, Link } = Typography;
 
@@ -24,13 +24,13 @@ export default function Hotels() {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const city = searchParams.get("city");
+  const city = searchParams.get('city');
   const scrollKey = `hotelsScroll-${city}`;
   const { withLng } = useWithLng();
   const pageSize = 10;
 
   const [searchValue, setSearchValue] = useState(
-    searchParams.get("search") || "",
+    searchParams.get('search') || '',
   );
 
   const debouncedSearch = useDebounce(searchValue, 700);
@@ -40,7 +40,7 @@ export default function Hotels() {
   );
 
   const hotelsSafe = Array.isArray(hotels) ? hotels : [];
-  const urlSearch = searchParams.get("search") || "";
+  const urlSearch = searchParams.get('search') || '';
 
   const markNewSearch = useScrollPersistence(scrollKey, hotelsSafe.length);
 
@@ -54,13 +54,13 @@ export default function Hotels() {
 
       setSearchParams({
         ...params,
-        city: params.city || "all",
-        search: debouncedSearch || "",
+        city: params.city || 'all',
+        search: debouncedSearch || '',
         page: 1,
       });
       markNewSearch();
     }
-  }, [debouncedSearch, urlSearch, searchParams, setSearchParams]);
+  }, [debouncedSearch, urlSearch, searchParams, setSearchParams, markNewSearch]);
 
   const handlePageChange = (newPage) => {
     const params = Object.fromEntries(searchParams.entries());
@@ -71,19 +71,19 @@ export default function Hotels() {
     });
   };
 
-  const sort = searchParams.get("sort") || null;
-  const currentPage = Number(searchParams.get("page")) || 1;
+  const sort = searchParams.get('sort') || null;
+  const currentPage = Number(searchParams.get('page')) || 1;
   const totalPages = Math.max(1, Math.ceil((total || 0) / pageSize));
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
-    const media = window.matchMedia("(max-width: 576px)");
+    const media = window.matchMedia('(max-width: 576px)');
     const handleChange = () => setIsSmallScreen(media.matches);
 
     handleChange();
-    media.addEventListener("change", handleChange);
+    media.addEventListener('change', handleChange);
 
-    return () => media.removeEventListener("change", handleChange);
+    return () => media.removeEventListener('change', handleChange);
   }, []);
 
   const handleSortChange = (value) => {
@@ -91,8 +91,8 @@ export default function Hotels() {
 
     setSearchParams({
       ...params,
-      city: params.city || "all",
-      sort: value || "",
+      city: params.city || 'all',
+      sort: value || '',
       page: 1,
     });
     markNewSearch();
@@ -100,11 +100,11 @@ export default function Hotels() {
 
   return (
     <section>
-      <h2 className="title">{t("hotels.title")}</h2>
+      <h2 className="title">{t('hotels.title')}</h2>
       <div className={styles.controlWrapper}>
         <Input
           allowClear
-          placeholder={t("hotels.searchPlaceholder")}
+          placeholder={t('hotels.searchPlaceholder')}
           className={styles.searchInput}
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
@@ -113,13 +113,13 @@ export default function Hotels() {
         {!loading && !error && hotelsSafe.length > 0 && (
           <Select
             allowClear
-            placeholder={t("hotels.sortByRating")}
+            placeholder={t('hotels.sortByRating')}
             className={styles.sortSelect}
             value={sort}
             onChange={handleSortChange}
             options={[
-              { value: "desc", label: t("hotels.sortHighToLow") },
-              { value: "asc", label: t("hotels.sortLowToHigh") },
+              { value: 'desc', label: t('hotels.sortHighToLow') },
+              { value: 'asc', label: t('hotels.sortLowToHigh') },
             ]}
           />
         )}
@@ -129,7 +129,7 @@ export default function Hotels() {
 
       {error && (
         <p>
-          {t("hotels.error")}: {error}
+          {t('hotels.error')}: {error}
         </p>
       )}
 
@@ -142,30 +142,30 @@ export default function Hotels() {
         >
           <Text>
             {city ? (
-              t("hotels.noHotelsFound", {
+              t('hotels.noHotelsFound', {
                 cityPart:
-                  city !== "all" ? t("hotels.noHotelsFoundIn", { city }) : "",
+                  city !== 'all' ? t('hotels.noHotelsFoundIn', { city }) : '',
               })
             ) : (
               <>
-                {t("hotels.pleaseSelectCity")}{" "}
-                <Link onClick={() => navigate(withLng("/search"))}>
-                  {t("hotels.city")}
+                {t('hotels.pleaseSelectCity')}{' '}
+                <Link onClick={() => navigate(withLng('/search'))}>
+                  {t('hotels.city')}
                 </Link>
                 .
               </>
             )}
           </Text>
-          {city !== "all" && (
+          {city !== 'all' && (
             <Button
               color="primary"
               variant="outlined"
               className={styles.showAllButton}
               onClick={() => {
-                navigate(`${withLng("/hotels")}?city=all&page=1`);
+                navigate(`${withLng('/hotels')}?city=all&page=1`);
               }}
             >
-              {t("hotels.showAll")}
+              {t('hotels.showAll')}
             </Button>
           )}
         </Space>
@@ -186,26 +186,26 @@ export default function Hotels() {
             showQuickJumper={false}
             itemRender={(page, type, originalElement) => {
               if (isSmallScreen) {
-                if (type === "prev" || type === "next") {
+                if (type === 'prev' || type === 'next') {
                   return originalElement;
                 }
 
-                if (type === "page" && page === currentPage) {
+                if (type === 'page' && page === currentPage) {
                   return originalElement;
                 }
 
                 return null;
               }
 
-              const isControl = type === "prev" || type === "next";
-              const isJumpPrev = type === "jump-prev";
-              const isJumpNext = type === "jump-next";
+              const isControl = type === 'prev' || type === 'next';
+              const isJumpPrev = type === 'jump-prev';
+              const isJumpNext = type === 'jump-next';
 
               if (isControl) {
                 return originalElement;
               }
 
-              if (type === "page") {
+              if (type === 'page') {
                 if (
                   page === 1 ||
                   page === totalPages ||

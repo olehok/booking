@@ -8,60 +8,60 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/api/destinations', (req, res) => {
-    const destinations = database.destination.map(city => ({
-        id: city.id,
-        label: city.label,
-    }));
-    res.json(destinations);
+  const destinations = database.destination.map(city => ({
+    id: city.id,
+    label: city.label,
+  }));
+  res.json(destinations);
 });
 
 app.get('/api/home', (req, res) => {
-    res.json({ hotels: database.hotels });
+  res.json({ hotels: database.hotels });
 });
 
 app.get('/api/hotels/search', (req, res) => {
-    const {
-        city,
-        page = 1,
-        limit = 10,
-        sort = "",
-        search = "",
-    } = req.query;
+  const {
+    city,
+    page = 1,
+    limit = 10,
+    sort = '',
+    search = '',
+  } = req.query;
 
-    let hotels = database.hotels;
+  let hotels = database.hotels;
 
-    if (!city) {
-        return res.json({ data: [], total: 0 });
-    }
-    if (city !== 'all') {
-        hotels = hotels.filter(
-            hotel => hotel.city === city
-        );
-    }
+  if (!city) {
+    return res.json({ data: [], total: 0 });
+  }
+  if (city !== 'all') {
+    hotels = hotels.filter(
+      hotel => hotel.city === city
+    );
+  }
 
-    if (search) {
-        hotels = hotels.filter(hotel =>
-            hotel.name.toLowerCase().includes(search.toLowerCase())
-        );
-    }
+  if (search) {
+    hotels = hotels.filter(hotel =>
+      hotel.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }
 
-    if (sort === "desc") {
-        hotels = hotels.sort((a, b) => b.hotel_rating - a.hotel_rating);
-    }
+  if (sort === 'desc') {
+    hotels = hotels.sort((a, b) => b.hotel_rating - a.hotel_rating);
+  }
 
-    if (sort === "asc") {
-        hotels = hotels.sort((a, b) => a.hotel_rating - b.hotel_rating);
-    }
+  if (sort === 'asc') {
+    hotels = hotels.sort((a, b) => a.hotel_rating - b.hotel_rating);
+  }
 
-    const total = hotels.length;
-    const start = (page - 1) * limit;
-    const end = start + Number(limit);
-    const paginatedHotels = hotels.slice(start, end);
+  const total = hotels.length;
+  const start = (page - 1) * limit;
+  const end = start + Number(limit);
+  const paginatedHotels = hotels.slice(start, end);
 
-    res.json({ data: paginatedHotels, total });
+  res.json({ data: paginatedHotels, total });
 });
 
 const PORT = 3001;
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

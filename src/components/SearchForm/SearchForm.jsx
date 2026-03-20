@@ -1,14 +1,14 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import dayjs from "dayjs";
-import { useTranslation } from "react-i18next";
-import { fetchDestinations } from "../../store/thunks/hotelsThunks";
-import { Formik } from "formik";
-import useWithLng from "../../hooks/useWithLng";
-import { Select, InputNumber, DatePicker, Button, Spin, Card } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import styles from "./SearchForm.module.scss";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
+import { fetchDestinations } from '../../store/thunks/hotelsThunks';
+import { Formik } from 'formik';
+import useWithLng from '../../hooks/useWithLng';
+import { Select, InputNumber, DatePicker, Button, Spin, Card } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import styles from './SearchForm.module.scss';
 
 const { RangePicker } = DatePicker;
 
@@ -23,7 +23,7 @@ const SearchForm = () => {
     dispatch(fetchDestinations());
   }, [dispatch]);
 
-  if (loading || !destinations.length) return <Spin fullscreen size="large" />;
+  if (loading || !destinations.length) {return <Spin fullscreen size="large" />;}
 
   return (
     <Card size="small" className={styles.searchFormCard}>
@@ -37,18 +37,18 @@ const SearchForm = () => {
         }}
         validate={(values) => {
           const errors = {};
-          if (!values.city) errors.city = t("searchForm.cityRequired");
+          if (!values.city) {errors.city = t('searchForm.cityRequired');}
           if (!values.dates || values.dates.length !== 2) {
-            errors.dates = t("searchForm.datesRequired");
+            errors.dates = t('searchForm.datesRequired');
           } else {
             const [start, end] = values.dates;
 
-            if (end.diff(start, "day") > 30) {
-              errors.dates = t("searchForm.stayTooLong");
+            if (end.diff(start, 'day') > 30) {
+              errors.dates = t('searchForm.stayTooLong');
             }
           }
           if (values.adults < 1 || values.adults > 6)
-            errors.adults = t("searchForm.adultsRange");
+          {errors.adults = t('searchForm.adultsRange');}
 
           return errors;
         }}
@@ -62,7 +62,7 @@ const SearchForm = () => {
             children: values.children,
             page: 1,
           });
-          navigate(`${withLng("/hotels")}?${params.toString()}`);
+          navigate(`${withLng('/hotels')}?${params.toString()}`);
         }}
       >
         {({ handleSubmit, setFieldValue, errors, values }) => (
@@ -73,13 +73,13 @@ const SearchForm = () => {
           >
             <div className={styles.searchFormGroup}>
               <Select
-                placeholder={t("searchForm.selectCity")}
+                placeholder={t('searchForm.selectCity')}
                 value={values.city}
                 options={destinations.map((city) => ({
                   value: city.id,
                   label: city.label,
                 }))}
-                onChange={(value) => setFieldValue("city", value)}
+                onChange={(value) => setFieldValue('city', value)}
                 className={styles.searchFormSelect}
               />
               {errors.city && (
@@ -90,14 +90,14 @@ const SearchForm = () => {
             <div className={styles.searchFormGroup}>
               <RangePicker
                 value={values.dates}
-                onChange={(dates) => setFieldValue("dates", dates)}
+                onChange={(dates) => setFieldValue('dates', dates)}
                 disabledDate={(current) => {
-                  return current && current < dayjs().startOf("day");
+                  return current && current < dayjs().startOf('day');
                 }}
                 className={styles.searchFormRange}
                 placeholder={[
-                  t("searchForm.checkIn"),
-                  t("searchForm.checkOut"),
+                  t('searchForm.checkIn'),
+                  t('searchForm.checkOut'),
                 ]}
               />
               {errors.dates && (
@@ -110,9 +110,9 @@ const SearchForm = () => {
                 min={1}
                 max={6}
                 value={values.adults}
-                onChange={(value) => setFieldValue("adults", value)}
+                onChange={(value) => setFieldValue('adults', value)}
                 className={styles.searchFormPersons}
-                placeholder={t("searchForm.adultsPlaceholder")}
+                placeholder={t('searchForm.adultsPlaceholder')}
               />
               {errors.adults && (
                 <div className="error-message">{errors.adults}</div>
@@ -123,9 +123,9 @@ const SearchForm = () => {
               min={0}
               max={5}
               value={values.children}
-              onChange={(value) => setFieldValue("children", value)}
+              onChange={(value) => setFieldValue('children', value)}
               className={styles.searchFormPersons}
-              placeholder={t("searchForm.childrenPlaceholder")}
+              placeholder={t('searchForm.childrenPlaceholder')}
             />
 
             <Button
@@ -141,11 +141,11 @@ const SearchForm = () => {
               color="primary"
               variant="outlined"
               onClick={() => {
-                navigate(`${withLng("/hotels")}?city=all&page=1`);
+                navigate(`${withLng('/hotels')}?city=all&page=1`);
               }}
               className={styles.searchFormShowAll}
             >
-              {t("searchForm.showAllHotels")}
+              {t('searchForm.showAllHotels')}
             </Button>
           </form>
         )}

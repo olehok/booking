@@ -1,15 +1,15 @@
-import { NavLink } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
-import useWithLng from "../../hooks/useWithLng";
-import useAutoHideHeader from "../../hooks/useAutoHideHeader";
-import { logout } from "../../store/slices/authSlice";
-import { toggleTheme } from "../../store/slices/themeSlice";
-import LanguageToggle from "../LanguageToggle/LanguageToggle";
-import { Switch, Badge, Button } from "antd";
-import { HeartOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
-import styles from "./Header.module.scss";
+import { NavLink } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import useWithLng from '../../hooks/useWithLng';
+import useAutoHideHeader from '../../hooks/useAutoHideHeader';
+import { logout } from '../../store/slices/authSlice';
+import { toggleTheme } from '../../store/slices/themeSlice';
+import LanguageToggle from '../LanguageToggle/LanguageToggle';
+import { Switch, Badge, Button } from 'antd';
+import { HeartOutlined, MenuOutlined, CloseOutlined } from '@ant-design/icons';
+import styles from './Header.module.scss';
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -26,8 +26,8 @@ export default function Header() {
     (state) => state.favorites.favorites.length,
   );
 
-  const isActiveClass = ({ isActive }) => (isActive ? "active" : "");
-  const noActiveClass = () => "";
+  const isActiveClass = ({ isActive }) => (isActive ? 'active' : '');
+  const noActiveClass = () => '';
   const toggleMenu = () => setIsMenuOpen((value) => !value);
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -52,23 +52,23 @@ export default function Header() {
       closeMenu();
     };
 
-    document.addEventListener("mousedown", handleOutsideClick);
-    document.addEventListener("touchstart", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('touchstart', handleOutsideClick);
 
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-      document.removeEventListener("touchstart", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('touchstart', handleOutsideClick);
     };
   }, [isMenuOpen]);
 
   return (
     <header
-      className={`${styles.header} ${isHidden ? styles.headerHidden : ""}`}
+      className={`${styles.header} ${isHidden ? styles.headerHidden : ''}`}
     >
       <div className={`${styles.headerWrapper} container`}>
         <h1 className={styles.headerLogo}>
-          <NavLink to={withLng("")} end>
-            {t("app.name")}
+          <NavLink to={withLng('')} end>
+            {t('app.name')}
           </NavLink>
         </h1>
 
@@ -85,43 +85,43 @@ export default function Header() {
 
         <nav
           id="header-navigation"
-          className={`${styles.headerNav} ${isMenuOpen ? styles.headerNavOpen : ""}`}
+          className={`${styles.headerNav} ${isMenuOpen ? styles.headerNavOpen : ''}`}
           ref={navRef}
         >
           <h3>
             <NavLink
               className={isActiveClass}
-              to={withLng("/search")}
+              to={withLng('/search')}
               onClick={closeMenu}
             >
-              {t("nav.stay")}
+              {t('nav.stay')}
             </NavLink>
           </h3>
           <h3>
             <NavLink
               className={isActiveClass}
-              to={withLng("/about")}
+              to={withLng('/about')}
               onClick={closeMenu}
             >
-              {t("nav.aboutUs")}
+              {t('nav.aboutUs')}
             </NavLink>
           </h3>
           <h3>
             <NavLink
               className={isActiveClass}
-              to={withLng("/hotels")}
+              to={withLng('/hotels')}
               onClick={closeMenu}
             >
-              {t("nav.hotels")}
+              {t('nav.hotels')}
             </NavLink>
           </h3>
           <h3>
             <NavLink
               className={isActiveClass}
-              to={withLng("/favorites")}
+              to={withLng('/favorites')}
               onClick={closeMenu}
             >
-              {t("nav.favorites")}
+              {t('nav.favorites')}
               <Badge
                 count={favoriteCount}
                 className={styles.headerFavoriteBadge}
@@ -135,22 +135,22 @@ export default function Header() {
               <h3>
                 <NavLink
                   className={isActiveClass}
-                  to={withLng("/profile")}
+                  to={withLng('/profile')}
                   onClick={closeMenu}
                 >
-                  {t("nav.profile")}
+                  {t('nav.profile')}
                 </NavLink>
               </h3>
               <h3>
                 <NavLink
                   className={noActiveClass}
-                  to={withLng("")}
+                  to={withLng('')}
                   onClick={() => {
                     dispatch(logout());
                     closeMenu();
                   }}
                 >
-                  {t("nav.logout")}
+                  {t('nav.logout')}
                 </NavLink>
               </h3>
             </>
@@ -158,10 +158,10 @@ export default function Header() {
             <h3>
               <NavLink
                 className={isActiveClass}
-                to={withLng("/login")}
+                to={withLng('/login')}
                 onClick={closeMenu}
               >
-                {t("nav.login")}
+                {t('nav.login')}
               </NavLink>
             </h3>
           )}
@@ -169,7 +169,7 @@ export default function Header() {
             <LanguageToggle />
           </div>
           <Switch
-            checked={themeMode === "dark"}
+            checked={themeMode === 'dark'}
             onChange={() => dispatch(toggleTheme())}
           />
         </nav>

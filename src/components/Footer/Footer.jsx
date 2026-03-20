@@ -1,7 +1,7 @@
-import { useTranslation } from "react-i18next";
-import { Typography, Space, Button } from "antd";
-import { GithubOutlined, LinkedinOutlined } from "@ant-design/icons";
-import styles from "./Footer.module.scss";
+import { useTranslation } from 'react-i18next';
+import { Typography, Space, Button } from 'antd';
+import { GithubOutlined, LinkedinOutlined } from '@ant-design/icons';
+import styles from './Footer.module.scss';
 
 const { Text } = Typography;
 
@@ -11,15 +11,15 @@ export default function Footer() {
   return (
     <footer>
       <section className={`${styles.footer} container`}>
-        <h3>{t("footer.contacts")}</h3>
+        <h3>{t('footer.contacts')}</h3>
         <Space orientation="horizontal" size="small" wrap="wrap">
-          <Text>{t("footer.copyright")}</Text>
+          <Text>{t('footer.copyright')}</Text>
           <Button
             type="text"
             className={styles.socialButton}
             icon={<GithubOutlined />}
             onClick={() =>
-              window.open("https://github.com/olehok/booking", "_blank")
+              window.open('https://github.com/olehok/booking', '_blank')
             }
           />
           <Button
@@ -27,7 +27,7 @@ export default function Footer() {
             className={styles.socialButton}
             icon={<LinkedinOutlined />}
             onClick={() =>
-              window.open("https://www.linkedin.com/in/olehkvln/", "_blank")
+              window.open('https://www.linkedin.com/in/olehkvln/', '_blank')
             }
           />
         </Space>

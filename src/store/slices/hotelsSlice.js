@@ -1,68 +1,68 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-    fetchDestinations,
-    fetchFeaturedHotels,
-    searchHotels
+  fetchDestinations,
+  fetchFeaturedHotels,
+  searchHotels
 } from '../thunks/hotelsThunks';
 
 const initialState = {
-    destinations: [],
-    hotels: [],
-    featured: [],
-    total: 0,
-    page: 1,
-    limit: 10,
-    loading: false,
-    error: null
+  destinations: [],
+  hotels: [],
+  featured: [],
+  total: 0,
+  page: 1,
+  limit: 10,
+  loading: false,
+  error: null
 };
 
 const hotelsSlice = createSlice({
-    name: 'hotels',
-    initialState,
-    reducers: {},
-    extraReducers: builder => {
-        builder
-            .addCase(fetchDestinations.pending, state => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(fetchDestinations.fulfilled, (state, action) => {
-                state.loading = false;
-                state.destinations = action.payload;
-            })
-            .addCase(fetchDestinations.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.error.message;
-            })
+  name: 'hotels',
+  initialState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      .addCase(fetchDestinations.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchDestinations.fulfilled, (state, action) => {
+        state.loading = false;
+        state.destinations = action.payload;
+      })
+      .addCase(fetchDestinations.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
 
-            .addCase(fetchFeaturedHotels.pending, state => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(fetchFeaturedHotels.fulfilled, (state, action) => {
-                state.loading = false;
-                state.featured = action.payload;
-            })
-            .addCase(fetchFeaturedHotels.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.error.message;
-            })
+      .addCase(fetchFeaturedHotels.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchFeaturedHotels.fulfilled, (state, action) => {
+        state.loading = false;
+        state.featured = action.payload;
+      })
+      .addCase(fetchFeaturedHotels.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
 
-            .addCase(searchHotels.pending, state => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(searchHotels.fulfilled, (state, action) => {
-                state.loading = false;
-                state.hotels = action.payload.data;
-                state.total = action.payload.total;
-                state.page = action.payload.page || 1;
-            })
-            .addCase(searchHotels.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.error.message;
-            });
-    }
+      .addCase(searchHotels.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(searchHotels.fulfilled, (state, action) => {
+        state.loading = false;
+        state.hotels = action.payload.data;
+        state.total = action.payload.total;
+        state.page = action.payload.page || 1;
+      })
+      .addCase(searchHotels.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+  }
 });
 
 export default hotelsSlice.reducer;

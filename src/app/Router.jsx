@@ -1,35 +1,35 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import Layout from "../components/Layout/Layout";
-import Home from "../pages/Home/Home";
-import Search from "../pages/Search/Search";
-import About from "../pages/About/About";
-import Hotels from "../pages/Hotels/Hotels";
-import Favorites from "../pages/Favorites/Favorites";
-import Profile from "../pages/Profile/Profile";
-import Login from "../pages/Login/Login";
-import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
-import { hotelsLoader, featuredHotelsLoader } from "../loaders/loaders";
-import { Spin } from "antd";
+import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import Layout from '../components/Layout/Layout';
+import Home from '../pages/Home/Home';
+import Search from '../pages/Search/Search';
+import About from '../pages/About/About';
+import Hotels from '../pages/Hotels/Hotels';
+import Favorites from '../pages/Favorites/Favorites';
+import Profile from '../pages/Profile/Profile';
+import Login from '../pages/Login/Login';
+import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
+import { hotelsLoader, featuredHotelsLoader } from '../loaders/loaders';
+import { Spin } from 'antd';
 
 const ErrorPage = () => {
   const { t } = useTranslation();
-  return <h2 className="title">{t("common.error")}</h2>;
+  return <h2 className="title">{t('common.error')}</h2>;
 };
 
 const NotFoundPage = () => {
   const { t } = useTranslation();
-  return <h2 className="title">{t("common.notFound")}</h2>;
+  return <h2 className="title">{t('common.notFound')}</h2>;
 };
 
 const Router = createBrowserRouter(
   [
     {
-      path: "/",
+      path: '/',
       element: <Navigate to="/en" replace />,
     },
     {
-      path: "/:lng",
+      path: '/:lng',
       element: <Layout />,
       errorElement: <ErrorPage />,
       HydrateFallback: () => <Spin fullscreen size="large" />,
@@ -40,34 +40,34 @@ const Router = createBrowserRouter(
           loader: featuredHotelsLoader,
         },
         {
-          path: "search",
+          path: 'search',
           element: <Search />,
         },
         {
-          path: "about",
+          path: 'about',
           element: <About />,
         },
         {
-          path: "hotels",
+          path: 'hotels',
           element: <Hotels />,
           loader: hotelsLoader,
           shouldRevalidate: ({ currentUrl, nextUrl, actionType }) => {
-            if (actionType === "POP") {
+            if (actionType === 'POP') {
               return false;
             }
             return currentUrl.search !== nextUrl.search;
           },
         },
         {
-          path: "favorites",
+          path: 'favorites',
           element: <Favorites />,
         },
         {
-          path: "login",
+          path: 'login',
           element: <Login />,
         },
         {
-          path: "profile",
+          path: 'profile',
           element: (
             <PrivateRoute>
               <Profile />
@@ -75,13 +75,13 @@ const Router = createBrowserRouter(
           ),
         },
         {
-          path: "*",
+          path: '*',
           element: <NotFoundPage />,
         },
       ],
     },
   ],
-  { basename: "/booking/" },
+  { basename: '/booking/' },
 );
 
 export default Router;

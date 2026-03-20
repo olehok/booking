@@ -1,38 +1,38 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 export default function useAutoHideHeader(offset = 70, hoverZone = 20) {
-    const [hidden, setHidden] = useState(false);
-    const lastScroll = useRef(0);
+  const [hidden, setHidden] = useState(false);
+  const lastScroll = useRef(0);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const current = window.scrollY;
+  useEffect(() => {
+    const handleScroll = () => {
+      const current = window.scrollY;
 
-            if (current > lastScroll.current && current > offset) {
-                setHidden(true);
-            } else {
-                setHidden(false);
-            }
+      if (current > lastScroll.current && current > offset) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
 
-            lastScroll.current = current;
-        };
+      lastScroll.current = current;
+    };
 
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [offset]);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [offset]);
 
-    useEffect(() => {
-        const handleMouseMove = (e) => {
-            if (hidden && e.clientY <= hoverZone) {
-                setHidden(false);
-            } else if (!hidden && e.clientY > offset && window.scrollY > offset) {
-                setHidden(true);
-            }
-        };
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (hidden && e.clientY <= hoverZone) {
+        setHidden(false);
+      } else if (!hidden && e.clientY > offset && window.scrollY > offset) {
+        setHidden(true);
+      }
+    };
 
-        window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, [hidden, hoverZone]);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [hidden, hoverZone, offset]);
 
-    return hidden;
+  return hidden;
 }

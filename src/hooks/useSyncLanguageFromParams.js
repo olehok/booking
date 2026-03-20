@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function useSyncLanguageFromParams() {
   const { lng } = useParams();

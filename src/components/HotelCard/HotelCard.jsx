@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
-import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
-import { toggleFavorite } from "../../store/slices/favoritesSlice";
-import fallBackImg from "../../assets/images/fallBackImg.jpg";
-import { Card, Rate, Typography, Space, Image } from "antd";
-import { HeartOutlined, HeartFilled } from "@ant-design/icons";
-import styles from "./HotelCard.module.scss";
+import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
+import { toggleFavorite } from '../../store/slices/favoritesSlice';
+import fallBackImg from '../../assets/images/fallBackImg.jpg';
+import { Card, Rate, Typography, Space, Image } from 'antd';
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
+import styles from './HotelCard.module.scss';
 
 const { Text, Link } = Typography;
 
@@ -59,20 +59,20 @@ const HotelCard = ({ hotel }) => {
 
         <Space align="baseline">
           <Text type="secondary">
-            {t("hotelCard.rating")} {hotel.hotel_rating}
+            {t('hotelCard.rating')} {hotel.hotel_rating}
           </Text>
           <Rate disabled size="small" value={hotel.hotel_rating} />
         </Space>
 
         {hotel.phone_number && (
           <Text type="secondary">
-            {t("hotelCard.tel")} {hotel.phone_number}
+            {t('hotelCard.tel')} {hotel.phone_number}
           </Text>
         )}
 
         {hotel.website && (
           <Link href={hotel.website} target="_blank">
-            {t("hotelCard.visitWebsite")}
+            {t('hotelCard.visitWebsite')}
           </Link>
         )}
       </Space>

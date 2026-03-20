@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Segmented } from "antd";
+import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Segmented } from 'antd';
 
 export default function LanguageToggle() {
   const { i18n } = useTranslation();
@@ -8,12 +8,12 @@ export default function LanguageToggle() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const currentLng = lng || i18n.language || "en";
+  const currentLng = lng || i18n.language || 'en';
   const changeLanguage = (newLng) => {
-    if (newLng === currentLng) return;
+    if (newLng === currentLng) {return;}
     const restPath = location.pathname.replace(
       new RegExp(`^/${currentLng}(?=/|$)`),
-      "",
+      '',
     );
     navigate(`/${newLng}${restPath}${location.search}${location.hash}`);
   };
@@ -24,8 +24,8 @@ export default function LanguageToggle() {
       value={currentLng}
       onChange={changeLanguage}
       options={[
-        { label: "EN", value: "en" },
-        { label: "UA", value: "ua" },
+        { label: 'EN', value: 'en' },
+        { label: 'UA', value: 'ua' },
       ]}
     />
   );
