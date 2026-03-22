@@ -1,10 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const database = require('./db.json');
+require('dotenv').config();
 
 const app = express();
 
-app.use(cors());
+let corsOrigin = process.env.CORS_ORIGIN || '*';
+if (corsOrigin !== '*' && corsOrigin.includes(',')) {
+  corsOrigin = corsOrigin.split(',').map(origin => origin.trim());
+}
+app.use(cors({ origin: corsOrigin }));
 app.use(express.json());
 
 app.get('/api/destinations', (req, res) => {
@@ -61,7 +66,9 @@ app.get('/api/hotels/search', (req, res) => {
   res.json({ data: paginatedHotels, total });
 });
 
-const PORT = 3001;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+const PORT = Number(process.env.PORT) || 3001;
+const HOST = process.env.HOST || '0.0.0.0';
+app.listen(PORT, HOST, () => {
+  const baseUrl = HOST === '0.0.0.0' ? `http://localhost:${PORT}` : `http://${HOST}:${PORT}`;
+  console.log(`Server is running on ${baseUrl}`);
 });
