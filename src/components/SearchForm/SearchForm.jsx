@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -18,10 +18,20 @@ const SearchForm = () => {
   const { destinations, loading } = useSelector((state) => state.hotels);
   const { t } = useTranslation();
   const { withLng } = useWithLng();
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchDestinations());
   }, [dispatch]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 576px)');
+    const onChange = (event) => setIsSmallScreen(event.matches);
+    setIsSmallScreen(mediaQuery.matches);
+
+    mediaQuery.addEventListener('change', onChange);
+    return () => mediaQuery.removeEventListener('change', onChange);
+  }, []);
 
   if (loading || !destinations.length) {return <Spin fullscreen size="large" />;}
 
@@ -94,6 +104,19 @@ const SearchForm = () => {
                 disabledDate={(current) => {
                   return current && current < dayjs().startOf('day');
                 }}
+                classNames={{ popup: { root: styles.rangePopup } }}
+                styles={isSmallScreen ? {
+                  popup: {
+                    root: {
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      maxWidth: 'calc(100vw - 2rem)',
+                      width: '100%',
+                      padding: '0 0.5rem',
+                      boxSizing: 'border-box',
+                    }
+                  }
+                } : undefined}
                 className={styles.searchFormRange}
                 placeholder={[
                   t('searchForm.checkIn'),
