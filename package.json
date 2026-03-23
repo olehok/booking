@@ -8,6 +8,8 @@
     "dev:client": "vite",
     "dev:server": "node server/server.js",
     "build": "vite build",
+    "postbuild": "node scripts/create-404.js",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
