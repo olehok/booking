@@ -1,18 +1,15 @@
 # Booking App
 
-Hotel search and booking UI with a small Express API and a localized frontend.
+Hotel search and booking UI with a small API and a localized frontend.
 
 ## Stack
 - React 19, Vite 7
 - Redux Toolkit, React Redux, Redux Thunk
 - React Router
-- Prop-types
 - Ant Design
 - Formik + Yup
 - i18next
-- Axios, Dayjs
-- Sass, ESLint
-- Express
+- Express (serverless on Vercel)
 
 ## Requirements
 - Node.js 18+
@@ -30,18 +27,13 @@ PORT=3001
 HOST=0.0.0.0
 CORS_ORIGIN=http://localhost:5173
 ```
-4. `npm run dev` (runs client + server)
-
-You can also run them separately:
-- `npm run dev:client`
-- `npm run dev:server`
+4. `npm run dev`
 
 ## Scripts
-- `npm run dev` - start client and server
-- `npm run dev:client` - start Vite dev server
-- `npm run dev:server` - start Express server
+- `npm run dev` - start client + local server
 - `npm run build` - production build
 - `npm run preview` - preview build
+- `npm run deploy` - build + deploy to GitHub Pages
 - `npm run lint` - lint
 - `npm run lint:fix` - fix lint issues
 
@@ -49,10 +41,8 @@ You can also run them separately:
 Client:
 - `VITE_API_URL` - API base URL (example: `http://localhost:3001`)
 
-Server:
-- `PORT` - server port
-- `HOST` - bind address
-- `CORS_ORIGIN` - allowed origin(s). Use a single URL or a comma-separated list.
+Server (Vercel):
+- `CORS_ORIGIN` - allowed origin. Use a single URL (no path, no trailing slash).
 
 ## API
 - `GET /api/destinations` - list of destinations
@@ -61,4 +51,4 @@ Server:
 
 ## Deployment
 - Frontend: GitHub Pages via `npm run deploy` (app expects `basename` = `/booking/`)
-- Server: Render (set `CORS_ORIGIN` to the frontend URL and `VITE_API_URL` to the backend URL in `.env.production`)
+- Server: Vercel (Root Directory = `server`, set `CORS_ORIGIN` in Vercel env vars)
